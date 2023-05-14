@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Vocabulary</string>
+    <string name="correct">Correct</string>
+    <string name="wrong">Wrong</string>
+    <string name="questions">Questions</string>
+    <string name="next_questions">Next Questions</string>
+</resources>

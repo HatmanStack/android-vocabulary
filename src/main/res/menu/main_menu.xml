@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/aList"
+        android:orderInCategory="1"
+        android:title="List A" />
+
+    <item
+        android:id="@+id/bList"
+        android:orderInCategory="2"
+        android:title="List B" />
+
+    <item
+        android:id="@+id/cList"
+        android:orderInCategory="3"
+        android:title="List C" />
+
+    <item
+        android:id="@+id/dList"
+        android:orderInCategory="4"
+        android:title="List D" />
+
+    <item
+        android:id="@+id/eList"
+        android:orderInCategory="5"
+        android:title="List E" />
+
+    <item
+        android:id="@+id/fList"
+        android:orderInCategory="6"
+        android:title="List F" />
+
+    <item
+        android:id="@+id/gList"
+        android:orderInCategory="7"
+        android:title="List G" />
+
+    <item
+        android:id="@+id/hList"
+        android:orderInCategory="8"
+        android:title="List H" />
+
+
+</menu>

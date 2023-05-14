@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="working_list_array">
+        <item>List A</item>
+        <item>List B</item>
+        <item>List C</item>
+        <item>List D</item>
+        <item>List E</item>
+        <item>List F</item>
+        <item>List G</item>
+        <item>List H</item>
+    </string-array>
+
+
+    <string-array name="sub_list_array">
+        <item>BASIC</item>
+        <item>INTERMEDIATE</item>
+        <item>ADVANCED</item>
+        <item>PROFESSIONAL</item>
+        <item>EXPERT</item>
+    </string-array>
+
+    <string-array name="abasicWordList">
+        <item>abject</item>
+        <item>aberration</item>
+        <item>abjure</item>
+        <item>abnegate</item>
+        <item>abrogate</item>
+        <item>abscond</item>
+        <item>abstruse</item>
+        <item>accede</item>
+    </string-array>
+
+    <string-array name="abasicDefinitionWordList">
+        <item>sunk to or exsisting in a low state or condition</item>
+        <item>the act of being different from a moral standard or normal state</item>
+        <item>to renounce upon oath, disclaim, disown</item>
+        <item>surrender, relinquish, deny, renounce(self-denial)</item>
+        <item>to revoke by authoritative action</item>
+        <item>to depart secretly and hide</item>
+        <item>difficult to comprehend</item>
+        <item>yield to another\'s wish or opinion</item>
+    </string-array>
+
+    <string-array name="abasicFillInTheBlank">
+        <item>Timmy was _____ after falling off the jungle gym and into the lava</item>
+        <item>It wasn\'t an ________ they really were making her pull her hair out</item>
+        <item>his refusal to _______ the Catholic faith</item>
+        <item>Rick Rolls were meant to ______ people, now they\'re just fun</item>
+        <item>the band was _____ from the hotel</item>
+        <item>the thief will ________ with the what\'s left if you let them</item>
+        <item>He stared at her blankly as if the words were _______</item>
+        <item>Later, in the ditch, he ______ they did have the right of way</item>
+    </string-array>
+
+    <string-array name="aintermediateWordList">
+        <item>accost</item>
+        <item>accretion</item>
+        <item>acumen</item>
+        <item>adamant</item>
+        <item>admonish</item>
+        <item>adumbrate</item>
+        <item>adverse</item>
+        <item>advocate</item>
+    </string-array>
+
+    <string-array name="aintermediateDefinitionWordList">
+        <item>approach and speak to someone aggressively or insistently</item>
+        <item>an increase by natural growth or addition</item>
+        <item>shrewdness shown by keen insight</item>
+        <item>unshakable or immovable especially in opposition</item>
+        <item>to express warning or disapproval, especially in a gentle solicitous manner</item>
+        <item>to suggest or disclose partially</item>
+        <item>in an opposing direction</item>
+        <item>a person who pleads for a person, cause, or idea</item>
+    </string-array>
+
+    <string-array name="aintermediateFillInTheBlank">
+        <item>why would you _________ him in the street</item>
+        <item>the _________ of sediments in coastal mangroves</item>
+        <item>dangling in the air she began to realize, maybe the psychic had better _____ than she thought</item>
+        <item>he was _______ the bird was not the word</item>
+        <item>they _______ the people against the evil of such practices</item>
+        <item>congress  _______ the necessity that the Senate be somewhat insulated from public passions</item>
+        <item>he wasn\'t ______ to putting lipstick on a pig, it was just taking the time to catch it</item>
+        <item>he was an untiring _______ of economic reform</item>
+    </string-array>
+
+
+    <string-array name="aadvancedWordList">
+        <item>affluent</item>
+        <item>aggrandize</item>
+        <item>alacrity</item>
+        <item>alias</item>
+        <item>ambivalent</item>
+        <item>amenable</item>
+        <item>amorphous</item>
+        <item>anachronistic</item>
+    </string-array>
+
+    <string-array name="aadvancedDefinitionWordList">
+        <item>typically increasing wealth</item>
+        <item>to make appear great or greater</item>
+        <item>liveliness and eagerness</item>
+        <item>a name that has been assumed temporarily</item>
+        <item>uncertain or unable to decide about what course to follow</item>
+        <item>disposed or willing to comply</item>
+        <item>having no definite form or distinct shape</item>
+        <item>chronologically misplaced</item>
+    </string-array>
+
+    <string-array name="aadvancedFillInTheBlank">
+        <item>he was ________ but bucked the trend and did not use E*trade</item>
+        <item>Hindus _____ cows, Americans see dinner</item>
+        <item>he jumped of the ledge with ______, </item>
+        <item>Eric Blair, ________ George Orwell</item>
+        <item>some loved it, some hated it, few were __________ about it</item>
+        <item>Walter Matthau was not know as _______</item>
+        <item>Draymond Green\'s style is ________</item>
+        <item>The trend of smoking being cool is __________</item>
+    </string-array>
+
+
+    <string-array name="aprofessionalWordList">
+        <item>anathema</item>
+        <item>annex</item>
+        <item>antediluvian</item>
+        <item>antiseptic</item>
+        <item>apathetic</item>
+        <item>antithesis</item>
+        <item>apocryphal</item>
+        <item>approbation</item>
+    </string-array>
+
+    <string-array name="aprofessionalDefinitionWordList">
+        <item>a formal ecclesiastical curse accompanied by excommunication</item>
+        <item>to add to something earlier, larger or more important</item>
+        <item>of or relating to the period before the biblical flood</item>
+        <item>thoroughly clean and free of disease-causing organisms</item>
+        <item>showing little or no emotion or animation</item>
+        <item>exact opposite</item>
+        <item>being of questionable authenticity</item>
+        <item>official approval</item>
+    </string-array>
+
+    <string-array name="aprofessionalFillInTheBlank">
+        <item>racial hatred should be _________ to all</item>
+        <item>they want to ________ our neighborhood</item>
+        <item>gigantic bones of _________ animals</item>
+        <item>the __________ modernity of a conference center</item>
+        <item>everybody becomes _________ overtime without positive input</item>
+        <item>friends of the actress say she is quite the _________ of her giddy and frivolous character</item>
+        <item>\You Look Great!\ he said ________</item>
+        <item>________ wasn\'t necessarily what he was after</item>
+    </string-array>
+
+
+    <string-array name="aexpertWordList">
+        <item>arbitrary</item>
+        <item>arboreal</item>
+        <item>arcane</item>
+        <item>archetypal</item>
+        <item>arrogate</item>
+        <item>ascetic</item>
+        <item>aspersion</item>
+        <item>assiduous</item>
+    </string-array>
+
+    <string-array name="aexpertDefinitionWordList">
+        <item>based on random choice or personal whim, rather than any reason or system</item>
+        <item>of or relating to or formed by trees</item>
+        <item>requiring secret or mysterious knowledge</item>
+        <item>of an original type after which other things are patterned</item>
+        <item>seize and take control without authority</item>
+        <item>someone who practices self denial as a spiritual discipline</item>
+        <item>a disparaging remark</item>
+        <item>marked by care and persistent effort</item>
+    </string-array>
+
+    <string-array name="aexpertFillInTheBlank">
+        <item>the consequences seemed ______ compared to the need for action</item>
+        <item>an _________ animal which makes itself at home in genealogical trees.</item>
+        <item>modern math and its ________ notation</item>
+        <item>an __________ journey representing the quest for identity</item>
+        <item>they _________ to themselves the ability to divine the nation\'s true interests</item>
+        <item>living an _________ is a choice made by only a few</item>
+        <item>if people cast _________ on you, stand up to them</item>
+        <item>they were ________ in pointing out every feature</item>
+    </string-array>
+
+
+    <string-array name="bbasicWordList">
+        <item>atrophy</item>
+        <item>bane</item>
+        <item>bashful</item>
+        <item>beguile</item>
+        <item>bereft</item>
+        <item>blandishment</item>
+        <item>bilk</item>
+        <item>bombastic</item>
+    </string-array>
+
+    <string-array name="bbasicDefinitionWordList">
+        <item>a decrease in size of an organ caused by disease or disuse</item>
+        <item>something causing misery or death</item>
+        <item>self-consciously timid</item>
+        <item>influence by slyness</item>
+        <item>sorrowful through loss or deprivation</item>
+        <item>flattery intended to persuade</item>
+        <item>cheat somebody out of what is due, especially money</item>
+        <item>ostentatiously lofty in style</item>
+    </string-array>
+
+    <string-array name="bbasicFillInTheBlank">
+        <item>the _________ of their writing skills was apparent</item>
+        <item>the _______ of the decorator is the long, narrow hall</item>
+        <item>don\'t be _______ about telling folks how you feel</item>
+        <item>the intention was not to _______ but to be straightforward and honest</item>
+        <item>the room was stark and _______ of color</item>
+        <item>their ________ of the cause did nothing to bring others to their side</item>
+        <item>government waste is about to _______ the taxpayer of more money</item>
+        <item>a _________ speech intended to impress the voters in their congressional district</item>
+    </string-array>
+
+    <string-array name="bintermediateWordList">
+        <item>cajole</item>
+        <item>callous</item>
+        <item>calumny</item>
+        <item>camaraderie</item>
+        <item>candor</item>
+        <item>capitulate</item>
+        <item>carouse</item>
+        <item>carp</item>
+    </string-array>
+
+    <string-array name="bintermediateDefinitionWordList">
+        <item>influence or urge by gentle urging, caressing, or flattering</item>
+        <item>emotionally hardened</item>
+        <item>a false accusation of an offense</item>
+        <item>the quality of affording easy familiarity and sociability</item>
+        <item>the quality of being honest and straightforward</item>
+        <item>surrender under agreed conditions</item>
+        <item>engage in boisterous, drunken merrymaking</item>
+        <item>complain or find fault continually, typically about trivial matters</item>
+    </string-array>
+
+    <string-array name="bintermediateFillInTheBlank">
+        <item>they hoped to ________ them into selling the house</item>
+        <item>the ________ comments about the murder made me shiver</item>
+        <item>they were the target of ________ for their unpopular beliefs</item>
+        <item>a genuine ________ on the football team</item>
+        <item>a man of refreshing _______</item>
+        <item>the criminals had to ________ to the police forces</item>
+        <item>we will dance and _______ until the drink runs out</item>
+        <item>I don\'t want to ______ about the way you did it</item>
+    </string-array>
+
+
+    <string-array name="badvancedWordList">
+        <item>caucus</item>
+        <item>cavort</item>
+        <item>circumlocution</item>
+        <item>circumscribe</item>
+        <item>circumvent</item>
+        <item>conflagration</item>
+        <item>congruity</item>
+        <item>connive</item>
+    </string-array>
+
+    <string-array name="badvancedDefinitionWordList">
+        <item>meet to select a candidate or promote a policy</item>
+        <item>play boisterously</item>
+        <item>an indirect way of expressing something</item>
+        <item>draw a geometric figure around another figure</item>
+        <item>to go around or bypass</item>
+        <item>a very intense and uncontrolled fire</item>
+        <item>the quality of agreeing; being suitable and appropriate</item>
+        <item>secretly allow (something considered immoral, illegal, wrong, or harmful) to occurr</item>
+    </string-array>
+
+    <string-array name="badvancedFillInTheBlank">
+        <item>will you ______ with other people in your district Tuesday</item>
+        <item>spider monkeys leap and _______ in the branches</item>
+        <item>their admission came after years of _________</item>
+        <item>the architect will ________ this shape</item>
+        <item>the checkpoints were easy to ___________</item>
+        <item>the ________ spread rapidly through the wooden buildings</item>
+        <item>there was much ________ about the atrocities of WWII</item>
+        <item>you have it in your power to ________ at my escape</item>
+    </string-array>
+
+
+    <string-array name="bprofessionalWordList">
+        <item>consign</item>
+        <item>constituent</item>
+        <item>construe</item>
+        <item>contusion</item>
+        <item>contrite</item>
+        <item>contentious</item>
+        <item>contravene</item>
+        <item>convivial</item>
+    </string-array>
+
+    <string-array name="bprofessionalDefinitionWordList">
+        <item>give over to another for care or safekeeping</item>
+        <item>one of the individual parts making up a composite entity</item>
+        <item>make sense of; assign a meaning to</item>
+        <item>an injury in which the skin is not broken</item>
+        <item>feeling or expressing pain or sorrow for sins or offenses</item>
+        <item>showing an inclination to disagree</item>
+        <item>go against, as of rules and laws</item>
+        <item>occupied with or fond of the pleasures of good company</item>
+    </string-array>
+
+    <string-array name="bprofessionalFillInTheBlank">
+        <item>they plan to _______ a painting to hang in the gallery</item>
+        <item>the _________ minerals of the rock</item>
+        <item>it is easy to ________ meaning when there was none</item>
+        <item>a minor ________ on their elbow</item>
+        <item>a broken and a ________ heart</item>
+        <item>a ________ issue is not a good way to make friends</item>
+        <item>this would ________ the rule against hearsay</item>
+        <item>the party had a ________ air</item>
+    </string-array>
+
+
+    <string-array name="bexpertWordList">
+        <item>corpulence</item>
+        <item>covet</item>
+        <item>cupidity</item>
+        <item>dearth</item>
+        <item>debacle</item>
+        <item>debauch</item>
+        <item>defunct</item>
+        <item>demagogue</item>
+    </string-array>
+
+    <string-array name="bexpertDefinitionWordList">
+        <item>the property of excessive fatness</item>
+        <item>wish, long, or crave for</item>
+        <item>extreme greed for material wealth</item>
+        <item>an insufficient quantity or number</item>
+        <item>a sudden and violent collapse</item>
+        <item>destroy or debase the moral purity of; corrupt</item>
+        <item>no longer in force or use; inactive</item>
+        <item>a leader who seeks support by appealing to popular passions</item>
+    </string-array>
+
+    <string-array name="bexpertFillInTheBlank">
+        <item>their ________ is an issue that threatens their health</item>
+        <item>they _______ time for exercises and fishing</item>
+        <item>they did not realize one another\'s _______ until they\'d been married for several years</item>
+        <item>there is a _______ of evidence</item>
+        <item>the economic _______ that became known as the Great Depression</item>
+        <item>they ______ their own morals by the actions they take</item>
+        <item>a now ______ technology that only people over a certain age remember</item>
+        <item>he stood up to the local _______ and suffered for his morality</item>
+    </string-array>
+
+
+
+    <string-array name="cbasicWordList">
+        <item>denigrate</item>
+        <item>derivative</item>
+        <item>despot</item>
+        <item>diaphanous</item>
+        <item>didactic</item>
+        <item>dirge</item>
+        <item>disaffected</item>
+        <item>discomfit</item>
+        <item>disparate</item>
+        <item>dispel</item>
+    </string-array>
+
+    <string-array name="cbasicDefinitionWordList">
+        <item>charge falsely or with malicious intent</item>
+        <item>a compound obtained from another compound</item>
+        <item>a cruel and oppressive dictator</item>
+        <item>light, delicate, and translucent</item>
+        <item>instructive, especially excessively</item>
+        <item>a song or hymn of mourning as a memorial to a dead person</item>
+        <item>dissatisfied with the people in authority and no longer willing to support them</item>
+        <item>cause to lose one\'s composure</item>
+        <item>fundamentally different or distinct in quality or kind</item>
+        <item>make (a doubt, feeling, or belief) disappear</item>
+    </string-array>
+
+    <string-array name="cbasicFillInTheBlank">
+        <item>there is a tendency to ________ the poor</item>
+        <item>an artist who is not in the slightest bit _________</item>
+        <item>when one _______ is deposed for another, the cycle of repression continues</item>
+        <item>a ________ dress of pale gold</item>
+        <item>the reforming, _______ function of art</item>
+        <item>a lone bagpiper played the woeful ______</item>
+        <item>a military plot by ________ elements in the army</item>
+        <item>the goal of the troll was to ______ the others </item>
+        <item>they inhabit _______ worlds of thought</item>
+        <item>the brightness of the day did nothing to ______ Elaine\'s dejection</item>
+    </string-array>
+
+
+    <string-array name="cintermediateWordList">
+        <item>disrepute</item>
+        <item>divisive</item>
+        <item>dogmatic</item>
+        <item>dour</item>
+        <item>duplicity</item>
+        <item>duress</item>
+        <item>eclectic</item>
+        <item>edict</item>
+        <item>ebullient</item>
+        <item>egregious</item>
+    </string-array>
+
+    <string-array name="cintermediateDefinitionWordList">
+        <item>conspicuously and outrageously bad or reprehensible</item>
+        <item>the state of being held in low esteem</item>
+        <item>tending to cause disagreement or hostility between people</item>
+        <item>inclined to lay down principles as incontrovertibly true</item>
+        <item>relentlessly severe, stern, or gloomy in manner or appearance</item>
+        <item>acting in bad faith</item>
+        <item>compulsory force or threat</item>
+        <item>selecting what seems best of various styles or ideas</item>
+        <item>a formal or authoritative proclamation</item>
+        <item>joyously unrestrained</item>
+    </string-array>
+
+    <string-array name="cintermediateFillInTheBlank">
+        <item>_________ abuses of moral judgment</item>
+        <item>one of the top clubs in the country is close to bringing the game into ________</item>
+        <item>the highly _______ issue of abortion</item>
+        <item>he gives his opinion without trying to be ________</item>
+        <item>a hard, ______, humorless fanatic</item>
+        <item>the _______ of the business was disgusting</item>
+        <item>confessions extracted under _______</item>
+        <item>their musical tastes are ________</item>
+        <item>the ______ meant everybody would return what they had taken</item>
+        <item>they sounded _______ and happy</item>
+    </string-array>
+
+
+    <string-array name="cadvancedWordList">
+        <item>elegy</item>
+        <item>elicit</item>
+        <item>embezzlement</item>
+        <item>emend</item>
+        <item>emollient</item>
+        <item>empirical</item>
+        <item>emulate</item>
+        <item>enervate</item>
+        <item>enfranchise</item>
+        <item>engender</item>
+    </string-array>
+
+    <string-array name="cadvancedDefinitionWordList">
+        <item>a mournful poem; a lament for the dead</item>
+        <item>call forth, as an emotion, feeling, or response</item>
+        <item>the fraudulent appropriation of funds or property</item>
+        <item>make corrections to text</item>
+        <item>a substance with a soothing effect when applied to the skin</item>
+        <item>derived from experiment and observation rather than theory</item>
+        <item>strive to equal or match, especially by imitating</item>
+        <item>weaken mentally or morally</item>
+        <item>grant freedom to, as from slavery or servitude</item>
+        <item>cause or give rise to (a feeling, situation, or condition)</item>
+    </string-array>
+
+    <string-array name="cadvancedFillInTheBlank">
+        <item>the _____ painted them in a undeserved light</item>
+        <item>they invariably ______ exclamations of approval from guests</item>
+        <item>charges of fraud and ___________</item>
+        <item>they had to ______ the passage</item>
+        <item>a rich _______ shampoo</item>
+        <item>they provided considerable _________ evidence to support their argument</item>
+        <item>others tried to ______ them</item>
+        <item>the goal was to _______ the enemy so they could be taken advantage of</item>
+        <item>women were _______ in Manitoba in 1916</item>
+        <item>the issue _________ continuing controversy</item>
+    </string-array>
+
+
+    <string-array name="cprofessionalWordList">
+        <item>ephemeral</item>
+        <item>epistolary</item>
+        <item>equanimity</item>
+        <item>equivocal</item>
+        <item>espouse</item>
+        <item>evanescent</item>
+        <item>evince</item>
+        <item>exacerbate</item>
+        <item>exhort</item>
+        <item>execrable</item>
+    </string-array>
+
+    <string-array name="cprofessionalDefinitionWordList">
+        <item>lasting for a very short time</item>
+        <item>written in the form of letters or correspondence</item>
+        <item>steadiness of mind under stress</item>
+        <item>open to two or more interpretations</item>
+        <item>choose and follow a theory, idea, policy, etc.</item>
+        <item>tending to vanish like vapor</item>
+        <item>reveal the presence of (a quality or feeling)</item>
+        <item>make worse</item>
+        <item>spur on or encourage especially by cheers and shouts</item>
+        <item>unequivocally detestable</item>
+    </string-array>
+
+    <string-array name="cprofessionalFillInTheBlank">
+        <item>fashions are ________</item>
+        <item>an ________ novel</item>
+        <item>she accepted both the good and the bad with __________</item>
+        <item>the _______ nature of her remarks</item>
+        <item>he turned his back on the modernism he had _________ in his youth</item>
+        <item>a shimmering ________ bubble</item>
+        <item>his letters _______ the excitement he felt at undertaking this journey</item>
+        <item>the exorbitant cost of land in urban areas only __________ the problem</item>
+        <item>the media have been _________ people to turn out for the demonstration</item>
+        <item>________ cheap wine</item>
+    </string-array>
+
+
+    <string-array name="cexpertWordList">
+        <item>vituperative</item>
+        <item>prevaricate</item>
+        <item>antipathy</item>
+        <item>desultory</item>
+        <item>spurious</item>
+        <item>perfidious</item>
+        <item>foment</item>
+        <item>capricious</item>
+        <item>erudite</item>
+        <item>resplendent</item>
+    </string-array>
+
+    <string-array name="cexpertDefinitionWordList">
+        <item>harsh and abusive</item>
+        <item>to intentionally mislead or create a false impression</item>
+        <item>intense dislike or hostility</item>
+        <item>aimless, haphazard, digressing at random, no purpose or plan</item>
+        <item>lacking authenticity, fake, not genuine, false, of illegitimate birth</item>
+        <item>unfaithful, deceptive, disloyal</item>
+        <item>to instigate or incite</item>
+        <item>given to whim</item>
+        <item>characterized by great knowledge, learned or scholarly</item>
+        <item>gleaming, splendid, shining</item>
+    </string-array>
+
+    <string-array name="cexpertFillInTheBlank">
+        <item>My supervisor’s ________ ranting seems like Scott Adams wrote it</item>
+        <item>I actually heard a politician speak without __________ just kidding</item>
+        <item>Thanks, boss! My ________ toward you has never been more intense than it is right now!</item>
+        <item>The ________ House of Representatives has an approval rating of 10%</item>
+        <item>The televangelist spouting his ________ drivel is, nevertheless, extremely rich</item>
+        <item>My ________ first wife got the house, and the car</item>
+        <item>Constant surveillance helps to ________ society against those that abuse power</item>
+        <item>After over-indulging it\'s common to become _________ </item>
+        <item>Their _______ knowledge of the subject was impressive</item>
+        <item>The lights were _______ </item>
+    </string-array>
+
+
+
+    <string-array name="dbasicWordList">
+        <item>exigent</item>
+        <item>expedient</item>
+        <item>expiate</item>
+        <item>expunge</item>
+        <item>extraneous</item>
+        <item>extol</item>
+        <item>extant</item>
+        <item>expurgate</item>
+        <item>fallacious</item>
+        <item>fatuous</item>
+    </string-array>
+
+    <string-array name="dbasicDefinitionWordList">
+        <item>demanding immediate attention</item>
+        <item>appropriate to a purpose</item>
+        <item>make amends for</item>
+        <item>erase or remove completely (something unwanted or unpleasant)</item>
+        <item>not belonging to that in which it is contained</item>
+        <item>praise, glorify, or honor</item>
+        <item>still in existence; not extinct or destroyed or lost</item>
+        <item>edit by omitting or modifying parts considered indelicate</item>
+        <item>containing or based on incorrect reasoning</item>
+        <item>devoid of intelligence</item>
+    </string-array>
+
+    <string-array name="dbasicFillInTheBlank">
+        <item>the _______ demands of the music took a toll on her voice</item>
+        <item>either side could break the agreement if it were ________ to do so</item>
+        <item>their sins must be ________ by sacrifice</item>
+        <item>they _________ that period from their CV</item>
+        <item>one is obliged to wade through many pages of _________ material</item>
+        <item>they ______ the virtues of the Russian peoples</item>
+        <item>the original manuscript is no longer _______</item>
+        <item>the ________ Arabian Nights did nothing to progress culture</item>
+        <item>________ arguments will never work in court</item>
+        <item>a ________ comment is not something they hold in high regard</item>
+    </string-array>
+
+
+    <string-array name="dintermediateWordList">
+        <item>fetter</item>
+        <item>flagrant</item>
+        <item>foil</item>
+        <item>forbearance</item>
+        <item>fortuitous</item>
+        <item>fractious</item>
+        <item>garrulous</item>
+        <item>gourmand</item>
+        <item>grandiloquent</item>
+        <item>gratuitous</item>
+    </string-array>
+
+    <string-array name="dintermediateDefinitionWordList">
+        <item>a shackle for the ankles or feet</item>
+        <item>conspicuously and outrageously bad or reprehensible</item>
+        <item>hinder or prevent, as an effort, plan, or desire</item>
+        <item>good-natured tolerance of delay or incompetence</item>
+        <item>occurring by happy chance</item>
+        <item>easily irritated or annoyed</item>
+        <item>full of trivial conversation</item>
+        <item>a person who is devoted to eating and drinking to excess</item>
+        <item>lofty in style</item>
+        <item>1.unnecessary and unwarranted   2.given or done free of charge</item>
+    </string-array>
+
+    <string-array name="dintermediateFillInTheBlank">
+        <item>he lay bound with ______ of iron</item>
+        <item>his ______ bad taste caused everyone embarrassment</item>
+        <item>a brave police officer ______ the armed robbery</item>
+        <item>__________ from taking action was welcomed by the group</item>
+        <item>the similarity between the paintings may not be simply ________</item>
+        <item>they fight and squabble like ________ children</item>
+        <item>Poloniums is portrayed as a foolish, ________ old man</item>
+        <item>people felt he was a _________ that would never learn control</item>
+        <item>a __________ celebration of Spanish glory</item>
+        <item>the ________ violence is always a talking point</item>
+    </string-array>
+
+
+    <string-array name="dadvancedWordList">
+        <item>hapless</item>
+        <item>hegemony</item>
+        <item>heterogeneous</item>
+        <item>iconoclast</item>
+        <item>idiosyncratic</item>
+        <item>impecunious</item>
+        <item>impetuous</item>
+        <item>impinge</item>
+        <item>impute</item>
+        <item>inane</item>
+    </string-array>
+
+    <string-array name="dadvancedDefinitionWordList">
+        <item>unfortunate and deserving pity</item>
+        <item>the dominance or leadership of one social group over others</item>
+        <item>consisting of elements that are not of the same kind</item>
+        <item>someone who attacks cherished ideas or institutions</item>
+        <item>peculiar to the individual</item>
+        <item>having little or no money</item>
+        <item>characterized by undue haste and lack of thought</item>
+        <item>infringe upon</item>
+        <item>attribute or credit to</item>
+        <item>devoid of intelligence</item>
+    </string-array>
+
+    <string-array name="dadvancedFillInTheBlank">
+        <item>many _______ investors have been swindled by poor corporate management</item>
+        <item>Germany was united under Prussian ________ after 1871</item>
+        <item>present in the urine are ________ proteins</item>
+        <item>the inflammatory rhetoric of right wing ________ makes our country less safe</item>
+        <item>she emerged as one of the great __________ talents of the Nineties</item>
+        <item>people who are just starting their careers usually are __________</item>
+        <item>their friend was headstrong and ________</item>
+        <item>they were determined that the tragedy would _____ as little as possible on their life</item>
+        <item>recovering the initial outlay plus _______ interest</item>
+        <item>don\'t constantly badger people with ______ questions</item>
+    </string-array>
+
+
+    <string-array name="dprofessionalWordList">
+        <item>inchoate</item>
+        <item>incontrovertible</item>
+        <item>incumbent</item>
+        <item>inexorable</item>
+        <item>inimical</item>
+        <item>injunction</item>
+        <item>inoculate</item>
+        <item>insidious</item>
+        <item>instigate</item>
+        <item>insurgent</item>
+    </string-array>
+
+    <string-array name="dprofessionalDefinitionWordList">
+        <item>only partly in existence; imperfectly formed</item>
+        <item>impossible to deny or disprove</item>
+        <item>1. necessary as a duty or responsibility; morally binding    2. (of an official or regime) currently holding office</item>
+        <item>not to be placated or appeased or moved by entreaty</item>
+        <item>not friendly</item>
+        <item>a judicial remedy to prohibit a party from doing something</item>
+        <item>inject or treat with the germ of a disease to render immune</item>
+        <item>working or spreading in a hidden and usually injurious way</item>
+        <item>provoke or stir up</item>
+        <item>in opposition to a civil authority or government</item>
+    </string-array>
+
+    <string-array name="dprofessionalFillInTheBlank">
+        <item>a still ______ democracy</item>
+        <item>_________ proof is what every prosecutor is after</item>
+        <item>it is _______ on all decent people to concentrate on destroying this evil</item>
+        <item>the seemingly _________ march of new technology</item>
+        <item>actions _______ to our interests will not be tolerated</item>
+        <item>once the _______ is ordered we\'ll have time to gather ourselves</item>
+        <item>he _________ his tenants against smallpox</item>
+        <item>sexually transmitted diseases can be _______ and sometimes without symptoms</item>
+        <item>__________ men to refuse allegiance to the civil powers</item>
+        <item>an attack by armed _________</item>
+    </string-array>
+
+
+    <string-array name="dexpertWordList">
+        <item>fervent</item>
+        <item>fortitude</item>
+        <item>gallivant</item>
+        <item>guise</item>
+        <item>hyperbole</item>
+        <item>hypnosis</item>
+        <item>integrity</item>
+        <item>irony</item>
+        <item>jejune</item>
+        <item>karma</item>
+    </string-array>
+
+    <string-array name="dexpertDefinitionWordList">
+        <item>characterized by intense emotion</item>
+        <item>strength of mind that enables one to endure adversity</item>
+        <item>wander aimlessly in search of pleasure</item>
+        <item>an artful or simulated semblance</item>
+        <item>extravagant exaggeration</item>
+        <item>a state that resembles sleep induced by suggestion</item>
+        <item>an undivided or unbroken completeness with nothing wanting</item>
+        <item>incongruity between what might be expected and what occurs</item>
+        <item>lacking interest or significance or impact</item>
+        <item>the effects of a person\'s actions that determine his destiny</item>
+    </string-array>
+
+    <string-array name="dexpertFillInTheBlank">
+        <item>Their ________ desire led to bad decisions</item>
+        <item>Management had the ________ to wait out the strikers</item>
+        <item>Kerouac was know for _______ across the country</item>
+        <item>They used the _____ of night to approach</item>
+        <item>The ________ was nothing was good enough</item>
+        <item>Being placed in ________ allowed them to have better recall</item>
+        <item>The ________ of the structure was tested when enduring the disaster</item>
+        <item>The _______ being that helping creates more opportunities</item>
+        <item>the poem seems to me rather ______</item>
+        <item>Good ______ leads to a good life</item>
+    </string-array>
+
+
+
+
+    <string-array name="ebasicWordList">
+        <item>interlocutor</item>
+        <item>intimation</item>
+        <item>inure</item>
+        <item>invective</item>
+        <item>intransigent</item>
+        <item>inveterate</item>
+        <item>irreverence</item>
+        <item>knell</item>
+        <item>laconic</item>
+        <item>largess</item>
+    </string-array>
+
+    <string-array name="ebasicDefinitionWordList">
+        <item>a person who takes part in a conversation</item>
+        <item>a slight suggestion or vague understanding</item>
+        <item>cause to accept or become hardened to</item>
+        <item>abusive language used to express blame or censure</item>
+        <item>impervious to pleas, persuasion, requests, or reason</item>
+        <item>habitual</item>
+        <item>a mental attitude showing lack of due respect</item>
+        <item>the sound of a bell rung slowly to announce a death</item>
+        <item>brief and to the point</item>
+        <item>liberality in bestowing gifts</item>
+    </string-array>
+
+    <string-array name="ebasicFillInTheBlank">
+        <item>society should look for __________ not domineering individuals to have debates</item>
+        <item>the first _______ of trouble</item>
+        <item>these children have been ________ to violence</item>
+        <item>he let out a stream of ________</item>
+        <item>the regime remained __________ in its opposition to wider participation in the political process</item>
+        <item>he was an ________ gambler</item>
+        <item>an attitude of _______ toward religion</item>
+        <item>this sounded the ______ for the project</item>
+        <item>his _______ reply suggested a lack of interest in the topic</item>
+        <item>dispensing his money with such _______</item>
+    </string-array>
+
+
+    <string-array name="eintermediateWordList">
+        <item>legerdemain</item>
+        <item>libertarian</item>
+        <item>licentious</item>
+        <item>linchpin</item>
+        <item>litigant</item>
+        <item>maelstrom</item>
+        <item>maudlin</item>
+        <item>maverick</item>
+        <item>mawkish</item>
+        <item>maxim</item>
+    </string-array>
+
+    <string-array name="eintermediateDefinitionWordList">
+        <item>an illusory feat</item>
+        <item>an advocate of freedom of thought and speech</item>
+        <item>1. lacking moral discipline   2. disregarding accepted rules or conventions, especially in grammar or literary style</item>
+        <item>a central cohesive source of support and stability</item>
+        <item>a party to a lawsuit; someone involved in litigation</item>
+        <item>a powerful circular current of water</item>
+        <item>self-pityingly or tearfully sentimental, often through drunkenness</item>
+        <item>someone who exhibits independence in thought and action</item>
+        <item>sentimental in a feeble or sickly way</item>
+        <item>a saying that is widely accepted on its own merits</item>
+    </string-array>
+
+    <string-array name="eintermediateFillInTheBlank">
+        <item>a piece of management _________ caused the strike</item>
+        <item>a _________ would only call for regulations if the environment was fraudulent</item>
+        <item>our society has adopted a _________ stance in regards to Internet security</item>
+        <item>regular brushing is the _______ of all good dental hygiene</item>
+        <item>the parties ________ will arrive later to be deposed</item>
+        <item>a _______ in the sea caused us to change course</item>
+        <item>the drinks made them _______ and regretful of their decision</item>
+        <item>a ________ among Republicans</item>
+        <item>a ______ poem that everybody could have done without</item>
+        <item>the _______ that actions speak louder than words</item>
+    </string-array>
+
+
+    <string-array name="eadvancedWordList">
+        <item>mendacious</item>
+        <item>modicum</item>
+        <item>morass</item>
+        <item>mores</item>
+        <item>munificent</item>
+        <item>multifarious</item>
+        <item>nadir</item>
+        <item>negligent</item>
+        <item>neophyte</item>
+        <item>noisome</item>
+    </string-array>
+
+    <string-array name="eadvancedDefinitionWordList">
+        <item>given to lying</item>
+        <item>a small or moderate or token amount</item>
+        <item>1. a soft wet area of low-lying land that sinks underfoot   2. a complicated or confused situation</item>
+        <item>the conventions embodying the fundamental values of a group</item>
+        <item>very generous</item>
+        <item>having many aspects</item>
+        <item>the lowest point of anything</item>
+        <item>characterized by undue lack of attention or concern</item>
+        <item>any new participant in some activity</item>
+        <item>offensively malodorous</item>
+    </string-array>
+
+    <string-array name="eadvancedFillInTheBlank">
+        <item>their __________ nature caused pain not only to others but to themselves</item>
+        <item>his statement had more than a ________ of truth</item>
+        <item>the _______ of paperwork was confusing to everyone</item>
+        <item>an offense against social _______</item>
+        <item>a ______ gesture is what the holidays are all about</item>
+        <item>children need _________ activities to help them grow</item>
+        <item>they had reached the ________ of their sufferings</item>
+        <item>directors have been ________ in the performance of their duties</item>
+        <item>four-day cooking classes are offered to ________ and experts</item>
+        <item>________ vapors from the smoldering waste</item>
+    </string-array>
+
+
+    <string-array name="eprofessionalWordList">
+        <item>noxious</item>
+        <item>obdurate</item>
+        <item>obfuscate</item>
+        <item>obstreperous</item>
+        <item>officious</item>
+        <item>onerous</item>
+        <item>ostensible</item>
+        <item>ostracism</item>
+        <item>palliate</item>
+        <item>panacea</item>
+    </string-array>
+
+    <string-array name="eprofessionalDefinitionWordList">
+        <item>injurious to physical or mental health</item>
+        <item>stubbornly persistent in wrongdoing</item>
+        <item>make obscure or unclear</item>
+        <item>noisily and stubbornly defiant</item>
+        <item>intrusive in a meddling or offensive manner</item>
+        <item>not easily borne; wearing</item>
+        <item>appearing as such but not necessarily so</item>
+        <item>the act of excluding someone from society by general consent</item>
+        <item>lessen or to try to lessen the seriousness or extent of</item>
+        <item>hypothetical remedy for all ills or diseases</item>
+    </string-array>
+
+    <string-array name="eprofessionalFillInTheBlank">
+        <item>they were overcome by the _______ fumes</item>
+        <item>It happened because of massive and _______ resistance to reasonable change</item>
+        <item>the spelling changes will deform some familiar words and ________ their etymological origins</item>
+        <item>they are headstrong and ________</item>
+        <item>a tour guide came to move them on, an _________, spiteful man</item>
+        <item>he found his duties increasingly _______</item>
+        <item>the delay may have a deeper cause than the ________ reason</item>
+        <item>the family suffered social _______ because of the way they acted</item>
+        <item>treatment works by _________ symptoms</item>
+        <item>the _______ for all corporate ills</item>
+    </string-array>
+
+
+    <string-array name="eexpertWordList">
+        <item>lethargic</item>
+        <item>lucid</item>
+        <item>melancholy</item>
+        <item>misanthrope</item>
+        <item>narrative</item>
+        <item>nostalgic</item>
+        <item>oxymoron</item>
+        <item>paradigm</item>
+        <item>quell</item>
+        <item>quirky</item>
+    </string-array>
+
+    <string-array name="eexpertDefinitionWordList">
+        <item>deficient in alertness or activity</item>
+        <item>transparently clear; easily understandable</item>
+        <item>a constitutional tendency to be gloomy and depressed</item>
+        <item>someone who dislikes people in general</item>
+        <item>an account that tells the particulars of an act or event</item>
+        <item>unhappy about being away and longing for familiar things</item>
+        <item>conjoining contradictory terms</item>
+        <item>a standard or typical example</item>
+        <item>suppress or crush completely</item>
+        <item>unusual in especially an interesting or appealing way</item>
+    </string-array>
+
+    <string-array name="eexpertFillInTheBlank">
+        <item>after eating everyone felt _____</item>
+        <item>The instructions were ______, nobody got lost</item>
+        <item>Their _______ mood affected everybody they interacted with</item>
+        <item>The attitude of a ________ is callous</item>
+        <item>The _______ of the company was changing</item>
+        <item>_______ feelings always pass with time</item>
+        <item>Clearly misunderstood is a common _________</item>
+        <item>A _______ shift leads to a new understanding about the world</item>
+        <item>They _______ their cries with platitudes</item>
+        <item>they have a _____ attitude that puts some people off</item>
+    </string-array>
+
+
+
+    <string-array name="fbasicWordList">
+        <item>paradigm</item>
+        <item>pariah</item>
+        <item>partisan</item>
+        <item>paucity</item>
+        <item>pejorative</item>
+        <item>pellucid</item>
+        <item>penchant</item>
+        <item>penurious</item>
+        <item>pert</item>
+        <item>pernicious</item>
+    </string-array>
+
+    <string-array name="fbasicDefinitionWordList">
+        <item>a standard or typical example</item>
+        <item>a person who is rejected from society or home</item>
+        <item>a fervent and even militant proponent of something</item>
+        <item>an insufficient quantity or number</item>
+        <item>expressing disapproval</item>
+        <item>transparently clear; easily understandable</item>
+        <item>a strong liking</item>
+        <item>1. extremely poor; poverty-stricken   2. parsimonious; mean</item>
+        <item>characterized by a lightly exuberant quality</item>
+        <item>having a harmful effect, especially in a gradual or subtle way</item>
+    </string-array>
+
+    <string-array name="fbasicFillInTheBlank">
+        <item>there is a new _______ for public art in this country</item>
+        <item>they were treated as social _________</item>
+        <item>newspapers have become increasingly ___________</item>
+        <item>the police cannot act with such a ________ of evidence</item>
+        <item>their remarks were considered too _________ for daytime radio</item>
+        <item>they writes, as always, in _______ prose</item>
+        <item>they have a _________ for adopting stray dogs</item>
+        <item>they were generous and hospitable in contrast to the more stingy and _______ group</item>
+        <item>a _____ Belgian actress</item>
+        <item>the ________ influences of mass media on society</item>
+    </string-array>
+
+
+    <string-array name="fintermediateWordList">
+        <item>pertinacious</item>
+        <item>phlegmatic</item>
+        <item>philanthropic</item>
+        <item>pithy</item>
+        <item>platitude</item>
+        <item>plaudit</item>
+        <item>plenitude</item>
+        <item>plethora</item>
+        <item>portent</item>
+        <item>potentate</item>
+    </string-array>
+
+    <string-array name="fintermediateDefinitionWordList">
+        <item>stubbornly unyielding</item>
+        <item>showing little emotion</item>
+        <item>of or relating to charitable giving</item>
+        <item>concise and full of meaning</item>
+        <item>a trite or obvious remark</item>
+        <item>enthusiastic approval</item>
+        <item>a full supply</item>
+        <item>extreme excess</item>
+        <item>a sign of something about to happen</item>
+        <item>a ruler who is unconstrained by law</item>
+    </string-array>
+
+    <string-array name="fintermediateFillInTheBlank">
+        <item>he worked with a __________ resistance to interruptions</item>
+        <item>a strangely ________ response to what should have been happy news</item>
+        <item>they receive financial support from ___________ bodies</item>
+        <item>their _______ laugh made everybody take notice</item>
+        <item>they began uttering liberal __________</item>
+        <item>the network has received __________ for its sports coverage</item>
+        <item>the farm boasts a ________ of animals and birds</item>
+        <item>a ________ of committees and subcommittees</item>
+        <item>they believed that wild birds in the house were _______ of death</item>
+        <item>the ________ was unrestricted when he chose to sentence people</item>
+    </string-array>
+
+
+    <string-array name="fadvancedWordList">
+        <item>preclude</item>
+        <item>predilection</item>
+        <item>preponderance</item>
+        <item>presage</item>
+        <item>probity</item>
+        <item>proclivity</item>
+        <item>profligate</item>
+        <item>promulgate</item>
+        <item>proscribe</item>
+        <item>protean</item>
+    </string-array>
+
+    <string-array name="fadvancedDefinitionWordList">
+        <item>make impossible, especially beforehand</item>
+        <item>a predisposition in favor of something</item>
+        <item>exceeding in heaviness; having greater weight</item>
+        <item>a foreboding about what is about to happen</item>
+        <item>complete and confirmed integrity</item>
+        <item>a natural inclination</item>
+        <item>unrestrained by convention or morality</item>
+        <item>state or announce</item>
+        <item>command against</item>
+        <item>a full supply</item>
+    </string-array>
+
+    <string-array name="fadvancedFillInTheBlank">
+        <item>the secret nature of his work _________ official recognition</item>
+        <item>my _________ for Asian food</item>
+        <item>the __________ of women among older people</item>
+        <item>the outcome of the game _________ the coming year</item>
+        <item>financial ________ is what successful business exercise</item>
+        <item>a _________ for hard work is an ingredient for success</item>
+        <item>________ consumers of energy cost us all</item>
+        <item>these objectives have to be __________ within the organization</item>
+        <item>the lifeguard _________ waiting 30 minutes after eating to swim</item>
+        <item>it is difficult to comprehend the whole of this ________ subject</item>
+    </string-array>
+
+
+    <string-array name="fprofessionalWordList">
+        <item>prurient</item>
+        <item>puerile</item>
+        <item>pugnacious</item>
+        <item>pulchritude</item>
+        <item>punctilious</item>
+        <item>quaint</item>
+        <item>quixotic</item>
+        <item>quandary</item>
+        <item>recalcitrant</item>
+        <item>redoubtable</item>
+    </string-array>
+
+    <string-array name="fprofessionalDefinitionWordList">
+        <item>characterized by lust</item>
+        <item>displaying or suggesting a lack of maturity</item>
+        <item>tough and callous by virtue of experience</item>
+        <item>physical beauty, especially of a woman</item>
+        <item>marked by precise accordance with details</item>
+        <item>attractively old-fashioned</item>
+        <item>not sensible about practical matters</item>
+        <item>state of uncertainty in a choice between unfavorable options</item>
+        <item>stubbornly resistant to authority or control</item>
+        <item>(of a person) formidable, especially as an opponent</item>
+    </string-array>
+
+    <string-array name="fprofessionalFillInTheBlank">
+        <item>they\'d been the subject of much _______ curiosity</item>
+        <item>you\'re making ________ excuses</item>
+        <item>the increasingly _________ demeanor of politicians</item>
+        <item>they thrust it out and strove to find encouragement in its _________</item>
+        <item>they were _________ in providing every amenity for their guests</item>
+        <item>the country cottage was _______</item>
+        <item>The investors became _________ after the flash crash</item>
+        <item>the problem presented a _________ for all involved</item>
+        <item>a class of _________ fifteen-year-olds</item>
+        <item>they were  _________ debaters</item>
+    </string-array>
+
+
+    <string-array name="fexpertWordList">
+        <item>wonky</item>
+        <item>xenophobia</item>
+        <item>zealot</item>
+        <item>zenith</item>
+        <item>relegate</item>
+        <item>vapid</item>
+        <item>hornswoggle</item>
+        <item>sacerdotal</item>
+        <item>fete</item>
+        <item>hortative</item>
+    </string-array>
+
+    <string-array name="fexpertDefinitionWordList">
+        <item>turned or twisted toward one side</item>
+        <item>a fear of foreigners or strangers</item>
+        <item>a fervent and even militant proponent of something</item>
+        <item>the point above the observer directly opposite the nadir</item>
+        <item>assign to a lower position</item>
+        <item>lacking flavor, zest, animation, or spirit</item>
+        <item>bamboozle, hoax</item>
+        <item>of or relating to priests or a priesthood</item>
+        <item>lavish party</item>
+        <item>giving exhortation, serving to advise or warn</item>
+    </string-array>
+
+    <string-array name="fexpertFillInTheBlank">
+        <item>After the persuasive speech they became _____ for the cause</item>
+        <item>The Syrian civil war inspired _________ across Europe</item>
+        <item>They were ________ known for inciting people</item>
+        <item>The sun is at it\'s _________ around noon</item>
+        <item>they aim to prevent women from being _________ to a secondary role</item>
+        <item>at a party their _____ nature killed the mood</item>
+        <item>the other competitors tried to _________ them into quiting</item>
+        <item>The priest gives a homily after reciting the Gospel as part of his ________ duties</item>
+        <item>they threw an evening _______ to welcome them</item>
+        <item>it was a ________ tale that many heeded</item>
+    </string-array>
+
+
+
+    <string-array name="gbasicWordList">
+        <item>remiss</item>
+        <item>reprieve</item>
+        <item>reprobate</item>
+        <item>rescind</item>
+        <item>requisition</item>
+        <item>rife</item>
+        <item>sanctimonious</item>
+        <item>sanguine</item>
+        <item>scurrilous</item>
+        <item>redoubtable</item>
+    </string-array>
+
+    <string-array name="gbasicDefinitionWordList">
+        <item>failing in what duty requires</item>
+        <item>postpone the punishment of a convicted criminal</item>
+        <item>a person without moral scruples</item>
+        <item>cancel officially</item>
+        <item>an authoritative request or demand</item>
+        <item>excessively abundant</item>
+        <item>excessively or hypocritically pious</item>
+        <item>confidently optimistic and cheerful</item>
+        <item>expressing offensive reproach</item>
+        <item>formidable, especially as an opponent</item>
+    </string-array>
+
+    <string-array name="gbasicFillInTheBlank">
+        <item>it would be very ______ of me not to pass on that information</item>
+        <item>under the new regime, prisoners under sentence of death were ________</item>
+        <item>a long-missed old ________ drinking comrade</item>
+        <item>the government eventually _________ the directive</item>
+        <item>I had to make various __________ for staff and accommodations</item>
+        <item>lack of anesthetic was ______ in medicine in those days</item>
+        <item>nothing made them madder than the ________ talk of hypocrites</item>
+        <item>they are _______ about prospects for the global economy</item>
+        <item>a _________ attack on his integrity</item>
+        <item>they are _______ debaters</item>
+    </string-array>
+
+
+    <string-array name="gintermediateWordList">
+        <item>semaphore</item>
+        <item>serendipity</item>
+        <item>sobriety</item>
+        <item>solicitous</item>
+        <item>solipsism</item>
+        <item>spurious</item>
+        <item>staid</item>
+        <item>stolid</item>
+        <item>subjugate</item>
+        <item>surfeit</item>
+    </string-array>
+
+    <string-array name="gintermediateDefinitionWordList">
+        <item>an apparatus for visual signaling</item>
+        <item>good luck in making unexpected and fortunate discoveries</item>
+        <item>the state of being sober and not intoxicated by alcohol</item>
+        <item>full of anxiety and concern</item>
+        <item>the philosophical theory that the self is all that exists</item>
+        <item>plausible but false</item>
+        <item>characterized by dignity and propriety</item>
+        <item>having or revealing little emotion or sensibility</item>
+        <item>make subservient; force to submit or subdue</item>
+        <item>indulge (one\'s appetite) to satiety</item>
+    </string-array>
+
+    <string-array name="gintermediateFillInTheBlank">
+        <item>they appreciated the ___________ like system used to communicate over the crowd</item>
+        <item>a fortunate stroke of __________</item>
+        <item>the price of beer compelled me to maintain a certain level of ________</item>
+        <item>she was always ________ about the welfare of her students</item>
+        <item>self centered people ascribe to a ___________ philosophy</item>
+        <item>separating authentic and _________ claims</item>
+        <item>______ law firms don\'t advertise on billboards</item>
+        <item>their ________ nature didn\'t betray any thoughts</item>
+        <item>the invaders had soon __________ most of the native population</item>
+        <item>a _______ of food and drink is what makes Thanksgiving</item>
+    </string-array>
+
+
+    <string-array name="gadvancedWordList">
+        <item>surreptitious</item>
+        <item>swarthy</item>
+        <item>tangential</item>
+        <item>tirade</item>
+        <item>tome</item>
+        <item>toady</item>
+        <item>torpid</item>
+        <item>travesty</item>
+        <item>trenchant</item>
+        <item>trundle</item>
+    </string-array>
+
+    <string-array name="gadvancedDefinitionWordList">
+        <item>marked by quiet and caution and secrecy</item>
+        <item>naturally having skin of a dark color</item>
+        <item>of superficial relevance if any</item>
+        <item>a speech of violent denunciation</item>
+        <item>a large and scholarly book</item>
+        <item>a person who tries to please someone to gain an advantage</item>
+        <item>in a condition of biological rest or suspended animation</item>
+        <item>a false, absurd, or distorted representation of something</item>
+        <item>having keenness and forcefulness and penetration in thought</item>
+        <item>to propel by causing to rotate</item>
+    </string-array>
+
+    <string-array name="gadvancedFillInTheBlank">
+        <item>they carried on a ____________ affair</item>
+        <item>they looked frail standing next to the strong and _______ other inhabitants</item>
+        <item>the reforms were __________ to efforts to maintain a basic standard of life</item>
+        <item>the ________ would have been funny if it weren\'t so sad</item>
+        <item>he expects us to read this ______ by Monday</item>
+        <item>their interactions gave him a ________ reputation</item>
+        <item>we sat around in a ________ state</item>
+        <item>the absurdly lenient sentence is a _______ of justice</item>
+        <item>they heard angry voices, not loud, yet certainly _________</item>
+        <item>the car ________ down the road</item>
+    </string-array>
+
+
+    <string-array name="gprofessionalWordList">
+        <item>trite</item>
+        <item>truculent</item>
+        <item>turpitude</item>
+        <item>ubiquitous</item>
+        <item>umbrage</item>
+        <item>upbraid</item>
+        <item>utilitarian</item>
+        <item>veracity</item>
+        <item>vestige</item>
+        <item>vicissitude</item>
+    </string-array>
+
+    <string-array name="gprofessionalDefinitionWordList">
+        <item>repeated too often; over familiar through overuse</item>
+        <item>defiantly aggressive</item>
+        <item>a corrupt or depraved or degenerate act or practice</item>
+        <item>being present everywhere at once</item>
+        <item>a feeling of anger caused by being offended</item>
+        <item>express criticism towards</item>
+        <item>1. designed to be useful or practical rather than attractive    2. relating to or adhering to the doctrine of utilitarianism</item>
+        <item>unwillingness to tell lies</item>
+        <item>an indication that something has been present</item>
+        <item>a variation in circumstances or fortune</item>
+    </string-array>
+
+    <string-array name="gprofessionalFillInTheBlank">
+        <item>this point may now seem obvious and _________</item>
+        <item>their days of ________ defiance were just beginning</item>
+        <item>acts of moral ________</item>
+        <item>the _________ nature of the framework gave them all hope</item>
+        <item>they took _______ at the remarks</item>
+        <item>they ________ them for their obesity</item>
+        <item>a ___________ theory allows for a wide berth of morals and evil actions</item>
+        <item>officials expressed doubts concerning the _________ of the story</item>
+        <item>the last ________ of colonialism</item>
+        <item>the __________ of the seasons</item>
+    </string-array>
+
+
+    <string-array name="gexpertWordList">
+        <item>vilify</item>
+        <item>virtuoso</item>
+        <item>vitriolic</item>
+        <item>vituperate</item>
+        <item>vociferous</item>
+        <item>wanton</item>
+        <item>wily</item>
+        <item>winsome</item>
+        <item>yoke</item>
+        <item>zephyr</item>
+    </string-array>
+
+    <string-array name="gexpertDefinitionWordList">
+        <item>spread negative information about</item>
+        <item>someone who is dazzlingly skilled in any field</item>
+        <item>harsh, bitter, or malicious in tone</item>
+        <item>spread negative information about</item>
+        <item>conspicuously and offensively loud</item>
+        <item>a lewd or lascivious person</item>
+        <item>marked by skill in deception</item>
+        <item>charming in a childlike or naive way</item>
+        <item>used of something that is regarded as oppressive or burdensome</item>
+        <item>a slight wind</item>
+    </string-array>
+
+    <string-array name="gexpertFillInTheBlank">
+        <item>they have been _________ in the press</item>
+        <item>a celebrated clarinet __________</item>
+        <item>their ________ attacks were admonished by all that heard them</item>
+        <item>their enemies _________ lies to weaken them</item>
+        <item>he was a __________ opponent of the takeover</item>
+        <item>sheer ________ vandal</item>
+        <item>they turned out to be ______ negotiators</item>
+        <item>a ________ smile will open a lot of doors</item>
+        <item>the _________ of expectation can hinder performance</item>
+        <item>a summer _______ gently stirred their hair</item>
+    </string-array>
+
+    <string-array name="hbasicWordList">
+        <item>abominous</item>
+        <item>billingsgate</item>
+        <item>cacoethes</item>
+        <item>daedal</item>
+        <item>embrangle</item>
+        <item>febrile</item>
+        <item>gliddery</item>
+        <item>horripilation</item>
+        <item>idoneous</item>
+        <item>jactance</item>
+    </string-array>
+
+    <string-array name="hbasicDefinitionWordList">
+        <item>paunchy stomach, or a large, protruding belly</item>
+        <item>coarse or abusive language</item>
+        <item>an insatiable desire to do something inadvisable</item>
+        <item>someone who is especially skilled or artful</item>
+        <item>to confuse someone</item>
+        <item>feverish</item>
+        <item>very slippery, as if covered by ice</item>
+        <item>medical term for goose bumps</item>
+        <item>a compliment to something, well suited</item>
+        <item>boasting</item>
+    </string-array>
+
+    <string-array name="hbasicFillInTheBlank">
+        <item>They were __________ making it hard to get a date</item>
+        <item>the ________ at pike\'s market was funny</item>
+        <item>the ________ actions betrayed their character</item>
+        <item>Bjarke Ingles is an architect who is ridiculed but is still a ________</item>
+        <item>the new comer felt ________ by all the different rules</item>
+        <item>all of the eyes focused on them made them feel _______</item>
+        <item>the freshly buffed floor was _______</item>
+        <item>they felt the _______ on the back of their neck</item>
+        <item>the approach was ________ to their personality</item>
+        <item>their constant ________ was embarrassing for everyone around them</item>
+    </string-array>
+
+
+    <string-array name="hintermediateWordList">
+        <item>kenspeckle</item>
+        <item>laodicean</item>
+        <item>mephitic</item>
+        <item>nipcheese</item>
+        <item>zoilism</item>
+        <item>pauciloquent</item>
+        <item>quiddity</item>
+        <item>riant</item>
+        <item>saccadic</item>
+        <item>vaticinate</item>
+    </string-array>
+
+    <string-array name="hintermediateDefinitionWordList">
+        <item>easily recognizable</item>
+        <item>apathetic, indifferent, or unconcerned person when it comes to religion</item>
+        <item>bad smell</item>
+        <item>mean, penny-pinching person</item>
+        <item>an overbearing harsh criticism</item>
+        <item>people who say little</item>
+        <item>the essence or nature of something</item>
+        <item>cheerful or mirthful</item>
+        <item>characteristically fidgety, twitch or restless</item>
+        <item>prophesier or predict something</item>
+    </string-array>
+
+    <string-array name="hintermediateFillInTheBlank">
+        <item>they were struck by how _________ their faces were</item>
+        <item>they were all _________, having done it all before</item>
+        <item>skunks were known as _______ weasels in the 19th century</item>
+        <item>being a __________ isn\'t something to be proud of, but necessary at times in business</item>
+        <item>the ________ did nothing to help the already depressed participant</item>
+        <item>their __________ style was appreciated by those with a lot to do</item>
+        <item>to asses somethings _________ you have to approach it from all angles</item>
+        <item>the ________ party was more fun than anyone expected</item>
+        <item>he was a _______ anxious guy</item>
+        <item>algorithms can __________ moods months in advance</item>
+    </string-array>
+
+
+    <string-array name="hbdvancedWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hbdvancedDefinitionWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hbdvancedFillInTheBlank">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+
+    <string-array name="hprofessionalWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hprofessionalDefinitionWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hprofessionalFillInTheBlank">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+
+    <string-array name="hexpertWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hexpertDefinitionWordList">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="hexpertFillInTheBlank">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+
+
+</resources>
