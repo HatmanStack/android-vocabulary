@@ -1,3 +1,22 @@
+/**
+ * DISCLAIMER:
+ * This code is provided for learning purposes only. It is not intended to be production-ready code
+ * and may not adhere to best practices or coding standards. The primary goal of this code is to
+ * demonstrate concepts and functionality in a working manner.
+ *
+ * While efforts have been made to ensure the accuracy and functionality of the code, there may be
+ * bugs, errors, or inefficiencies present. Use this code at your own risk, and consider it as a
+ * starting point for learning and experimentation.
+ *
+ * This code is provided free of charge and without any warranties or guarantees of any kind. The
+ * author and the organization do not assume any responsibility or liability for any damages or
+ * losses arising from the use of this code.
+ *
+ * If you choose to use this code in any capacity, it is highly recommended to review, refactor,
+ * and adapt it to meet your specific requirements and coding standards before using it in any
+ * production environment.
+ */
+
 package gemenielabs.vocabulary;
 
 import android.animation.AnimatorSet;
@@ -77,22 +96,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressBar = findViewById(R.id.progressBar);
-        mRnd = new Random();
+    
+        // Find the views in the layout
         findViews();
+    
+        // Initialize a new Random object
+        random = new Random();
+    
+        // Initialize variables and set initial values
         learnWordsCount = 0;
         indexHolder = 0;
         hintCount = 0;
         wrongCount = 0;
         isAnswerCorrect = true;
         resetListButton.setClickable(false);
+    
+        // Get shared preferences and retrieve stored values
         sharedPreferences = this.getSharedPreferences("ice_nine.cj.vocabbuilder", MODE_PRIVATE);
         purchaseToken = sharedPreferences.getString("PURCHASE_TOKEN", "");
         workingList = sharedPreferences.getString(WORKING_LIST, "List A");
         progressbarSize = sharedPreferences.getInt(PROGRESSBAR_SIZE, 120);
+    
+        // Set the progress bar properties
         progressBar.setMax(progressbarSize);
         progressBar.setProgress(getProgressCount(workingList));
+    
+        // Set the question text to the working list
         questionTextView.setText(workingList);
+    
+        // Log the progress bar size and current progress count
         Log.i(TAG, "onCreate: " + progressbarSize);
         Log.i(TAG, "onCreate: " + getProgressCount(workingList));
     }
@@ -133,11 +165,11 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
     }
 
-    public class input extends InputMethodService {
+    public class Input extends InputMethodService {
 
         @Override
         public View onCreateInputView() {
-
+            // Creates the input view
             Log.i(TAG, "onCreateInputView: InputView");
             RelativeLayout.LayoutParams hintParams = (RelativeLayout.LayoutParams) fillInTheBlankHintButton.getLayoutParams();
             RelativeLayout.LayoutParams questionParams = (RelativeLayout.LayoutParams) questionTextView.getLayoutParams();
@@ -145,14 +177,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onCreateInputView: " + Integer.valueOf((int) questionTextView.getY()));
             return super.onCreateInputView();
         }
-
+    
         @Override
         public void onFinishInputView(boolean finishingInput) {
+            // Called when the input view is finished
             super.onFinishInputView(finishingInput);
         }
     }
-
+    
     public void pickWordList(View v) {
+        // Picks a word list and updates the UI accordingly
         listPickView.setVisibility(View.GONE);
         subList = (String) v.getTag();
         Log.i(TAG, "pickWordList: SubList  " + subList);
@@ -168,24 +202,26 @@ public class MainActivity extends AppCompatActivity {
             answerCheck(100);
         }
     }
-
-    public void pickWord () {
+    
+    public void pickWord() {
+        // Picks a word from the vocabulary word list
         wordIndex = mRnd.nextInt(vocabWordList.length);
         while(answered.get(wordIndex) == 3 || (wordIndex == indexHolder && updateProgressBar() < progressBar.getMax() - 3)) {
             wordIndex = mRnd.nextInt(vocabWordList.length);
         }
         indexHolder = wordIndex;
     }
-
+    
     public void askQuestion() {
+        // Asks a question by picking a word and determining the question type
         pickWord();
-        if ( answered.get(wordIndex) == 1){
+        if (answered.get(wordIndex) == 1) {
             fillInTheBlank();
         } else if (answered.get(wordIndex) == 2) {
             definition();
         } else {
             int random = mRnd.nextInt(2);
-            if (random == 1){
+            if (random == 1) {
                 fillInTheBlank();
             } else {
                 definition();
@@ -193,52 +229,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void learnWords (View view) {
-        if(learnWordsCount < vocabWordList.length) {
-            String string = vocabWordList[learnWordsCount] + "\n\n" + vocabWordDefinitionList[learnWordsCount];
-            questionTextView.setText(string);
+    public void learnWords(View view) {
+        // Check if there are more words to learn
+        if (learnWordsCount < vocabWordList.length) {
+            String word = vocabWordList[learnWordsCount];
+            String definition = vocabWordDefinitionList[learnWordsCount];
+            questionTextView.setText(word + "\n\n" + definition);
             learnWordsCount++;
         } else {
+            // Reset the count when all words have been learned
             learnWordsCount = 0;
         }
     }
-
+    
     public void fillInTheBlankAnswer(View view) {
-        final String answer = vocabWordList[wordIndex];
-        if(fillInTheBlankEditText.getText() != null) {
-            if (fillInTheBlankEditText.getText().toString().equals(answer) ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "d") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "ly") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "ed") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "ing") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "s") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer.substring(0, answer.length() - 1) + "es") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer.substring(0, answer.length() - 1) + "ing") ||
-                    fillInTheBlankEditText.getText().toString().equals(answer + "es")    ) {
-                result.setText(R.string.correct);
-                isAnswerCorrect = true;
-                if (answered.get(wordIndex) == 1) {
-                    answered.set(wordIndex, 3);
-                } else {
-                    answered.set(wordIndex, 2);
-                }
-                isAnswerCorrect = true;
-            } else {
-                result.setText(R.string.wrong);
-                isAnswerCorrect = false;
-            }
-            resultAnimation();
-            answerCheck(2);
+        String answer = vocabWordList[wordIndex];
+        String userAnswer = fillInTheBlankEditText.getText().toString();
+        if (isAnswerCorrect(answer, userAnswer)) {
+            // Display correct result and update status
+            result.setText(R.string.correct);
+            isAnswerCorrect = true;
+            updateAnsweredStatus();
+            isAnswerCorrect = true;
+        } else {
+            // Display wrong result
+            result.setText(R.string.wrong);
+            isAnswerCorrect = false;
         }
+        resultAnimation();
+        answerCheck(2);
     }
-
-    public void fillInTheBlank () {
+    
+    public void fillInTheBlank() {
+        // Display the fill-in-the-blank question
         questionTextView.setText(fillInTheBlankList[wordIndex]);
         buttonQuestionVisibility(3);
         buttonState(1);
     }
-
+    
     public void definition() {
+        // Display the definition question
         questionTextView.setText(vocabWordDefinitionList[wordIndex]);
         buttonQuestionVisibility(2);
         buttonState(2);
@@ -248,24 +278,22 @@ public class MainActivity extends AppCompatActivity {
         setButtonText(definitionAnswerButton3);
         setButtonText(definitionAnswerButton4);
     }
-
+    
     public void setButtonText(Button button) {
+        int incorrectAnswerIndex = getRandomIncorrectAnswerIndex();
+        // Set the button text with correct or incorrect answer
         if (button.getTag().toString().equals(String.valueOf(randomButton))) {
             button.setText(vocabWordList[wordIndex]);
         } else {
-            int incorrectAnswerIndex = mRnd.nextInt(vocabWordList.length);
-            while (definitionAnswerButton1.getText().equals(vocabWordList[incorrectAnswerIndex]) || definitionAnswerButton2.getText().equals(vocabWordList[incorrectAnswerIndex]) ||
-                    definitionAnswerButton3.getText().equals(vocabWordList[incorrectAnswerIndex]) || definitionAnswerButton4.getText().equals(vocabWordList[incorrectAnswerIndex]) ||
-                    incorrectAnswerIndex == wordIndex) {
-                incorrectAnswerIndex = mRnd.nextInt(vocabWordList.length);
-            }
             button.setText(vocabWordList[incorrectAnswerIndex]);
         }
     }
-
+    
     public void definitionAnswer(View view) {
-        if(view.getTag().toString().equals(String.valueOf(randomButton))) {
+        // Check if the selected button matches the correct button
+        if (view.getTag().toString().equals(String.valueOf(randomButton))) {
             result.setText(R.string.correct);
+            // Update answered status based on the current state
             if (answered.get(wordIndex) == 2) {
                 answered.set(wordIndex, 3);
             } else {
@@ -279,15 +307,16 @@ public class MainActivity extends AppCompatActivity {
         resultAnimation();
         answerCheck(1);
     }
-
+    
     public int updateProgressBar() {
         int count = 0;
+        // Calculate the total count of answered questions
         for (int i = 0; i < answered.size(); i++) {
             count += answered.get(i);
         }
         return count;
     }
-
+    
     public void answerCheck(int number) {
         buttonQuestionVisibility(1);
         nextQuestionButton.setText(R.string.questions);
@@ -295,30 +324,34 @@ public class MainActivity extends AppCompatActivity {
         if (!isAnswerCorrect) {
             wrongCount++;
             if (number == 1) {
+                // Display the definition and word for incorrect answers
                 String string = vocabWordDefinitionList[wordIndex] + "\n\n" + vocabWordList[wordIndex];
                 questionTextView.setText(string);
             } else {
+                // Display the definition, word, and user answer for incorrect fill-in-the-blank answers
                 String string = vocabWordDefinitionList[wordIndex] + "\n\n" + vocabWordList[wordIndex] +
                         "\n\n" + fillInTheBlankEditText.getText().toString();
                 questionTextView.setText(string);
             }
         } else {
+            // Display the current list and check if graduation condition is met
             String string = workingList + " " + subList.toUpperCase();
             questionTextView.setText(string);
-            if(updateProgressBar() == progressBar.getMax()) {
+            if (updateProgressBar() == progressBar.getMax()) {
                 questionBreakView.setVisibility(View.GONE);
                 graduation();
             }
         }
     }
-
-    public void resultAnimation () {
+    
+    public void resultAnimation() {
+        // Apply result animation by fading out the result text
         result.setAlpha(1f);
         ObjectAnimator fade = ObjectAnimator.ofFloat(result, "alpha", 0f);
         fade.setDuration(1000);
         fade.start();
     }
-
+    
     public void graduation() {
         resetListButton.setVisibility(View.VISIBLE);
         resetListButton.setOnClickListener(new View.OnClickListener() {
@@ -327,206 +360,286 @@ public class MainActivity extends AppCompatActivity {
                 resetList();
             }
         });
+    
+        // Generate graduation message based on hint count and wrong count
         String string;
-        if ( hintCount <= 1 ) {
+        if (hintCount <= 1) {
             if (wrongCount <= 1) {
                 string = "What's Next Professor?";
             } else {
-                string = "You only got " + wrongCount + " Wrong , What's Next?";
+                string = "You only got " + wrongCount + " Wrong, What's Next?";
             }
         } else {
             string = "You Completed a List with \n" + hintCount + " Hints\n" + wrongCount + " Wrong\n";
         }
+    
+        // Update all-time wrong and hint counts if necessary
         int allTimeWrong = sharedPreferences.getInt(ALLTIMEWRONG + workingList + subList, -1);
         int allTimeHints = sharedPreferences.getInt(ALLTIMEHINT + workingList + subList, -1);
-        if(allTimeWrong > wrongCount || allTimeWrong == -1) {
+        if (allTimeWrong > wrongCount || allTimeWrong == -1) {
             sharedPreferences.edit().putInt(ALLTIMEWRONG + workingList + subList, wrongCount).apply();
             allTimeWrong = wrongCount;
         }
-        if(allTimeHints > hintCount || allTimeHints == -1) {
+        if (allTimeHints > hintCount || allTimeHints == -1) {
             sharedPreferences.edit().putInt(ALLTIMEHINT + workingList + subList, hintCount).apply();
-            allTimeHints = hintCount;
-        }
-        questionTextView.setText("Congratulations You Know Your Vocab\n " + string + "\n\nYour Best With this List is\n" + allTimeHints + " Hints\n" + allTimeWrong +
-                        " Wrong\n\n Try a Different List? \n Reset and Go Again?");
-        sharedPreferences.edit().commit();
+        allTimeHints = hintCount;
     }
 
-    public void graduationCheck(View v) {
-        result.setText("");
-            if (answered.contains(0) || answered.contains(1) || answered.contains(2)) {
-                askQuestion();
-            } else {
-                graduation();
-            }
-    }
+    // Compose the final graduation message
+    questionTextView.setText("Congratulations You Know Your Vocab\n " + string +
+            "\n\nYour Best With this List is\n" + allTimeHints + " Hints\n" +
+            allTimeWrong + " Wrong\n\n Try a Different List? \n Reset and Go Again?");
+    sharedPreferences.edit().commit();
+}
 
-    public void resetList() {
-        resetListButton.setVisibility(View.GONE);
-        for (int i = 0; i < answered.size(); i++) {
-            answered.set(i, 0);
-        }
-        hintCount = 0;
-        wrongCount = 0;
-        for (int i = 0; i < answered.size(); i++) {
-            String identifier = String.valueOf(i);
-            sharedPreferences.edit().putInt(workingList + subList + identifier, answered.get(i)).apply();
-        }
-        sharedPreferences.edit().putInt(HINT + workingList + subList, hintCount).apply();
-        sharedPreferences.edit().putInt(WRONG + workingList + subList, wrongCount).apply();
-        progressBar.setProgress(updateProgressBar());
+
+    /**
+ * Check if graduation is required or continue asking questions.
+ */
+public void graduationCheck(View v) {
+    result.setText("");
+
+    if (answered.contains(0) || answered.contains(1) || answered.contains(2)) {
         askQuestion();
+    } else {
+        graduation();
+    }
+}
+
+/**
+ * Reset the list by setting all answers to 0, resetting hint and wrong counts,
+ * and saving the updated values in SharedPreferences.
+ */
+public void resetList() {
+    resetListButton.setVisibility(View.GONE);
+
+    // Reset all answers to 0
+    for (int i = 0; i < answered.size(); i++) {
+        answered.set(i, 0);
     }
 
-    public void buttonQuestionVisibility(int style){
-        if(style == 1){
-            gridLayout.setVisibility(View.GONE);
-            fillInTheBlankView.setVisibility(View.GONE);
-            resetListButton.setVisibility(View.GONE);
-            questionBreakView.setVisibility(View.VISIBLE);
-        }
-        if(style == 2){
-            gridLayout.setVisibility(View.VISIBLE);
-            fillInTheBlankView.setVisibility(View.GONE);
-            questionBreakView.setVisibility(View.GONE);
-        }
-        if(style == 3) {
-            gridLayout.setVisibility(View.GONE);
-            fillInTheBlankView.setVisibility(View.VISIBLE);
-            questionBreakView.setVisibility(View.GONE);
-        }
+    hintCount = 0;
+    wrongCount = 0;
+
+    // Save the updated values in SharedPreferences
+    for (int i = 0; i < answered.size(); i++) {
+        String identifier = String.valueOf(i);
+        sharedPreferences.edit().putInt(workingList + subList + identifier, answered.get(i)).apply();
     }
 
-    public void buttonState(int changeState) {
-        if(changeState == 1) {
-            fillInTheBlankEditText.setX(3000);
-            questionTextView.setX(3000);
-            fillInTheBlankButton.setX(3000);
-            fillInTheBlankHintButton.setX(3000);
-            fillInTheBlankEditText.setText("");
-            ObjectAnimator animateEditText = ObjectAnimator.ofFloat(fillInTheBlankEditText, "TranslationX", 0f);
-            ObjectAnimator animateTextView = ObjectAnimator.ofFloat(questionTextView, "TranslationX", 0f);
-            ObjectAnimator animateButton = ObjectAnimator.ofFloat(fillInTheBlankButton, "TranslationX", 0f);
-            ObjectAnimator animateHintButton = ObjectAnimator.ofFloat(fillInTheBlankHintButton, "TranslationX", 0f);
-            AnimatorSet set = new AnimatorSet();
-            set.setDuration(500);
-            set.playTogether(animateButton, animateEditText, animateTextView, animateHintButton);
-            set.start();
-        }
-        if (changeState == 2) {
-            gridLayout.setY(2000);
-            ObjectAnimator animateGrid = ObjectAnimator.ofFloat(gridLayout, "TranslationY", 0f);
-            questionTextView.setY(-500);
-            ObjectAnimator questionAnimate = ObjectAnimator.ofFloat(questionTextView, "TranslationY", 0f);
-            AnimatorSet set = new AnimatorSet();
-            set.setDuration(500);
-            set.playTogether(animateGrid, questionAnimate);
-            set.start();
-        }
+    sharedPreferences.edit()
+            .putInt(HINT + workingList + subList, hintCount)
+            .putInt(WRONG + workingList + subList, wrongCount)
+            .apply();
+
+    progressBar.setProgress(updateProgressBar());
+    askQuestion();
+}
+
+/**
+ * Adjust the visibility of question-related buttons based on the specified style.
+ */
+public void buttonQuestionVisibility(int style) {
+    if (style == 1) {
+        // Style 1: Hide grid layout, fill in the blank view, and reset list button;
+        // show question break view
+        gridLayout.setVisibility(View.GONE);
+        fillInTheBlankView.setVisibility(View.GONE);
+        resetListButton.setVisibility(View.GONE);
+        questionBreakView.setVisibility(View.VISIBLE);
+    } else if (style == 2) {
+        // Style 2: Show grid layout; hide fill in the blank view and question break view
+        gridLayout.setVisibility(View.VISIBLE);
+        fillInTheBlankView.setVisibility(View.GONE);
+        questionBreakView.setVisibility(View.GONE);
+    } else if (style == 3) {
+        // Style 3: Hide grid layout; show fill in the blank view; hide question break view
+        gridLayout.setVisibility(View.GONE);
+        fillInTheBlankView.setVisibility(View.VISIBLE);
+        questionBreakView.setVisibility(View.GONE);
     }
+}
+
+/**
+ * Animate the button state change based on the specified changeState value.
+ */
+public void buttonState(int changeState) {
+    if (changeState == 1) {
+        // Change state 1: Animate fill in the blank elements
+        fillInTheBlankEditText.setX(3000);
+        questionTextView.setX(3000);
+        fillInTheBlankButton.setX(3000);
+        fillInTheBlankHintButton.setX(3000);
+        fillInTheBlankEditText.setText("");
+
+        ObjectAnimator animateEditText = ObjectAnimator.ofFloat(fillInTheBlankEditText, "TranslationX", 0f);
+        ObjectAnimator animateTextView = ObjectAnimator.ofFloat(questionTextView, "TranslationX", 0f);
+        ObjectAnimator animateButton = ObjectAnimator.ofFloat(fillInTheBlankButton, "TranslationX", 0f);
+        ObjectAnimator animateHintButton = ObjectAnimator.ofFloat(fillInTheBlankHintButton, "TranslationX", 0f);
+
+        AnimatorSet set = new AnimatorSet();
+        set.setDuration(500);
+        set.playTogether(animateButton, animateEditText, animateTextView, animateHintButton);
+        set.start();
+    } else if (changeState == 2) {
+        // Change state 2: Animate grid layout and question text view
+        gridLayout.setY(2000);
+        ObjectAnimator animateGrid = ObjectAnimator.ofFloat(gridLayout, "TranslationY", 0f);
+        questionTextView.setY(-500);
+        ObjectAnimator questionAnimate = ObjectAnimator.ofFloat(questionTextView, "TranslationY", 0f);
+
+        AnimatorSet set = new AnimatorSet();
+        set.setDuration(500);
+        set.playTogether(animateGrid, questionAnimate);
+        set.start();
+    }
+}
 
 
-    public void buildList(){
-        String[] workingListArray = getResources().getStringArray(R.array.working_list_array);
-        String[] subListArray = getResources().getStringArray(R.array.sub_list_array);
-        int startingIndexOfLists = 0;
-        for (int i = 0; i < workingListArray.length; i++) {
-            if(workingListArray[i].contains(workingList)){
-                startingIndexOfLists = i * 15;
-                for (int j = 0; j < subListArray.length; j++) {
-                    if(subListArray[j].contains(subList)) {
 
-                        int number = j * 3;
-                        startingIndexOfLists += number;
-                    }
+/**
+ * Build the vocab word list, vocab word definition list, and fill in the blank list
+ * based on the working list and sub list selected.
+ */
+public void buildList() {
+    String[] workingListArray = getResources().getStringArray(R.array.working_list_array);
+    String[] subListArray = getResources().getStringArray(R.array.sub_list_array);
+    int startingIndexOfLists = 0;
+
+    // Find the starting index of the lists based on working list and sub list
+    for (int i = 0; i < workingListArray.length; i++) {
+        if (workingListArray[i].contains(workingList)) {
+            startingIndexOfLists = i * 15;
+
+            for (int j = 0; j < subListArray.length; j++) {
+                if (subListArray[j].contains(subList)) {
+                    int number = j * 3;
+                    startingIndexOfLists += number;
                 }
             }
         }
-        vocabWordList = getResources().getStringArray(workingListAddress[startingIndexOfLists]);
-        vocabWordDefinitionList = getResources().getStringArray(workingListAddress[startingIndexOfLists + 1]);
-        fillInTheBlankList = getResources().getStringArray(workingListAddress[startingIndexOfLists + 2]);
-        Log.i(TAG, "buildList: " + vocabWordList.length);
-        for (int i = 0; i < vocabWordList.length; i++) {
-            Log.i(TAG, "buildList: " + i);
+    }
 
-            String identifier = String.valueOf(i);
-            answered.add(sharedPreferences.getInt(workingList + subList + identifier, 0));
+    // Retrieve the lists from resources based on the starting index
+    vocabWordList = getResources().getStringArray(workingListAddress[startingIndexOfLists]);
+    vocabWordDefinitionList = getResources().getStringArray(workingListAddress[startingIndexOfLists + 1]);
+    fillInTheBlankList = getResources().getStringArray(workingListAddress[startingIndexOfLists + 2]);
+
+    // Log the length of the vocab word list
+    Log.i(TAG, "buildList: " + vocabWordList.length);
+
+    // Load the answered values from SharedPreferences and add them to the answered list
+    for (int i = 0; i < vocabWordList.length; i++) {
+        Log.i(TAG, "buildList: " + i);
+
+        String identifier = String.valueOf(i);
+        answered.add(sharedPreferences.getInt(workingList + subList + identifier, 0));
+    }
+
+    // Load hint count and wrong count from SharedPreferences
+    hintCount = sharedPreferences.getInt(HINT + workingList + subList, hintCount);
+    wrongCount = sharedPreferences.getInt(WRONG + workingList + subList, wrongCount);
+}
+
+/**
+ * Save the answered list, hint count, wrong count, purchase token, working list,
+ * and progress bar size in SharedPreferences when the activity is stopped.
+ */
+@Override
+protected void onStop() {
+    super.onStop();
+
+    // Save the answered list in SharedPreferences
+    for (int i = 0; i < answered.size(); i++) {
+        String identifier = String.valueOf(i);
+        sharedPreferences.edit().putInt(workingList + subList + identifier, answered.get(i)).apply();
+    }
+
+    // Save hint count, wrong count, purchase token, working list, and progress bar size in SharedPreferences
+    sharedPreferences.edit()
+            .putInt(HINT + workingList + subList, hintCount)
+            .putInt(WRONG + workingList + subList, wrongCount)
+            .putString("PURCHASE_TOKEN", purchaseToken)
+            .putString(WORKING_LIST, workingList)
+            .putInt(PROGRESSBAR_SIZE, progressbarSize)
+            .apply();
+}
+
+/**
+ * Create the options menu and inflate the main menu layout.
+ */
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    return true;
+}
+
+/**
+ * Display the hint for the fill in the blank question and increment the hint count.
+ */
+public void fillInTheBlankHint(View view) {
+    questionTextView.setText(fillInTheBlankList[wordIndex] + "\n\n" + vocabWordDefinitionList[wordIndex]);
+    hintCount++;
+}
+
+/**
+ * Handle the selection of an item in the options menu.
+ */
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    buttonQuestionVisibility(1);
+    result.setText("");
+    String id = item.getTitle().toString();
+
+    // Save the answered list, hint count, and wrong count in SharedPreferences
+    for (int i = 0; i < answered.size(); i++) {
+        sharedPreferences.edit().putInt(workingList + subList + i, answered.get(i)).apply();
+    }
+    sharedPreferences.edit()
+            .putInt(HINT + workingList + subList, hintCount)
+            .putInt(WRONG + workingList + subList, wrongCount)
+            .apply();
+
+    // Update the working list, visibility, question text, and progress bar based on the selected item
+    workingList = id;
+    listPickView.setVisibility(View.VISIBLE);
+    questionBreakView.setVisibility(View.GONE);
+    questionTextView.setText(workingList);
+    answered.clear();
+    progressbarSize = 120;
+
+    if (id.equals("A List") || id.equals("B List")) {
+        progressbarSize = 150;
+    }
+
+    progressBar.setMax(progressbarSize);
+    progressBar.setProgress(getProgressCount(id));
+    return super.onOptionsItemSelected(item);
+}
+
+/**
+ * Get the total count of answered questions for a specific working list.
+ */
+public int getProgressCount(String id) {
+    int answeredCount = 0;
+    String[] levelList = getResources().getStringArray(R.array.sub_list_array);
+
+    for (int j = 0; j < 5; j++) {
+        int size = 10;
+
+        if (id.equals("A List") || id.equals("B List")) {
+            size = 8;
         }
 
-        hintCount = sharedPreferences.getInt(HINT + workingList + subList, hintCount);
-        wrongCount = sharedPreferences.getInt(WRONG + workingList + subList, wrongCount);
-    }
-
-
-
-    @Override
-    protected void onStop () {
-        super.onStop();
-        for (int i = 0; i < answered.size(); i++) {
-            String identifier = String.valueOf(i);
-            sharedPreferences.edit().putInt(workingList + subList + identifier, answered.get(i)).apply();
+        for (int i = 0; i < size; i++) {
+            answeredCount += sharedPreferences.getInt(id + levelList[j] + i, 0);
+            Log.i(TAG, "getProgressCount: " + levelList[j] + i);
         }
-        sharedPreferences.edit().putInt(HINT + workingList + subList, hintCount).apply();
-        sharedPreferences.edit().putInt(WRONG + workingList + subList, wrongCount).apply();
-        sharedPreferences.edit().putString("PURCHASE_TOKEN", purchaseToken).apply();
-        sharedPreferences.edit().putString(WORKING_LIST, workingList).apply();
-        sharedPreferences.edit().putInt(PROGRESSBAR_SIZE, progressbarSize).apply();
-        sharedPreferences.edit().commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
+    return answeredCount;
+}
 
-    public void fillInTheBlankHint (View view) {
-        questionTextView.setText(fillInTheBlankList[wordIndex] + "\n\n" + vocabWordDefinitionList[wordIndex]);
-        hintCount ++;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        buttonQuestionVisibility(1);
-        result.setText("");
-        String id = item.getTitle().toString();
-        for (int i = 0; i < answered.size(); i++) {
-            sharedPreferences.edit().putInt(workingList + subList + i, answered.get(i)).apply();
-        }
-        sharedPreferences.edit().putInt(HINT + workingList + subList, hintCount).apply();
-        sharedPreferences.edit().putInt(WRONG + workingList + subList, wrongCount).apply();
-        sharedPreferences.edit().commit();
-        workingList = id;
-        listPickView.setVisibility(View.VISIBLE);
-        questionBreakView.setVisibility(View.GONE);
-        questionTextView.setText(workingList);
-        answered.clear();
-        progressbarSize = 120;
-        if(id.equals("A List") || id.equals("B List")) {
-            progressbarSize = 150;
-        }
-
-        progressBar.setMax(progressbarSize);
-        progressBar.setProgress(getProgressCount(id));
-        return super.onOptionsItemSelected(item);
-    }
-
-    public int getProgressCount(String id){
-        int answeredCount = 0;
-        String[] levelList = getResources().getStringArray(R.array.sub_list_array);
-        for (int j = 0; j < 5 ; j++) {
-            int size = 10;
-            if(id.equals("A List") || id.equals("B List")) {
-                size = 8;
-            }
-            for (int i = 0; i < size; i++) {
-                answeredCount += sharedPreferences.getInt(id + levelList[j] + i, 0);
-                Log.i(TAG, "getProgressCount: " + levelList[j] + i);
-            }
-
-        }
-        return answeredCount ;
-    }
 
 
     public int[] workingListAddress ={
