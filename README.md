@@ -1,16 +1,10 @@
 # Vocabulary
 
-License: MIT
-
 The Vocabulary app presents over 300 words in groups of 10 with multiple choice and fill-in-the-blank options to improve users' vocabulary. It tracks performance by recording incorrect answers and hints used to help users track their progress and identify areas for improvement.
 
 ## Demo
 
-Click [here](https://www.youtube.com/watch?v=YSn5voRYyY4) to access the demo.
-
-## Installation
-
-You can download the application from the Google Play Store by clicking [here](https://play.google.com/store/apps/details?id=gemenielabs.vocabulary).
+Click [here](https://www.youtube.com/watch?v=YSn5voRYyY4) for the Youtube demo. You can download the application from the Google Play Store by clicking [here](https://play.google.com/store/apps/details?id=gemenielabs.vocabulary).
 
 ## Features
 
