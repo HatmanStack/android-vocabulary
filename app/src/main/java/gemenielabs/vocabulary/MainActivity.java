@@ -41,6 +41,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import builder.gemenielabs.vocabulary.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         findViews();
     
         // Initialize a new Random object
-        random = new Random();
+
     
         // Initialize variables and set initial values
         learnWordsCount = 0;
@@ -163,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
         fillInTheBlankView = findViewById(R.id.fill_in_the_blank_view);
         questionBreakView = findViewById(R.id.question_view);
         result = findViewById(R.id.result);
+        progressBar = findViewById(R.id.progressBar);
+        mRnd = new Random();
     }
 
     public class Input extends InputMethodService {
@@ -241,23 +244,40 @@ public class MainActivity extends AppCompatActivity {
             learnWordsCount = 0;
         }
     }
-    
+
     public void fillInTheBlankAnswer(View view) {
-        String answer = vocabWordList[wordIndex];
-        String userAnswer = fillInTheBlankEditText.getText().toString();
-        if (isAnswerCorrect(answer, userAnswer)) {
-            // Display correct result and update status
-            result.setText(R.string.correct);
-            isAnswerCorrect = true;
-            updateAnsweredStatus();
-            isAnswerCorrect = true;
-        } else {
-            // Display wrong result
-            result.setText(R.string.wrong);
-            isAnswerCorrect = false;
+        final String answer = vocabWordList[wordIndex];
+        String userText = fillInTheBlankEditText.getText().toString().trim();
+
+        if (!userText.isEmpty()) {
+            String[] possibleAnswers = {
+                    answer, answer + "d", answer + "ly", answer + "ed",
+                    answer + "ing", answer + "s",
+                    answer.substring(0, answer.length() - 1) + "es",
+                    answer.substring(0, answer.length() - 1) + "ing",
+                    answer + "es"
+            };
+
+            boolean isCorrect = false;
+            for (String possibleAnswer : possibleAnswers) {
+                if (userText.equals(possibleAnswer)) {
+                    isCorrect = true;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                result.setText(R.string.correct);
+                isAnswerCorrect = true;
+                answered.set(wordIndex, answered.get(wordIndex) == 1 ? 3 : 2);
+            } else {
+                result.setText(R.string.wrong);
+                isAnswerCorrect = false;
+            }
+
+            resultAnimation();
+            answerCheck(2);
         }
-        resultAnimation();
-        answerCheck(2);
     }
     
     public void fillInTheBlank() {
@@ -278,15 +298,30 @@ public class MainActivity extends AppCompatActivity {
         setButtonText(definitionAnswerButton3);
         setButtonText(definitionAnswerButton4);
     }
-    
+
     public void setButtonText(Button button) {
-        int incorrectAnswerIndex = getRandomIncorrectAnswerIndex();
-        // Set the button text with correct or incorrect answer
-        if (button.getTag().toString().equals(String.valueOf(randomButton))) {
-            button.setText(vocabWordList[wordIndex]);
-        } else {
-            button.setText(vocabWordList[incorrectAnswerIndex]);
-        }
+        String text = button.getTag().toString().equals(String.valueOf(randomButton))
+                ? vocabWordList[wordIndex]
+                : getUniqueIncorrectAnswer();
+
+        button.setText(text);
+    }
+
+    private String getUniqueIncorrectAnswer() {
+        int index;
+        do {
+            index = mRnd.nextInt(vocabWordList.length);
+        } while (isDuplicateAnswer(index));
+
+        return vocabWordList[index];
+    }
+
+    private boolean isDuplicateAnswer(int index) {
+        return index == wordIndex ||
+                definitionAnswerButton1.getText().equals(vocabWordList[index]) ||
+                definitionAnswerButton2.getText().equals(vocabWordList[index]) ||
+                definitionAnswerButton3.getText().equals(vocabWordList[index]) ||
+                definitionAnswerButton4.getText().equals(vocabWordList[index]);
     }
     
     public void definitionAnswer(View view) {
