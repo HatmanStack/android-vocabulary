@@ -30,7 +30,7 @@ Click [here](https://www.youtube.com/watch?v=YSn5voRYyY4) for the Youtube demo. 
 - From the Open File or Project window that appears, navigate to and select the android-vocabulary directory. Click OK.
 - If it asks you to do a Gradle Sync, click OK.
 - With your Android device/emulator connected to your computer and developer mode enabled, click on the green Run arrow in Android Studio.
-- Enjoy
+
 
 ## License
 
