@@ -69,7 +69,7 @@
         <item>approach and address (someone) boldly or aggressively</item>
         <item>the growth or increase of something by the gradual accumulation of additional layers or matter </item>
         <item>the ability to make good judgments and quick decisions</item>
-        <item>refusing to be persuaded or to change one's mind</item>
+        <item>refusing to be persuaded or to change one\'s mind</item>
         <item>warn or reprimand someone firmly</item>
         <item>represent in outline or in a suggestive way </item>
         <item>preventing success or development; harmful; unfavorable</item>
@@ -82,7 +82,7 @@
         <item>The seasoned detective possessed remarkable _____ , solving complex cases with an unnerving speed that involved crumpled newspapers, an old magnifying glass, and a collection of half-eaten donuts.</item>
         <item>The toddler stood with ______ resolve, arms crossed, refusing to eat broccoli even when it was disguised as a tiny tree, a landing pad for superheroes, or a dinosaur snack.</item>
         <item>After repeatedly misplacing her keys, the teacher had to ______ herself, developing an elaborate system of brightly colored keychains, jangling bracelets, and increasingly frantic morning searches. </item>
-        <item>The artist's sketch seemed to ______  the deeper emotions of the subject, hinting at a hidden sorrow with a few skillfully drawn lines and a strategically placed shadow. </item>
+        <item>The artist\'s sketch seemed to ______  the deeper emotions of the subject, hinting at a hidden sorrow with a few skillfully drawn lines and a strategically placed shadow. </item>
         <item>The storm created ______ sailing conditions for the small boat, which bravely endured waves the size of small mountains and a distinct feeling among the crew that they should have just stayed home.</item>
         <item>She became a passionate _____ for animal rights, fiercely determined to make a difference, one rescued hedgehog and indignantly protesting squirrel at a time.</item>
     </string-array>
@@ -147,12 +147,12 @@
     <string-array name="aprofessionalFillInTheBlank">
         <item>To the rebellious teenager, chores and the mere concept of mornings were an absolute ______, to be avoided at all costs.</item>
         <item>The ambitious emperor planned to ______  the neighboring island, motivated by dreams of expanding his beach towel collection and building an empire of questionable sandcastles.</item>
-        <item>The museum's fossil collection included the ______ remains of a dinosaur with a particularly grumpy expression and an unfortunate fondness for eating ferns.</item> 
+        <item>The museum\'s fossil collection included the ______ remains of a dinosaur with a particularly grumpy expression and an unfortunate fondness for eating ferns.</item>
         <item>With its potent smell and suspicious ability to make even the tiniest paper cut sting, the old-fashioned ______ did its job, though perhaps with excessive enthusiasm. </item>
-        <item>The ______ audience stared blankly at the comedian, who began to suspect his elaborate mime routine about the perils of mismatched socks might not be as funny as he'd imagined. </item>
+        <item>The ______ audience stared blankly at the comedian, who began to suspect his elaborate mime routine about the perils of mismatched socks might not be as funny as he\'d imagined. </item>
         <item>In a world obsessed with speed and instant gratification, the slow-moving sloth was the ______ of modern life, proving the enduring appeal of naps and a relaxed philosophy. </item>
         <item>The internet was filled with ______ stories involving celebrity encounters with aliens and surprisingly well-spoken pigeons with a fondness for conspiracy theories.</item>
-        <item>Earning the dreaded "Most Improved Handwriting" award did little to raise the student's spirits, as he considered it rather faint ______ considering his previous penmanship resembled spiderwebs dipped in ink. </item> 
+        <item>Earning the dreaded "Most Improved Handwriting" award did little to raise the student\'s spirits, as he considered it rather faint ______ considering his previous penmanship resembled spiderwebs dipped in ink. </item>
     </string-array>
 
 
@@ -179,7 +179,7 @@
     </string-array>
 
     <string-array name="aexpertFillInTheBlank">
-        <item>The art critic's choices seemed entirely ______, declaring a piece of crumpled paper a masterpiece and dismissing an actual sculpture as "too representational of reality."</item>
+        <item>The art critic\'s choices seemed entirely ______, declaring a piece of crumpled paper a masterpiece and dismissing an actual sculpture as "too representational of reality."</item>
         <item>Those squirrels, with their bushy tails and love of heights, were clearly ______ creatures. </item>
         <item>The ancient spell was shrouded in ______ language, its meaning decipherable only by those with a fondness for dusty books, questionable potions, and long naps.</item>
         <item>The detective story featured the ______ cast of characters: the gruff detective, the suspicious butler, and the enigmatic femme fatale with a tragic past and a collection of deadly hatpins.</item>
@@ -220,7 +220,7 @@
         <item>Losing his beloved dog left the man feeling utterly ______, the laughter and tail-wagging enthusiasm gone from his once-vibrant home.</item>
         <item>The overly enthusiastic used car salesman attempted to sell the rusty jalopy with a series of outrageous ______ that involved its "untapped race car potential" and "unique vintage aroma."</item>
         <item>Hoping to avoid paying for dinner, the shifty customer attempted to ______ the waiter with a confusing story about an escaped octopus and a sudden aversion to seafood.</item>
-        <item>The politician's speech was filled with ______ phrases and dramatic hand gestures, but it was disappointingly short on actual solutions. </item> 
+        <item>The politician\'s speech was filled with ______ phrases and dramatic hand gestures, but it was disappointingly short on actual solutions. </item>
     </string-array>
 
     <string-array name="bintermediateWordList">
@@ -237,7 +237,7 @@
     <string-array name="bintermediateDefinitionWordList">
         <item>to persuade someone to do something by sustained coaxing or flattery</item>
         <item>showing or feeling no sympathy for others</item>
-        <item>the making of false and defamatory statements to damage someone's reputation; slander</item>
+        <item>the making of false and defamatory statements to damage someone\'s reputation; slander</item>
         <item>mutual trust and friendship among people who spend a lot of time together</item>
         <item>the quality of being open and honest in expression </item>
         <item>to cease to resist an opponent or an unwelcome demand; surrender</item>
@@ -282,12 +282,12 @@
     <string-array name="badvancedFillInTheBlank">
         <item>The squirrel _____ convened on the park bench, their agenda presumably involving world nut domination and the strategic hoarding of acorns. </item>
         <item>The enthusiastic puppy continued to ______ around the house, blissfully unaware of the potential damage caused by its wagging tail and questionable understanding of valuable vases. </item>
-        <item>The spokesperson's mastery of _________ was impressive: a five-minute speech somehow managed to say absolutely nothing of consequence. </item>
+        <item>The spokesperson\'s mastery of _________ was impressive: a five-minute speech somehow managed to say absolutely nothing of consequence. </item>
         <item>The ambitious toddler, determined to reach the cookie jar, found his explorations ________ by the kitchen gate and his lack of opposable thumbs. </item>
         <item>The wily detective managed to _________ the usual bureaucracy with a well-timed distraction involving a runaway donut and several easily confused officers. </item>
         <item>The campfire, after several ill-advised attempts to roast marshmallows with a magnifying glass, erupted into a small but alarming ____________. </item>
         <item>The odd _______ between the polka-dotted wallpaper, the classical music, and the suspicious collection of rubber chickens gave the detective pause. </item>
-        <item>The museum guards seemed to be suspiciously turning a blind eye, subtly ________ the daring heist of the world's largest cheese sculpture by a team of particularly motivated mice. 
+        <item>The museum guards seemed to be suspiciously turning a blind eye, subtly ________ the daring heist of the world\'s largest cheese sculpture by a team of particularly motivated mice. </item>
     </string-array>
 
 
@@ -303,7 +303,7 @@
     </string-array>
 
     <string-array name="bprofessionalDefinitionWordList">
-        <item>deliver (something) to a person's custody, typically for sale</item>
+        <item>deliver (something) to a person\'s custody, typically for sale</item>
         <item>a member of a constituency; a voter represented by an elected official</item>
         <item>interpret (a word or action) in a particular way</item>
         <item>an injury in which the skin is not broken; a bruise</item>
@@ -321,7 +321,7 @@
         <item>The formerly mischievous puppy, after chewing through a suspiciously important-looking document, gazed up at his owner with big, _______ eyes and a wagging tail, hoping that cuteness would be an acceptable form of currency.</item>
         <item>The town hall meeting quickly descended into a _________ debate on the ideal toppings for pizza, highlighting the deeply polarizing nature of pineapple and anchovies. </item>
         <item>The reckless driver blithely _________ several traffic laws, treating stop signs as mere suggestions and leaving a trail of bewildered pigeons in his wake. </item>
-        <item>The family gathering, known for its boisterous debates and questionable fashion choices, had a surprisingly ________ atmosphere this year, perhaps due to a general consensus that they'd all run out of things to argue about. 
+        <item>The family gathering, known for its boisterous debates and questionable fashion choices, had a surprisingly ________ atmosphere this year, perhaps due to a general consensus that they\'d all run out of things to argue about. </item>
     </string-array>
 
 
@@ -348,10 +348,10 @@
     </string-array>
 
     <string-array name="bexpertFillInTheBlank">
-        <item>After a month-long voyage with the ship's chef and his questionable culinary inventions, the sailor's newfound _________ made getting back into his uniform a daunting challenge.</item>
-        <item>The dragon jealously ________ the neighboring kingdom's impressive collection of bottle caps, occasionally breathing fire in their general direction to emphasize its point. </item>
-        <item>Driven by insatiable ________, the villain stole the world's entire supply of cheese, causing widespread panic and a resurgence in cracker-related culinary experiments. </item>
-        <item>A sudden _______ of hair ties caused the hero's impeccably styled mane to collapse into disarray just before the ball, leading to a desperate quest involving a lint brush and a suspiciously hairy squirrel. </item>
+        <item>After a month-long voyage with the ship\'s chef and his questionable culinary inventions, the sailor\'s newfound _________ made getting back into his uniform a daunting challenge.</item>
+        <item>The dragon jealously ________ the neighboring kingdom\'s impressive collection of bottle caps, occasionally breathing fire in their general direction to emphasize its point. </item>
+        <item>Driven by insatiable ________, the villain stole the world\'s entire supply of cheese, causing widespread panic and a resurgence in cracker-related culinary experiments. </item>
+        <item>A sudden _______ of hair ties caused the hero\'s impeccably styled mane to collapse into disarray just before the ball, leading to a desperate quest involving a lint brush and a suspiciously hairy squirrel. </item>
         <item>The overly ambitious "Build a Giant Sandcastle" project ended in a spectacular _______, involving disgruntled seagulls, an unexpected tidal wave, and an impressive amount of soggy sandwiches. </item>
         <item>Famed for his wild parties, the eccentric billionaire aimed to _______ his guests with questionable karaoke contests, an experimental jello-sculpting workshop, and a flock of flamingos trained in synchronized swimming. </item>
         <item>The floppy-eared bloodhound detective agency, once renowned for sniffing out criminal masterminds, sadly went _______ after the entire team became distracted by a mysteriously tasty-smelling sock. </item>
@@ -387,16 +387,16 @@
     </string-array>
 
     <string-array name="cbasicFillInTheBlank">
-        <item>The rival art critics engaged in a fierce battle to _____ each other's work, using words like "derivative" and "uninspired" as their weapons of choice.</item>
+        <item>The rival art critics engaged in a fierce battle to _____ each other\'s work, using words like "derivative" and "uninspired" as their weapons of choice.</item>
         <item>The pop song, with its predictable lyrics and catchy-yet-annoying tune, was painfully _____  of countless other pop songs. </item>
         <item>The self-proclaimed fashion _____ ruled the catwalk with an iron fist, a bedazzled scepter, and a deep loathing of anyone wearing comfortable shoes.</item>
         <item>A delicate, _____  gown seemed a questionable choice for attempting to wrestle a bear, but the princess was determined to look fabulous while doing it.</item>
         <item>The _____  professor lectured for hours about the importance of correct semicolon usage, leaving his students both terrified and vaguely impressed. </item>
-        <item>The bagpipe player's rendition of a mournful _____  caused a mass exodus from the picnic, leaving behind only one slightly deaf squirrel and a flock of confused pigeons. </item>
+        <item>The bagpipe player\'s rendition of a mournful _____  caused a mass exodus from the picnic, leaving behind only one slightly deaf squirrel and a flock of confused pigeons. </item>
         <item>The employees grew increasingly _____  with their boss, whose ideas included mandatory kazoo practice and a "no talking Tuesday" policy. </item>
-        <item>The speaker's awkward joke and mistimed pratfall managed to thoroughly _____ both himself and the audience.</item>
+        <item>The speaker\'s awkward joke and mistimed pratfall managed to thoroughly _____ both himself and the audience.</item>
         <item>The research team analyzed the _____ evidence: a half-eaten cheeseburger, a strangely shaped muddy footprint, and a flock of suspiciously smug pigeons. </item>
-        <item>With a wave of her hand and a suspiciously well-timed gust of wind, the sorceress managed to _____  the swirling fog of confusion and doubt.
+        <item>With a wave of her hand and a suspiciously well-timed gust of wind, the sorceress managed to _____  the swirling fog of confusion and doubt.</item>
     </string-array>
 
 
@@ -427,16 +427,16 @@
     </string-array>
 
     <string-array name="cintermediateFillInTheBlank">
-        <item>The politician's reputation fell into _____ after the unfortunate hot mic incident involving goats, a yodeling contest, and a questionable amount of cheese.</item>
+        <item>The politician\'s reputation fell into _____ after the unfortunate hot mic incident involving goats, a yodeling contest, and a questionable amount of cheese.</item>
         <item>His _____ speech about the evils of socks only served to further divide the room into the staunchly pro-sock camp and the defiantly anti-sock faction. </item>
-        <item>The _____ professor refused to entertain any theories that didn't involve 15th-century poetry, suspicious hand gestures, and a belief in talking squirrels. </item>
+        <item>The _____ professor refused to entertain any theories that didn\'t involve 15th-century poetry, suspicious hand gestures, and a belief in talking squirrels. </item>
         <item>The _____ art critic dismissed the exhibit with a frown, declaring it "derivative, uninspired, and lacking in thematically appropriate snacks." </item>
-        <item>The con artist's scheme was built on a foundation of _____ , involving a fake lottery ticket, a sob story about lost penguins, and an unfortunate gullibility on the part of his victims.</item>
+        <item>The con artist\'s scheme was built on a foundation of _____ , involving a fake lottery ticket, a sob story about lost penguins, and an unfortunate gullibility on the part of his victims.</item>
         <item>The confession obtained under _____ was deemed inadmissible in court, much to the relief of the parrot and its surprisingly proficient lawyer.</item>
         <item>The artist had an _____ style, with her paintings featuring everything from dancing hot dogs to philosophical cacti sporting tiny spectacles.</item>
-        <item>The queen's _____ about wearing hats shaped like fruit caused widespread confusion, a boom in the watermelon industry, and the resignation of several bewildered palace gardeners.</item>
+        <item>The queen\'s _____ about wearing hats shaped like fruit caused widespread confusion, a boom in the watermelon industry, and the resignation of several bewildered palace gardeners.</item>
         <item>Their _____ celebration after solving a particularly tricky crossword involved confetti cannons, a polka band, and an impromptu conga line through the library.</item>
-        <item>The restaurant's attempt at fusion cuisine was an _____ disaster, featuring sushi pizza, spaghetti tacos, and a dessert resembling a pineapple wearing a beret.</item>
+        <item>The restaurant\'s attempt at fusion cuisine was an _____ disaster, featuring sushi pizza, spaghetti tacos, and a dessert resembling a pineapple wearing a beret.</item>
     </string-array>
 
 
@@ -456,7 +456,7 @@
     <string-array name="cadvancedDefinitionWordList">
         <item>a poem in elegiac couplets, often expressing sorrow or a lament for the dead</item>
         <item>to draw or bring out; evoke</item>
-        <item>theft or misappropriation of funds placed in one's trust (especially by a public official)</item>
+        <item>theft or misappropriation of funds placed in one\'s trust (especially by a public official)</item>
         <item>to make corrections or improvements (usually to text)</item>
         <item>having a softening or soothing effect</item>
         <item>based on, concerned with, or verifiable by observation or experience rather than theory or pure logic </item>
@@ -468,7 +468,7 @@
 
     <string-array name="cadvancedFillInTheBlank">
         <item>His heartfelt _____ for the office plant involved a wilted daisy, a single tear, and a suspiciously empty bag of cheese puffs.</item>
-        <item>The detective's skillful questioning managed to _____ a confession from the parrot, who admitted a fondness for shiny objects and a dislike of opera music. </item>
+        <item>The detective\'s skillful questioning managed to _____ a confession from the parrot, who admitted a fondness for shiny objects and a dislike of opera music. </item>
         <item>The scandal-plagued politician was accused of _____, leaving him with a depleted bank account, a sudden interest in obscure hobbies, and a one-way ticket to a remote island. </item>
         <item>The editor carefully _____ the manuscript, removing typos (along with any references to squirrels with questionable fashion sense). </item>
         <item>After a stressful day, a cup of tea and a soothing facemask provided the perfect _____ effect. </item>
@@ -476,7 +476,7 @@
         <item>Inspired by the great explorers, the adventurous snail set out to _____ Magellan, armed with a map drawn on a lettuce leaf and an impressive sense of determination.</item>
         <item>Sitting through the endless budget meeting had a distinctly _____ effect, leaving everyone with a glazed expression and a sudden craving for naps.</item>
         <item>The determined activists worked tirelessly to _____ underrepresented groups, ensuring their voices would be heard in the upcoming election. </item>
-        <item>His disastrous cooking attempts tended to _____ feelings of horror, a frantic search for takeout menus, and the suspicion that he could somehow burn water. 
+        <item>His disastrous cooking attempts tended to _____ feelings of horror, a frantic search for takeout menus, and the suspicion that he could somehow burn water. </item>
     </string-array>
 
 
@@ -507,16 +507,16 @@
     </string-array>
 
     <string-array name="cprofessionalFillInTheBlank">
-        <item>The beauty of the rainbow was sadly _____, disappearing as quickly as the toddler's promise to share his candy. </item>
+        <item>The beauty of the rainbow was sadly _____, disappearing as quickly as the toddler\'s promise to share his candy. </item>
         <item>The old chest contained a series of _____ love letters involving passionate declarations, questionable poetry, and a surprising number of spelling errors.  </item>
         <item>With admirable _____, the seasoned gardener greeted news of yet another squirrel-inflicted crop disaster with a philosophical sigh and a renewed subscription to the hot sauce of the month club. </item>
-        <item>The defendant's _____ answers frustrated the lawyer, who longed for a simple yes or no, rather than references to tap-dancing llamas and the importance of cheese. </item>
+        <item>The defendant\'s _____ answers frustrated the lawyer, who longed for a simple yes or no, rather than references to tap-dancing llamas and the importance of cheese. </item>
         <item>The environmental advocate passionately _____ the cause of renewable energy, using charts, alarming statistics, and a strategically placed inflatable polar bear. </item>
         <item>The ghostly figure, with its flickering form and suspiciously squeaky shoes, proved rather _____, vanishing before anyone could take a halfway decent photo. </item>
-        <item>The child's drawing proudly _____ a love of dinosaurs, a fascination with explosions, and a questionable grasp of perspective. </item>
+        <item>The child\'s drawing proudly _____ a love of dinosaurs, a fascination with explosions, and a questionable grasp of perspective. </item>
         <item>The incessant beeping of the alarm clock only served to _____ the headache caused by the polka band practicing next door.</item>
         <item>The motivational speaker enthusiastically _____ the virtues of waking up at 4 AM, even on those days that involved rain, grumpy cats, and a distinct lack of coffee.</item>
-        <item>The comedian's attempt at stand-up was so _____  that the audience resorted to throwing vegetables and attempting to communicate their displeasure through mime. 
+        <item>The comedian\'s attempt at stand-up was so _____  that the audience resorted to throwing vegetables and attempting to communicate their displeasure through mime.</item>
     </string-array>
 
 
@@ -556,7 +556,7 @@
         <item>Social media influencers began to _____  unrest with surprisingly effective memes and poorly photoshopped images of squirrels in questionable hats. </item>
         <item>The notoriously _____  weather changed abruptly from sunshine to hail to a sudden downpour of maple syrup, leaving everyone confused and slightly sticky. </item>
         <item>The _____ scholar could quote obscure 12th-century poetry, identify the mating calls of extinct birds, yet remained utterly baffled by the concept of self-checkout machines. </item>
-        <item>Dressed in a golden gown, a tiara, and enough glitter to blind a satellite, the princess was positively _____ for her visit to the local turnip-carving festival. 
+        <item>Dressed in a golden gown, a tiara, and enough glitter to blind a satellite, the princess was positively _____ for her visit to the local turnip-carving festival. </item>
     </string-array>
 
 
@@ -590,14 +590,14 @@
     <string-array name="dbasicFillInTheBlank">
         <item>The _____  leak in the roof demanded immediate attention, especially as the weather report involved suspiciously large rain clouds and a possible frognado.</item>
         <item>Though morally questionable, bribing the pigeons with stale popcorn proved an _____ way to reclaim the park bench. </item>
-        <item>To _____  his guilt for eating all the cookies, he offered to do the dishes (though his track record on that front wasn't exactly stellar).</item>
+        <item>To _____  his guilt for eating all the cookies, he offered to do the dishes (though his track record on that front wasn\'t exactly stellar).</item>
         <item>The frustrated editor tried to _____  several misspelled words, a questionable yodeling reference, and a strangely detailed ode to cheese from the manuscript.</item>
-        <item>The lawyer's argument included so many _____  details that the jury began to suspect he was just trying to stall for time. </item>
+        <item>The lawyer\'s argument included so many _____  details that the jury began to suspect he was just trying to stall for time. </item>
         <item>The celebrity chef enthusiastically _____ the virtues of kale smoothies, despite the skeptical looks and sudden urge to flee toward the nearest pizza place. </item>
         <item>Despite years of searching, no dinosaur remains were ever found, save for a few  _____ footprints and a rather suspicious-looking pebble. </item>
         <item>The movie censors decided to _____ several scenes of questionable taste, including one involving interpretive dance, a giant squid, and a concerning amount of mayonnaise. </item>
         <item>His _____  theory that squirrels were secretly plotting world domination was dismissed with amused eye rolls and a gentle suggestion of less coffee. </item>
-        <item>The self-proclaimed fashion guru's _____  advice involved wearing mismatched socks, top hats, and strategically placed rubber ducks. 
+        <item>The self-proclaimed fashion guru\'s _____  advice involved wearing mismatched socks, top hats, and strategically placed rubber ducks. </item>
     </string-array>
 
 
@@ -628,16 +628,16 @@
     </string-array>
 
     <string-array name="dintermediateFillInTheBlank">
-        <item>The prisoner desperately rattled his _____ , but the sound was lost in the wind and the guard's questionable humming. </item>
-        <item>The politician's _____ disregard for the truth was as obvious as his blindingly orange hairpiece. </item>
-        <item>The pesky squirrel managed to _____ the bird's attempts to build a nest, stealing twigs and shiny bottle caps with equal enthusiasm. </item>
-        <item>With admirable _____, the teacher refrained from confiscating the student's 20-page essay on the social lives of dust bunnies. </item>
+        <item>The prisoner desperately rattled his _____ , but the sound was lost in the wind and the guard\'s questionable humming. </item>
+        <item>The politician\'s _____ disregard for the truth was as obvious as his blindingly orange hairpiece. </item>
+        <item>The pesky squirrel managed to _____ the bird\'s attempts to build a nest, stealing twigs and shiny bottle caps with equal enthusiasm. </item>
+        <item>With admirable _____, the teacher refrained from confiscating the student\'s 20-page essay on the social lives of dust bunnies. </item>
         <item>In a ______  turn of events, the lost hiker stumbled upon a fully-stocked cabin, complete with hot chocolate and a surprisingly well-behaved moose. </item>
-        <item>The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter. </item>
+        <item>The _____ toddler refused to eat, nap, or wear anything that wasn\'t covered in glitter. </item>
         <item>The _____ restaurant critic was known for his long, winding descriptions of meals and his tendency to fall asleep mid-bite. </item>
         <item>The self-proclaimed _____  loved nothing more than feasting on elaborate meals and waxing poetic about the importance of truffle oil. </item>
-        <item>The speaker's _____  claims of inventing the internet were met with skeptical sighs and a sudden mass exodus towards the nearest coffee machine.</item>
-        <item>The neighbor's _____  offer to mow the lawn at 5 AM with a rusty chainsaw and a polka band was politely declined. 
+        <item>The speaker\'s _____  claims of inventing the internet were met with skeptical sighs and a sudden mass exodus towards the nearest coffee machine.</item>
+        <item>The neighbor\'s _____  offer to mow the lawn at 5 AM with a rusty chainsaw and a polka band was politely declined. </item>
     </string-array>
 
 
@@ -659,7 +659,7 @@
         <item>leadership or dominance, especially by one country or social group over others</item>
         <item>diverse in character or content</item>
         <item>a person who attacks cherished beliefs or institutions</item>
-        <item>peculiar or individual, relating to a person's distinctive character</item>
+        <item>peculiar or individual, relating to a person\'s distinctive character</item>
         <item>having little or no money</item>
         <item>acting or done quickly and without thought or care</item>
         <item>to have a negative effect on something; to encroach</item>
@@ -670,14 +670,14 @@
     <string-array name="dadvancedFillInTheBlank">
         <item>The _____ burglar tripped over his own shoelaces, landed face-first in a pie, and was then promptly apprehended by a confused basset hound. </item>
         <item>The fashion designer sought sartorial _____ over the city, aiming to establish the dominance of neon yellow and questionable animal prints.</item>
-        <item>The professor's office contained a wonderfully _____ collection of mismatched mugs, dusty books on obscure topics, and a surprising number of rubber chickens. </item>
+        <item>The professor\'s office contained a wonderfully _____ collection of mismatched mugs, dusty books on obscure topics, and a surprising number of rubber chickens. </item>
         <item>The outspoken writer was a true _____, fearlessly criticizing anything from pineapple on pizza to the excessive use of glitter in holiday decorations.</item>
         <item>The artist had a delightfully _____ style, creating sculptures from used chewing gum wrappers and paintings inspired by the strange stains on his carpet.</item>
         <item>Despite his grand ambitions, the would-be entrepreneur was sadly _____, relying mostly on packets of ramen noodles and increasingly desperate calls to his parents. </item>
         <item>Her _____ decision to adopt twelve puppies on a whim seemed destined to lead to chaos, chewed furniture, and a distinct lack of sleep.</item>
         <item>The intrusive pop-up ads constantly _____ on his reading experience, offering dubious hair growth remedies and questionable vacation packages.</item>
         <item>The conspiracy theorist was quick to _____  blame for his missing sock on everything from telepathic squirrels to interdimensional aliens.</item>
-        <item>The celebrity's memoir was filled with surprisingly _____ observations on the meaning of life, the importance of pedicures, and the ideal cheese-to-cracker ratio. </item>
+        <item>The celebrity\'s memoir was filled with surprisingly _____ observations on the meaning of life, the importance of pedicures, and the ideal cheese-to-cracker ratio. </item>
     </string-array>
 
 
@@ -708,16 +708,16 @@
     </string-array>
 
     <string-array name="dprofessionalFillInTheBlank">
-        <item>The architect's initial design was rather _____, involving a vague sketch resembling either a spaceship or a squashed potato.</item>
-        <item>To his dismay, the lawyer realized the evidence supporting his client's alibi of "eaten by giant wombats" was sadly not _____. </item>
-        <item>As the _____ mayor, she faced the daunting task of reversing the town's recent ban on polka-dot socks.</item>
+        <item>The architect\'s initial design was rather _____, involving a vague sketch resembling either a spaceship or a squashed potato.</item>
+        <item>To his dismay, the lawyer realized the evidence supporting his client\'s alibi of "eaten by giant wombats" was sadly not _____. </item>
+        <item>As the _____ mayor, she faced the daunting task of reversing the town\'s recent ban on polka-dot socks.</item>
         <item>The relentless rain, combined with his leaky umbrella, provided an _____ reminder of the importance of checking the weather forecast.</item>
         <item>His _____ attitude toward exercise made the idea of joining a gym seem almost as terrifying as the possibility of running into anyone he knew there. </item>
-        <item>The judge issued a stern _____  against using the courtroom as a karaoke venue, regardless of the quality of one's Elvis impersonation. </item>
+        <item>The judge issued a stern _____  against using the courtroom as a karaoke venue, regardless of the quality of one\'s Elvis impersonation. </item>
         <item>As a precaution, the hikers decided to get _____ against mosquito bites, leading to a rather lively interpretive dance designed to ward off any potential attackers. </item>
         <item>An _____ feeling of dread spread through the office as news of the impending surprise karaoke party leaked. </item>
         <item>Frustrated with the slow pace of change, the activist knew it was time to _____ a protest outside the surprisingly well-guarded pickle factory. </item>
-        <item>A band of _____ squirrels, tired of being underestimated, staged a daring mutiny and seized control of the park's peanut supply. </item>
+        <item>A band of _____ squirrels, tired of being underestimated, staged a daring mutiny and seized control of the park\'s peanut supply. </item>
     </string-array>
 
 
@@ -744,7 +744,7 @@
         <item>the quality of being honest and having strong moral principles</item>
         <item>the  incongruity between what might be expected and what actually occurs</item>
         <item>dull; lacking interest; naive and simplistic</item>
-        <item>the idea that a person's actions will determine the good or bad things that happen to them in the future </item>
+        <item>the idea that a person\'s actions will determine the good or bad things that happen to them in the future </item>
     </string-array>
 
     <string-array name="dexpertFillInTheBlank">
@@ -756,8 +756,8 @@
         <item>Under _____, the witness admitted his story of being abducted by tap-dancing aliens may have been slightly embellished for dramatic effect. </item>
         <item>His unwavering _____ was evident in his refusal to cheat at board games, even when everyone else was suspiciously winning. </item>
         <item>In a twist of delicious _____, the chef known for his overly spicy dishes suffered from a fear of peppercorns. </item>
-        <item>The teenager's _____ explanation for the missing cake involved time travel, talking squirrels, and strangely convenient amnesia. </item>
-        <item>Believing in _____, she vowed revenge on the pigeon that pooped on her freshly-painted car... though revenge involving glitter may have been excessive. 
+        <item>The teenager\'s _____ explanation for the missing cake involved time travel, talking squirrels, and strangely convenient amnesia. </item>
+        <item>Believing in _____, she vowed revenge on the pigeon that pooped on her freshly-painted car… though revenge involving glitter may have been excessive. </item>
     </string-array>
 
 
@@ -781,7 +781,7 @@
         <item>to suggest or hint slyly</item>
         <item>to accustom (someone) to something, especially something unpleasant</item>
         <item>insulting, abusive, or highly critical language</item>
-        <item>unwilling or refusing to change one's views or to agree about something</item>
+        <item>unwilling or refusing to change one\'s views or to agree about something</item>
         <item>having a particular habit, activity, or interest that is long-established and unlikely to change</item>
         <item>a lack of respect for people or things that are generally taken seriously</item>
         <item>a sound of a bell, especially when rung solemnly for a death or funeral</item>
@@ -795,11 +795,11 @@
         <item>After years of working outdoors, the gardener was _____ to both sunburn and sudden downpours of bird droppings. </item>
         <item>The rival politicians unleashed a torrent of _____ upon each other, causing several audience members to consider earplugs or possibly a swift escape. </item>
         <item>The _____ professor refused to budge on his position that all essays should be handwritten in calligraphy on repurposed papyrus.</item>
-        <item>The _____ gambler's belief in his lucky fedora was sadly misplaced, as judging from the results, the hat appeared actively unlucky. </item>
-        <item>His _____ for wearing pajamas all day wasn't mere laziness; he claimed it was a carefully developed "comfort optimization strategy".</item>
+        <item>The _____ gambler\'s belief in his lucky fedora was sadly misplaced, as judging from the results, the hat appeared actively unlucky. </item>
+        <item>His _____ for wearing pajamas all day wasn\'t mere laziness; he claimed it was a carefully developed "comfort optimization strategy".</item>
         <item>A sudden _____ from the church tower signaled both the arrival of the ominous storm clouds and a possible increase in pigeon activity. </item>
-        <item>The normally chatty teenager's response to the bad news was a surprisingly _____  "meh.", causing his parents increased concern. </item>
-        <item>Inspired by tales of Robin Hood, the eccentric billionaire showered the city with his _____, which unfortunately involved glitter bombs and oddly specific coupons. 
+        <item>The normally chatty teenager\'s response to the bad news was a surprisingly _____  "meh.", causing his parents increased concern. </item>
+        <item>Inspired by tales of Robin Hood, the eccentric billionaire showered the city with his _____, which unfortunately involved glitter bombs and oddly specific coupons. </item>
     </string-array>
 
 
@@ -817,29 +817,29 @@
     </string-array>
 
     <string-array name="eintermediateDefinitionWordList">
-        <item>skillful use of one's hands when performing conjuring tricks; trickery or deception</item>
+        <item>skillful use of one\'s hands when performing conjuring tricks; trickery or deception</item>
         <item>an advocate or supporter of the principle of individual liberty, especially in thought and behavior</item>
         <item>displaying a lack of moral or legal restraints; promiscuous or unprincipled in sexual matters</item>
         <item>a person or thing that plays a vital or pivotal role in an organization or system</item>
         <item>a person involved in a lawsuit</item>
         <item>a situation or state of violent confusion or great turbulence</item>
         <item>self-pityingly or tearfully sentimental</item>
-        <item>an independent-minded person who doesn't follow the crowd</item>
+        <item>an independent-minded person who doesn\'t follow the crowd</item>
         <item>sentimental in a feeble or sickly way</item>
         <item>a short, pithy statement expressing a general truth or rule of conduct</item>
     </string-array>
 
     <string-array name="eintermediateFillInTheBlank">
-        <item>The magician's impressive _____  involved disappearing rabbits, dubious card tricks, and the audience's lingering suspicion that their wallets were also missing. </item>
+        <item>The magician\'s impressive _____  involved disappearing rabbits, dubious card tricks, and the audience\'s lingering suspicion that their wallets were also missing. </item>
         <item>The _____ activist passionately argued for the right to wear mismatched socks and eat cereal for dinner. </item>
-        <item>The novel's _____ protagonist was mostly interested in breaking the rules, causing general mayhem, and seducing anyone who carried a monocle. </item>
-        <item>The office gossip was the _____ of the organization, somehow always knowing everyone's secrets before they did themselves. </item>
+        <item>The novel\'s _____ protagonist was mostly interested in breaking the rules, causing general mayhem, and seducing anyone who carried a monocle. </item>
+        <item>The office gossip was the _____ of the organization, somehow always knowing everyone\'s secrets before they did themselves. </item>
         <item>The weary _____  faced yet another confusing legal form and wished for the simplicity of building sandcastles instead. </item>
         <item>The stock market crash caused a financial _____ , leaving investors shouting at squirrels and rethinking their life choices. </item>
         <item>The tearjerker movie induced a wave of _____ sniffling throughout the audience and a notable spike in tissue sales.</item>
         <item>With his refusal to wear matching socks and his fondness for interpretive toast-based poetry, the artist was clearly a _____. </item>
         <item>The overly sentimental greeting card featured kittens,  rainbows, and a _____ message about the enduringurance of friendship (or possibly the importance of flossing).</item>
-        <item>The wise old hiker offered a useful _____:  "When packing for a trip, bring half the clothes and twice the snacks." 
+        <item>The wise old hiker offered a useful _____:  "When packing for a trip, bring half the clothes and twice the snacks." </item>
     </string-array>
 
 
@@ -870,12 +870,12 @@
     </string-array>
 
     <string-array name="eadvancedFillInTheBlank">
-        <item>The politician's _____ promises of giant flying squirrels for every voter proved surprisingly popular. </item>
+        <item>The politician\'s _____ promises of giant flying squirrels for every voter proved surprisingly popular. </item>
         <item>Despite his best efforts, the detective found only a _____ of actual evidence at the crime scene – a single button and a slightly suspicious sock. </item>
         <item>The team found themselves stuck in a _____ of regulations, unable to open a lemonade stand without twelve permits and a notarized letter from a llama. </item>
         <item>The company retreat, meant to improve teamwork, quickly devolved into arguments over the questionable _____ of freeze-dried snacks. </item>
-        <item>The philanthropist's _____ donation led to a new library wing, much to the delight of bookworms and sleepy pigeons looking for shelter. </item>
-        <item>The professor's lecture covered a _____ array of topics, from the mating rituals of snails to the importance of alphabetizing one's spice collection.</item>
+        <item>The philanthropist\'s _____ donation led to a new library wing, much to the delight of bookworms and sleepy pigeons looking for shelter. </item>
+        <item>The professor\'s lecture covered a _____ array of topics, from the mating rituals of snails to the importance of alphabetizing one\'s spice collection.</item>
         <item>After weeks of neglect, his attempt at cultivating a beard reached a rather sad _____, resembling more a fluffy dandelion than a symbol of rugged masculinity. </item>
         <item>The _____ house guest left a trail of half-eaten sandwiches and mysteriously damp socks throughout the apartment.</item>
         <item>As a complete _____ in the art of baking, his attempt at a cake resulted in a creation of questionable density and surprising resilience. </item>
@@ -898,7 +898,7 @@
 
     <string-array name="eprofessionalDefinitionWordList">
         <item>harmful, poisonous, or very unpleasant</item>
-        <item>stubbornly refusing to change one's opinion or course of action</item>
+        <item>stubbornly refusing to change one\'s opinion or course of action</item>
         <item>to make something obscure, unclear, or unintelligible</item>
         <item>noisy and difficult to control</item>
         <item>asserting authority in an excessively domineering way</item>
@@ -912,14 +912,14 @@
     <string-array name="eprofessionalFillInTheBlank">
         <item>A _____ odor wafted from the abandoned house, hinting at either a failed chemistry experiment or a family of very smelly skunks.</item>
         <item>The customer service representative was maddeningly _____ , refusing to budge on the "no returns on chewed shoes" policy. </item>
-        <item>The politician's speech was designed to _____ the issue, involving long, meandering sentences and suspiciously vague promises.</item>
-        <item>The _____ toddler refused to be silenced, bellowing his displeasure at the park's inexplicable lack of dinosaur-shaped slides.</item>
-        <item>The _____ committee insisted on inspecting everyone's shoes for conformity, resulting in a lengthy delay and several confused pigeons. </item>
+        <item>The politician\'s speech was designed to _____ the issue, involving long, meandering sentences and suspiciously vague promises.</item>
+        <item>The _____ toddler refused to be silenced, bellowing his displeasure at the park\'s inexplicable lack of dinosaur-shaped slides.</item>
+        <item>The _____ committee insisted on inspecting everyone\'s shoes for conformity, resulting in a lengthy delay and several confused pigeons. </item>
         <item>Reorganizing the entire library by the length of book titles proved an unexpectedly _____ task.</item>
         <item>The advertisement claimed the new lotion was the _____ solution for hair loss, bad moods, and a lack of telekinetic powers.</item>
         <item>The ostracized mime found solace in a support group for others silenced by social convention. </item>
         <item>The soothing cup of chamomile tea served to slightly _____ the stress of the malfunctioning printer and looming deadline.</item>
-        <item>The so-called "miracle cure" turned out to be nothing more than overpriced fizzy water, proving yet again there's no easy _____ for questionable gullibility. 
+        <item>The so-called "miracle cure" turned out to be nothing more than overpriced fizzy water, proving yet again there\'s no easy _____ for questionable gullibility. </item>
     </string-array>
 
 
@@ -955,9 +955,9 @@
         <item>A wave of _____ washed over the poet as he stared out the window at the slightly drizzly parking lot.</item>
         <item>The grumpy recluse, a self-proclaimed _____, refused to acknowledge the holiday carolers, despite their adorable outfits and questionable pitch.</item>
         <item>The detective spun a gripping _____ involving a missing stapler, a disgruntled office clown, and an unusual number of pigeons.</item>
-        <item>The old photograph inspired a _____ longing for simpler times, back when phones were attached to walls and shoulder pads weren't yet a fashion faux-pas.</item>
+        <item>The old photograph inspired a _____ longing for simpler times, back when phones were attached to walls and shoulder pads weren\'t yet a fashion faux-pas.</item>
         <item>Their attempt at "friendly competition" quickly descended into what could only be described as an _____. </item>
-        <item>The company's new advertising campaign was a strange _____ shift relying on outdated slang, polka-dot patterns, and an inexplicable talking pineapple. </item>
+        <item>The company\'s new advertising campaign was a strange _____ shift relying on outdated slang, polka-dot patterns, and an inexplicable talking pineapple. </item>
         <item>The librarian was remarkably efficient at _____ any hint of whispered conversations or giggling in the stacks.</item>
         <item>With his collection of mismatched socks and a pet rock named Bob, the new student was endearingly _____. </item>
     </string-array>
@@ -991,12 +991,12 @@
     </string-array>
 
     <string-array name="fbasicFillInTheBlank">
-        <item>The company's new business _____ involved elaborate flowcharts, excessive use of buzzwords, and a surprising number of inspirational cat posters.</item>
+        <item>The company\'s new business _____ involved elaborate flowcharts, excessive use of buzzwords, and a surprising number of inspirational cat posters.</item>
         <item>The fashion critic became a social _____ after declaring sweatpants to be a crime against humanity.</item>
         <item>The political commentator was a known _____ , incapable of discussing the opposing party without referencing farm animals and questionable hairstyles. </item>
         <item>The museum exhibit featured a notable _____ of dinosaur bones, consisting mainly of a single fossilized toe.  </item>
-        <item>The restaurant review contained several _____ remarks about the chef's creative use of ketchup and his questionable understanding of the word 'seasoning'.</item>
-        <item>The lawyer's explanation of the contract was remarkably _____, causing his client to briefly consider a career in interpretive dance instead.</item>
+        <item>The restaurant review contained several _____ remarks about the chef\'s creative use of ketchup and his questionable understanding of the word \'seasoning\'.</item>
+        <item>The lawyer\'s explanation of the contract was remarkably _____, causing his client to briefly consider a career in interpretive dance instead.</item>
         <item>The detective had a particular _____ for solving mysteries involving missing socks and questionable fashion choices.</item>
         <item>The _____ landlord refused to fix the leaky roof, suggesting a system of strategically placed buckets instead.</item>
         <item>The _____ puppy was adorably destructive, with a particular fondness for chewing on important documents and shoelaces. </item>
@@ -1034,7 +1034,7 @@
         <item>The _____ telemarketer refused to be discouraged, even after being told the family was on an extended llama-trekking vacation.</item>
         <item>With a _____ disposition, the accountant remained unfazed even during the surprise office mariachi band performance.</item>
         <item>The _____ billionaire donated generously to the cause of building solid gold statues of himself. </item>
-        <item>The motivational speaker's _____ advice, "Just be yourself!", was met with skeptical eyebrow raises from the audience.</item>
+        <item>The motivational speaker\'s _____ advice, "Just be yourself!", was met with skeptical eyebrow raises from the audience.</item>
         <item>The self-help book was filled with inspirational _____ such as "follow your dreams" and "carpe diem (but maybe check your calendar first)".</item>
         <item>The actor received enthusiastic _____ from the audience, despite the fact that his performance involved very little movement and questionable yodeling.</item>
         <item>The garden produced a _____ of tomatoes, leading to a desperate neighborhood zucchini-gifting campaign. </item>
@@ -1077,7 +1077,7 @@
         <item>The ominous background music in the movie clearly _____ an unfortunate encounter with a chainsaw-wielding clown. </item>
         <item>His reputation for _____ preceded him; his bank manager sighed wearily upon seeing his name on the appointment schedule. </item>
         <item>The chameleon had a natural _____ for blending in, though its attempts to camouflage as a plaid sofa were less successful. </item>
-        <item>The senator's _____ spending habits quickly drained the campaign funds, leaving only enough for a few stickers and a slightly used kazoo.</item>
+        <item>The senator\'s _____ spending habits quickly drained the campaign funds, leaving only enough for a few stickers and a slightly used kazoo.</item>
         <item>The health guru sought to _____ the benefits of an all-kale diet, conveniently ignoring the existence of pizza.</item>
         <item>The government chose to _____ the use of spoons, leading to widespread confusion and an unexpected boom in the straw industry. </item>
         <item>The shape-shifting villain proved difficult to track down, especially after his unfortunate transformation into a pigeon.</item>
@@ -1115,11 +1115,11 @@
         <item>The debate devolved into a _____ exchange of insults, mostly focused on questionable hair choices of historical figures.</item>
         <item>The notoriously _____ lawyer was known to start courtroom brawls in response to misspelled names or lukewarm coffee. </item>
         <item>The beauty pageant winner was praised for her dazzling smile, impressive hairspray collection, and undeniable _____.</item>
-        <item>The _____ editor insisted on using a typewriter, scoffed at anything written after 1920, and used the word 'egregious' at every opportunity. </item>
+        <item>The _____ editor insisted on using a typewriter, scoffed at anything written after 1920, and used the word \'egregious\' at every opportunity. </item>
         <item>The charming village, with its cobblestone streets and abundance of thatched roofs, had a delightfully _____ quality. </item>
         <item>His _____ plan involved battling windmills, befriending sheep, and pursuing a surprisingly elusive Dulcinea.</item>
         <item>The student found himself in a _____ after realizing he had accidentally submitted his English essay for his Chemistry final. </item>
-        <item>The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter. </item>
+        <item>The _____ toddler refused to eat, nap, or wear anything that wasn\'t covered in glitter. </item>
         <item>The _____ fortress overlooked the valley, though it was rumored to be haunted by the ghost of a disgruntled interior decorator. </item> 
     </string-array>
 
@@ -1152,15 +1152,15 @@
 
     <string-array name="fexpertFillInTheBlank">
         <item>The bookshelf, assembled after midnight and several glasses of wine, had a distinctly _____ angle.</item>
-        <item>His _____ led him to believe that anyone who didn't share his taste in polka-dotted socks was secretly plotting against him.</item>
+        <item>His _____ led him to believe that anyone who didn\'t share his taste in polka-dotted socks was secretly plotting against him.</item>
         <item>The environmental _____ chained himself to a bulldozer and refused to budge until the tree was given a name and weekly therapy sessions.</item>
-        <item>Though past its _____, the aging rock band's reunion tour still involved surprising amounts of spandex. </item>
+        <item>Though past its _____, the aging rock band\'s reunion tour still involved surprising amounts of spandex. </item>
         <item>Tired of menial tasks, the office worker felt _____ to the position of official coffee cup washer.</item>
-        <item>The celebrity's memoir was a surprisingly _____ read, filled with inspirational quotes and questionable grammar.</item>
-        <item>The con man tried to _____ the farmer with a scheme involving a time-traveling chicken and a 'magic' bean.</item>
+        <item>The celebrity\'s memoir was a surprisingly _____ read, filled with inspirational quotes and questionable grammar.</item>
+        <item>The con man tried to _____ the farmer with a scheme involving a time-traveling chicken and a \'magic\' bean.</item>
         <item>Wearing an elaborate robe and an excessive amount of glitter, he performed his _____ duties at the festival of cheese. </item>
-        <item>The castle grounds were abuzz in preparation for the grand _____ celebrating the king's exceptionally fluffy cat.</item>
-        <item>The motivational speaker's _____ speech involved shouting, several PowerPoint slides of waterfalls, and questionable life advice.  </item>
+        <item>The castle grounds were abuzz in preparation for the grand _____ celebrating the king\'s exceptionally fluffy cat.</item>
+        <item>The motivational speaker\'s _____ speech involved shouting, several PowerPoint slides of waterfalls, and questionable life advice.  </item>
     </string-array>
 
 
@@ -1179,7 +1179,7 @@
     </string-array>
 
     <string-array name="gbasicDefinitionWordList">
-        <item>neglectful in performance of one's duty or careless</item>
+        <item>neglectful in performance of one\'s duty or careless</item>
         <item>cancellation or postponement of a punishment</item>
         <item>a person without moral scruples </item>
         <item>to revoke, cancel, or repeal (a law, order, or agreement)</item>
@@ -1222,8 +1222,8 @@
         <item>a system of sending messages by holding the arms or two flags or poles in certain positions </item>
         <item>the occurrence of fortunate events by chance</item>
         <item>the state of being sober; refraining from alcohol</item>
-        <item>showing concern or care for someone's feelings or well-being </item>
-        <item>the philosophical theory that only one's own mind is sure to exist</item>
+        <item>showing concern or care for someone\'s feelings or well-being </item>
+        <item>the philosophical theory that only one\'s own mind is sure to exist</item>
         <item>not genuine in nature, authenticity, or origin; false </item>
         <item>sedate, respectable, and unadventurous</item>
         <item>calm, dependable, and showing little emotion or animation</item>
@@ -1236,9 +1236,9 @@
         <item>In a stroke of _____, the hungry traveler stumbled upon a food festival dedicated entirely to cheese sculptures.</item>
         <item>His newfound commitment to _____ led him to replace his extensive beer bottle collection with motivational posters featuring squirrels. </item>
         <item>The _____ nurse tended to the grumpy patient with excessive cheerfulness, which he found almost as unsettling as the illness itself.</item>
-        <item>The philosopher's argument for _____ collapsed when he absentmindedly bumped into a chair, acknowledging the existence of the external world. </item>
-        <item>The art critic dismissed the forgery as a _____ imitation, noting the imposter's unfortunate overuse of glitter.</item>
-        <item>The couple's _____ lifestyle involved meticulously planned outfits, tasteful home decor, and a shared calendar app.</item>
+        <item>The philosopher\'s argument for _____ collapsed when he absentmindedly bumped into a chair, acknowledging the existence of the external world. </item>
+        <item>The art critic dismissed the forgery as a _____ imitation, noting the imposter\'s unfortunate overuse of glitter.</item>
+        <item>The couple\'s _____ lifestyle involved meticulously planned outfits, tasteful home decor, and a shared calendar app.</item>
         <item>With a _____ expression, the security guard watched the teenager suspiciously eyeing the cookie display. </item>
         <item>The invading army sought to _____ the neighboring country, primarily to gain access to their superior pastry selection.</item>
         <item>After a Thanksgiving _____ featuring three kinds of pie, a deep sense of regret settled upon the guests.  </item>
@@ -1272,9 +1272,9 @@
     </string-array>
 
     <string-array name="gadvancedFillInTheBlank">
-        <item>The detective's _____ surveillance involved binoculars, a long trench coat, and questionable attempts to blend in with a flock of pigeons.</item>
-        <item>The actor's naturally _____ complexion made his beach vacation photos rather alarming after a weekend out of the sun.</item>
-        <item>The professor's lecture took a series of _____ turns, covering everything from taxidermy to the mating rituals of the garden snail. </item>
+        <item>The detective\'s _____ surveillance involved binoculars, a long trench coat, and questionable attempts to blend in with a flock of pigeons.</item>
+        <item>The actor\'s naturally _____ complexion made his beach vacation photos rather alarming after a weekend out of the sun.</item>
+        <item>The professor\'s lecture took a series of _____ turns, covering everything from taxidermy to the mating rituals of the garden snail. </item>
         <item>The disgruntled employee went on a lengthy _____ about the unfair vending machine snack selection.</item>
         <item>The dusty _____ on forgotten library shelves contained wisdom from ages past and surprisingly effective cockroach eradication techniques.</item>
         <item>The aspiring politician transformed into a shameless _____ in the presence of wealthy donors, eagerly agreeing with any opinion that might result in a campaign contribution.</item>
@@ -1312,16 +1312,16 @@
     </string-array>
 
     <string-array name="gprofessionalFillInTheBlank">
-        <item>The motivational speaker's speech relied on _____ clichés, leaving the audience feeling uninspired and slightly sleepy. </item>
+        <item>The motivational speaker\'s speech relied on _____ clichés, leaving the audience feeling uninspired and slightly sleepy. </item>
         <item>The customer service representative faced a _____ customer who insisted that his pet parrot qualified for a frequent flyer card. </item>
-        <item>The politician's history of scandals hinted at a deep moral _____, making his promises of honesty ring rather hollow.</item>
-        <item>The internet meme spread with _____ speed, appearing on every social media platform and even inexplicably on Aunt Ethel's embroidered pillows. </item>
+        <item>The politician\'s history of scandals hinted at a deep moral _____, making his promises of honesty ring rather hollow.</item>
+        <item>The internet meme spread with _____ speed, appearing on every social media platform and even inexplicably on Aunt Ethel\'s embroidered pillows. </item>
         <item>He took _____ at the slightest criticism, interpreting a raised eyebrow as a declaration of war.</item>
         <item>The teacher had to _____ the student for attempting to build a potato-powered time machine in chemistry class. </item>
         <item>The office building had a strictly _____ design, favoring gray carpets and flickering fluorescent lights. </item>
         <item>His reputation for _____ preceded him, though occasionally he just happened to be telling the truth. </item>
         <item>The old photograph was the only _____ of a bustling town square, now replaced by a strip mall. </item>
-        <item>The stock market's unpredictable _____ left investors feeling both exhilarated and vaguely nauseous. </item> 
+        <item>The stock market\'s unpredictable _____ left investors feeling both exhilarated and vaguely nauseous. </item>
     </string-array>
 
 
@@ -1357,9 +1357,9 @@
         <item>The disgruntled theater critic penned a _____ review, comparing the play to a root canal without anesthesia.</item>
         <item>The coach _____ the team after their dismal performance, his words echoing unpleasantly off the locker room walls. </item>
         <item>The protesters were undeniably _____, their chants reverberating through the city streets.</item>
-        <item>The teenagers' _____ act of spray-painting a mustache on the school statue was met with less amusement than they anticipated.</item>
+        <item>The teenagers\' _____ act of spray-painting a mustache on the school statue was met with less amusement than they anticipated.</item>
         <item>The _____ con artist charmed his way into the hearts (and wallets) of unsuspecting victims. </item>
-        <item>The puppy's _____ expression quickly melted the hearts of even the most committed cat-lovers.</item>
+        <item>The puppy\'s _____ expression quickly melted the hearts of even the most committed cat-lovers.</item>
         <item>The revolution sought to throw off the _____ of the oppressive regime, yearning for freedom.</item>
         <item>A gentle _____ rustled the leaves, offering a momentary respite from the summer heat. </item>
     </string-array>
@@ -1385,21 +1385,21 @@
         <item>to confuse, entangle, or throw into disorder</item>
         <item>having or showing a feverish activity; restless</item>
         <item>slippery, difficult to hold firm</item>
-        <item>the act or sensation of having one's hair stand on end (goosebumps)</item>
+        <item>the act or sensation of having one\'s hair stand on end (goosebumps)</item>
         <item>appropriate; fitting; suitable</item>
         <item>boasting, bragging</item>
     </string-array>
 
     <string-array name="hbasicFillInTheBlank">
-        <item>The food critic declared the chef's latest creation an _____ fusion of flavors that should never be repeated.</item>
-        <item>The politician's speech descended into pure _____, leaving his opponents both baffled and mildly amused.</item>
+        <item>The food critic declared the chef\'s latest creation an _____ fusion of flavors that should never be repeated.</item>
+        <item>The politician\'s speech descended into pure _____, leaving his opponents both baffled and mildly amused.</item>
         <item>An inexplicable _____ compelled him to collect mismatched buttons, much to the bewilderment of his family.</item>
         <item>The labyrinthine bureaucracy, with its _____ forms and endless procedures, seemed designed to frustrate even the most determined individual. </item>
-        <item>The scandal quickly _____ the senator's career, leaving his reputation in tatters.</item>
+        <item>The scandal quickly _____ the senator\'s career, leaving his reputation in tatters.</item>
         <item>Her _____ attempts to remain focused resulted in piles of half-completed tasks and a growing sense of unease.</item>
         <item>The _____ path through the icy forest proved treacherous, making for a less-than-pleasant hike.</item>
-        <item>The horror movie's chilling soundtrack induced a distinct sense of _____ in the audience.</item>
-        <item>The candidate's impressive resume deemed him _____ for the position, despite his questionable hairstyle.</item>
+        <item>The horror movie\'s chilling soundtrack induced a distinct sense of _____ in the audience.</item>
+        <item>The candidate\'s impressive resume deemed him _____ for the position, despite his questionable hairstyle.</item>
         <item>His habit of  _____ about his accomplishments made him rather tedious company at dinner parties. </item>
     </string-array>
 
@@ -1432,14 +1432,14 @@
 
     <string-array name="hintermediateFillInTheBlank">
         <item>His unusually bright tie made him rather _____ in the otherwise somber boardroom. </item>
-        <item>The politician's _____ response to the crisis statement left the public both uninformed and mildly concerned.</item>
+        <item>The politician\'s _____ response to the crisis statement left the public both uninformed and mildly concerned.</item>
         <item>A faint _____ odor lingered in the old library, hinting at forgotten lunches and decaying paperbacks.</item>
         <item>The _____ meticulously tracked his bus fare expenses in a leather-bound ledger.  </item>
-        <item>The critic's review contained a touch of _____, suggesting the novel's potential was overshadowed by its overuse of adverbs. </item>
+        <item>The critic\'s review contained a touch of _____, suggesting the novel\'s potential was overshadowed by its overuse of adverbs. </item>
         <item>The notoriously _____ witness offered only "yes" or "no" answers, leaving the courtroom buzzing with speculation. </item>
         <item>The philosopher pondered the _____ of a table, questioning whether it was truly a table if no one was there to dine upon it.</item>
-        <item>The hostess's _____ smile seemed a bit strained after hours of forced cheerfulness.</item>
-        <item>The patient's _____ eye movements made the optometrist's examination surprisingly difficult.</item>
+        <item>The hostess\'s _____ smile seemed a bit strained after hours of forced cheerfulness.</item>
+        <item>The patient\'s _____ eye movements made the optometrist\'s examination surprisingly difficult.</item>
         <item>The psychic laid out her tarot cards, preparing to _____ a future filled with unexpected parking tickets and questionable haircuts. </item>
     </string-array>
 
