@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -88,32 +89,103 @@
         android:textColor="@color/colorText"
         android:textSize="36sp" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/list_pick_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/basic_button"
+            style="@style/ButtonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:onClick="pickWordList"
+            android:tag="BASIC"
+            android:text="Basic" />
+
+        <Button
+            android:id="@+id/intermediate_button"
+            style="@style/ButtonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/basic_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:onClick="pickWordList"
+            android:tag="INTERMEDIATE"
+            android:text="Intermediate" />
+
+        <Button
+            android:id="@+id/advanced_button"
+            style="@style/ButtonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/intermediate_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:onClick="pickWordList"
+            android:tag="ADVANCED"
+            android:text="Advanced" />
+
+        <Button
+            android:id="@+id/expert_button"
+            style="@style/ButtonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/professional_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:onClick="pickWordList"
+            android:tag="EXPERT"
+            android:text="Expert" />
+
+        <Button
+            android:id="@+id/professional_button"
+            style="@style/ButtonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/advanced_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:onClick="pickWordList"
+            android:tag="PROFESSIONAL"
+            android:text="Professional" />
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:id="@+id/fill_in_the_blank_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone">
 
         <EditText
             android:id="@+id/fill_in_the_blank_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimary"
             android:ems="10"
             android:inputType="text"
             android:textAlignment="center"
-            android:textColor="@color/colorText"
-            android:background="@color/colorPrimary"/>
+            android:textColor="@color/colorText" />
 
         <Button
             android:id="@+id/fill_in_the_blank_button"
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hint_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="0dp"
+            android:layout_above="@+id/fill_in_the_blank_edit_text"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="50dp"
             android:onClick="fillInTheBlankAnswer"
             android:text="Answer" />
 
@@ -124,10 +196,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/fill_in_the_blank_edit_text"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="22dp"
             android:layout_marginTop="22dp"
+            android:layout_marginBottom="22dp"
             android:onClick="fillInTheBlankHint"
             android:text="Hint" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -183,70 +256,5 @@
         android:onClick="resetList"
         android:text="Reset"
         android:visibility="gone" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_pick_view"
-        android:orientation="vertical">
-    <Button
-        android:id="@+id/basic_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:onClick="pickWordList"
-        android:tag="BASIC"
-        android:text="Basic"
-        style="@style/ButtonList"/>
-
-    <Button
-        android:id="@+id/intermediate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/basic_button"
-        android:layout_marginTop="16dp"
-        android:onClick="pickWordList"
-        android:tag="INTERMEDIATE"
-        android:text="Intermediate"
-        style="@style/ButtonList"/>
-
-    <Button
-        android:id="@+id/advanced_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/intermediate_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:onClick="pickWordList"
-        android:tag="ADVANCED"
-        android:text="Advanced"
-        style="@style/ButtonList"/>
-
-    <Button
-        android:id="@+id/expert_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/professional_button"
-        android:layout_marginTop="10dp"
-        android:onClick="pickWordList"
-        android:tag="EXPERT"
-        android:text="Expert"
-        style="@style/ButtonList"/>
-
-    <Button
-        android:id="@+id/professional_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/advanced_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:onClick="pickWordList"
-        android:tag="PROFESSIONAL"
-        android:text="Professional"
-        style="@style/ButtonList"/>
-    </LinearLayout>
 
 </RelativeLayout>

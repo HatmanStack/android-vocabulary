@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -251,6 +252,9 @@ public class MainActivity extends AppCompatActivity {
         final String answer = vocabWordList[wordIndex];
         String userText = fillInTheBlankEditText.getText().toString().trim();
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
         if (!userText.isEmpty()) {
             String[] possibleAnswers = {
                     answer, answer + "d", answer + "ly", answer + "ed",
@@ -265,10 +269,18 @@ public class MainActivity extends AppCompatActivity {
 
             for (String possibleAnswer : possibleAnswers) {
                 int differenceCount = 0;
-                for (int i = 0; i < possibleAnswer.length(); i++) {
+                int minLength = Math.min(userText.length(), possibleAnswer.length());
+
+                int i = 0;
+                while (i < minLength) {
                     if (userText.charAt(i) != possibleAnswer.charAt(i)) {
                         differenceCount++;
                     }
+                    i++;
+                }
+
+                if (userText.length() < possibleAnswer.length()) {
+                    differenceCount += possibleAnswer.length() - userText.length();
                 }
                 if(differenceCount < 4){
                     isCorrect = true;
