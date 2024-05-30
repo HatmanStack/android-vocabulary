@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String BESTLISTHINT = "best_list_hint";
     public static final String WORKING_LIST = "working_list";
     public static final String PROGRESSBAR_SIZE = "progressbar_size";
+    public static final String USER_RESET = "user_reset";
     public static String[] vocabWordList;
     public static String[] vocabWordDefinitionList;
     public static String[] fillInTheBlankList;
@@ -269,20 +270,33 @@ public class MainActivity extends AppCompatActivity {
 
             for (String possibleAnswer : possibleAnswers) {
                 int differenceCount = 0;
-                int minLength = Math.min(userText.length(), possibleAnswer.length());
-
-                int i = 0;
-                while (i < minLength) {
-                    if (userText.charAt(i) != possibleAnswer.charAt(i)) {
+                int i = 0, j = 0;
+            
+                while (i < userText.length() && j < possibleAnswer.length()) {
+                    if (userText.charAt(i) != possibleAnswer.charAt(j)) {
                         differenceCount++;
+                        if (differenceCount > 1) {
+                            break;
+                        }
+                        if (userText.length() < possibleAnswer.length()) {
+                            j++;
+                        } else if (userText.length() > possibleAnswer.length()) {
+                            i++;
+                        } else {
+                            i++;
+                            j++;
+                        }
+                    } else {
+                        i++;
+                        j++;
                     }
-                    i++;
                 }
-
-                if (userText.length() < possibleAnswer.length()) {
-                    differenceCount += possibleAnswer.length() - userText.length();
+            
+                if (i < userText.length() || j < possibleAnswer.length()) {
+                    differenceCount++;
                 }
-                if(differenceCount < 4){
+            
+                if (differenceCount < 2) {
                     isCorrect = true;
                     break;
                 }
@@ -428,51 +442,50 @@ public class MainActivity extends AppCompatActivity {
                 string = "You only got " + wrongCount + " Wrong, What's Next?";
             }
         } else {
-            string = "You Completed a List with \n" + hintCount + " Hints\n" + wrongCount + " Wrong\n";
+            string = "You Completed a List with\n\n" + hintCount + " Hints\n" + wrongCount + " Wrong";
         }
     
         // Update all-time wrong and hint counts if necessary
 
-        int allTimeWrong = sharedPreferences.getInt(ALLTIMEWRONG + workingList + subList, -1);
-        int allTimeHints = sharedPreferences.getInt(ALLTIMEHINT + workingList + subList, -1);
-        int bestlistWrong = sharedPreferences.getInt(BESTLISTWRONG + workingList + subList, -1);
-        int bestlistHints = sharedPreferences.getInt(BESTLISTHINT + workingList + subList, -1);
-        if(hintCount < bestlistHints){
+        int allTimeWrong = sharedPreferences.getInt(ALLTIMEWRONG , 0);
+        int allTimeHints = sharedPreferences.getInt(ALLTIMEHINT , 0);
+        int bestlistWrong = sharedPreferences.getInt(BESTLISTWRONG + workingList + subList, 0);
+        int bestlistHints = sharedPreferences.getInt(BESTLISTHINT + workingList + subList, 0);
+        boolean userReset = sharedPreferences.getBoolean(USER_RESET + workingList + subList, false);
+        if(hintCount < bestlistHints && userReset){
             allTimeHints += hintCount;
             bestlistHints = hintCount;
-            sharedPreferences.edit().putInt(ALLTIMEHINT + workingList + subList, allTimeHints).apply();
+            sharedPreferences.edit().putInt(ALLTIMEHINT , allTimeHints).apply();
             sharedPreferences.edit().putInt(BESTLISTHINT + workingList + subList, hintCount).apply();
-        } else if(bestlistHints == -1){
+            sharedPreferences.edit().putBoolean(USER_RESET + workingList + subList, false).apply();
+        } else if(bestlistHints == 0){
             bestlistHints = hintCount;
             allTimeHints += hintCount;
-            sharedPreferences.edit().putInt(ALLTIMEHINT + workingList + subList, allTimeHints).apply();
+            sharedPreferences.edit().putInt(ALLTIMEHINT , allTimeHints).apply();
             sharedPreferences.edit().putInt(BESTLISTHINT + workingList + subList, hintCount).apply();
+            sharedPreferences.edit().putBoolean(USER_RESET + workingList + subList, false).apply();
         }
-        if(wrongCount < bestlistWrong){
+        if(wrongCount < bestlistWrong && userReset){
             allTimeWrong += wrongCount;
             bestlistWrong = wrongCount;
-            sharedPreferences.edit().putInt(BESTLISTWRONG + workingList + subList, wrongCount).apply();
-            sharedPreferences.edit().putInt(ALLTIMEWRONG + workingList + subList, allTimeWrong).apply();
-        } else if(bestlistWrong == -1){
+            sharedPreferences.edit().putInt(ALLTIMEWRONG , allTimeWrong).apply();
+            sharedPreferences.edit().putInt(BESTLISTWRONG + workingList + subList, bestlistWrong).apply();
+            sharedPreferences.edit().putBoolean(USER_RESET + workingList + subList, false).apply();
+            
+        } else if(bestlistWrong == 0){
             bestlistWrong = wrongCount;
             allTimeWrong += wrongCount;
-            sharedPreferences.edit().putInt(ALLTIMEWRONG + workingList + subList, allTimeWrong).apply();
+            sharedPreferences.edit().putInt(ALLTIMEWRONG , allTimeWrong).apply();
             sharedPreferences.edit().putInt(BESTLISTWRONG + workingList + subList, wrongCount).apply();
+            sharedPreferences.edit().putBoolean(USER_RESET + workingList + subList, false).apply();
         }
-        if (allTimeWrong == -1) {
-            allTimeWrong += wrongCount;
-            sharedPreferences.edit().putInt(ALLTIMEWRONG + workingList + subList, wrongCount).apply();
-        }
-        if (allTimeHints == -1) {
-            allTimeHints += hintCount;
-            sharedPreferences.edit().putInt(ALLTIMEHINT + workingList + subList, hintCount).apply();
-        }
-
+       
     // Compose the final graduation message
-    questionTextView.setText("Congratulations You Know Your Vocab\n " + string +
-            "\n\nYour Best With this List is\n" + bestlistHints + " Hints\n" +
-            bestlistWrong + " Wrong\n\n\n AllTime\n"  + allTimeHints +" Hints\n" + allTimeWrong +" Wrong\n\n" +
-            "a Different List? \n Reset and Go Again?");
+    String winText = "Congratulations You Know Your Vocab\n " + string +
+            "\n\n\nYour Best With this List is\n\n" + bestlistHints + " Hints\n" +
+            bestlistWrong + " Wrong\n\n\nALL TIME\n\n"  + allTimeHints +" Hints\n" + allTimeWrong +" Wrong\n\n\n" +
+            "a Different List? \n\n Reset and Go Again?";
+    questionTextView.setText(winText);
     sharedPreferences.edit().apply();
     hintCount = 0;
     wrongCount = 0;
@@ -503,6 +516,7 @@ public void resetList() {
     for (int i = 0; i < answered.size(); i++) {
         answered.set(i, 0);
     }
+    sharedPreferences.edit().putBoolean(USER_RESET + workingList + subList, true).apply();
 
     hintCount = 0;
     wrongCount = 0;
