@@ -166,6 +166,62 @@ describe('quizStore', () => {
           store.getNextQuestion();
         }
       });
+
+      it('progresses word state for multiple choice: 2→3', () => {
+        let store = useQuizStore.getState();
+        store.startQuiz('list-a', 'basic');
+
+        // Set up a word at state 2
+        const newAnswered = [...store.answered];
+        newAnswered[0] = 2;
+        (store as any).answered = newAnswered;
+
+        // Find the word at state 2 and answer correctly with multiple choice
+        for (let i = 0; i < 50; i++) {
+          store.getNextQuestion();
+          store = useQuizStore.getState(); // Get fresh state
+          const wordIndex = store.lastWordIndex;
+          if (
+            wordIndex === 0 &&
+            store.currentQuestion?.type === 'multiple' &&
+            store.answered[wordIndex] === 2
+          ) {
+            const correctWord = store.currentQuestion.word.word;
+            store.submitAnswer(correctWord);
+            store = useQuizStore.getState(); // Get fresh state
+            expect(store.answered[wordIndex]).toBe(3);
+            return;
+          }
+        }
+      });
+
+      it('progresses word state for fill-in-blank: 1→3', () => {
+        let store = useQuizStore.getState();
+        store.startQuiz('list-a', 'basic');
+
+        // Set up a word at state 1
+        const newAnswered = [...store.answered];
+        newAnswered[0] = 1;
+        (store as any).answered = newAnswered;
+
+        // Find the word at state 1 and answer correctly with fill-in-blank
+        for (let i = 0; i < 50; i++) {
+          store.getNextQuestion();
+          store = useQuizStore.getState(); // Get fresh state
+          const wordIndex = store.lastWordIndex;
+          if (
+            wordIndex === 0 &&
+            store.currentQuestion?.type === 'fillin' &&
+            store.answered[wordIndex] === 1
+          ) {
+            const correctWord = store.currentQuestion.word.word;
+            store.submitAnswer(correctWord);
+            store = useQuizStore.getState(); // Get fresh state
+            expect(store.answered[wordIndex]).toBe(3);
+            return;
+          }
+        }
+      });
     });
 
     describe('wrong answers', () => {
@@ -352,6 +408,75 @@ describe('quizStore', () => {
       store = useQuizStore.getState(); // Get fresh state
 
       expect(store.sessionStats.correctAnswers).toBe(3);
+    });
+  });
+
+  describe('error handling', () => {
+    it('handles starting quiz with invalid list/level', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      const store = useQuizStore.getState();
+      store.startQuiz('invalid-list', 'invalid-level');
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('No words found')
+      );
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('handles getNextQuestion with no active session', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      // Set store to have no active session
+      useQuizStore.setState({
+        currentSession: null,
+        isQuizActive: false,
+      });
+
+      const store = useQuizStore.getState();
+      store.getNextQuestion();
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('No active quiz session')
+      );
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('handles submitAnswer with no active question', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      // Set store to have no current question
+      useQuizStore.setState({
+        currentQuestion: null,
+        lastWordIndex: -1,
+        isQuizActive: false,
+      });
+
+      const store = useQuizStore.getState();
+      const result = store.submitAnswer('test');
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('No active question')
+      );
+      expect(result.isCorrect).toBe(false);
+      expect(result.correctAnswer).toBe('');
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('handles useHint with no current question', () => {
+      // Set store to have no current question
+      useQuizStore.setState({
+        currentQuestion: null,
+        isQuizActive: false,
+      });
+
+      const store = useQuizStore.getState();
+      const hint = store.useHint();
+
+      expect(hint).toBe('');
     });
   });
 });
