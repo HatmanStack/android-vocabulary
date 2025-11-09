@@ -1,65 +1,102 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Button, Surface, Divider } from 'react-native-paper';
+import React, { useEffect, useRef } from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  useWindowDimensions,
+  Animated,
+} from 'react-native';
+import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { loadVocabularyLists } from '../utils/vocabularyLoader';
+import { ListCard } from '../components/ListCard';
+import { Typography, Spacer } from '@/shared/ui';
 
 type Props = StackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
+  const { width } = useWindowDimensions();
+
+  // Determine number of columns based on screen width
+  // Breakpoint: 600px (common tablet breakpoint)
+  const numColumns = width >= 600 ? 2 : 1;
+
+  // Animation values for fade-in effect
+  const fadeAnims = useRef(
+    vocabularyLists.map(() => new Animated.Value(0))
+  ).current;
+
+  // Fade-in animation on mount
+  useEffect(() => {
+    const animations = fadeAnims.map((anim, index) =>
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 300,
+        delay: index * 100, // Stagger animations
+        useNativeDriver: true,
+      })
+    );
+    Animated.parallel(animations).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Surface style={styles.header} elevation={0}>
-        <Text variant="headlineLarge" style={styles.title}>
-          Vocabulary App
-        </Text>
-        <Text variant="bodyMedium" style={styles.subtitle}>
-          Select a vocabulary list to begin
-        </Text>
-      </Surface>
+    <View style={styles.container}>
+      <Appbar.Header>
+        <Appbar.Content title="Vocabulary Builder" />
+        <Appbar.Action
+          icon="chart-bar"
+          onPress={() => navigation.navigate('Stats')}
+          accessibilityLabel="View Statistics"
+        />
+        <Appbar.Action
+          icon="cog"
+          onPress={() => navigation.navigate('Settings')}
+          accessibilityLabel="Open Settings"
+        />
+      </Appbar.Header>
 
-      <View style={styles.content}>
-        <Text variant="titleMedium" style={styles.sectionTitle}>
-          Vocabulary Lists ({vocabularyLists.length})
-        </Text>
-
-        {vocabularyLists.map((list) => (
-          <Button
-            key={list.id}
-            mode="contained"
-            onPress={() => navigation.navigate('Difficulty', { listId: list.id })}
-            style={styles.listButton}
-            contentStyle={styles.listButtonContent}
-          >
-            {list.name}
-          </Button>
-        ))}
-
-        <Divider style={styles.divider} />
-
-        <View style={styles.bottomButtons}>
-          <Button
-            mode="outlined"
-            onPress={() => navigation.navigate('Stats')}
-            style={styles.button}
-            icon="chart-bar"
-          >
-            View Statistics
-          </Button>
-          <Button
-            mode="outlined"
-            onPress={() => navigation.navigate('Settings')}
-            style={styles.button}
-            icon="cog"
-          >
-            Settings
-          </Button>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+        <View style={styles.header}>
+          <Typography variant="heading1">Choose a List</Typography>
+          <Spacer size="xs" />
+          <Typography variant="body" color="secondary">
+            Select a vocabulary list to begin learning
+          </Typography>
         </View>
-      </View>
-    </ScrollView>
+
+        <Spacer size="lg" />
+
+        <View style={styles.listsContainer}>
+          <View style={styles.grid}>
+            {vocabularyLists.map((list, index) => (
+              <Animated.View
+                key={list.id}
+                style={[
+                  numColumns === 2 ? styles.gridItemTwoColumn : styles.gridItemOneColumn,
+                  { opacity: fadeAnims[index] },
+                ]}
+              >
+                <ListCard
+                  id={list.id}
+                  name={list.name}
+                  description={list.description}
+                  progress={0} // Real progress data will come from Phase 4
+                  max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
+                  onPress={() =>
+                    navigation.navigate('Difficulty', { listId: list.id })
+                  }
+                />
+              </Animated.View>
+            ))}
+          </View>
+        </View>
+
+        <Spacer size="xl" />
+      </ScrollView>
+    </View>
   );
 }
 
@@ -67,37 +104,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    padding: 24,
-    alignItems: 'center',
+  scrollView: {
+    flex: 1,
   },
-  title: {
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  subtitle: {
-    textAlign: 'center',
-    opacity: 0.7,
-  },
-  content: {
+  scrollContent: {
     padding: 16,
   },
-  sectionTitle: {
-    marginBottom: 16,
-  },
-  listButton: {
-    marginBottom: 12,
-  },
-  listButtonContent: {
+  header: {
+    alignItems: 'center',
     paddingVertical: 8,
   },
-  divider: {
-    marginVertical: 24,
+  listsContainer: {
+    width: '100%',
   },
-  bottomButtons: {
-    gap: 12,
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
-  button: {
-    marginVertical: 4,
+  gridItemOneColumn: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  gridItemTwoColumn: {
+    width: '48%',
+    marginBottom: 16,
   },
 });
