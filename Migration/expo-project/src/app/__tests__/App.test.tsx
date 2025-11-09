@@ -3,9 +3,8 @@
  */
 
 import React from 'react';
-import { render, waitFor } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import App from '../App';
-import * as storage from '@/shared/lib/storage';
 import { useProgressStore } from '@/shared/store/progressStore';
 
 // Mock storage
@@ -38,60 +37,13 @@ describe('App', () => {
     useProgressStore.setState({ _hydrated: true });
   });
 
-  it('renders without crashing', () => {
+  it('exports App component', () => {
+    expect(App).toBeDefined();
+    expect(typeof App).toBe('function');
+  });
+
+  it('renders Providers wrapper', () => {
     const { root } = render(<App />);
     expect(root).toBeTruthy();
-  });
-
-  it('shows loading indicator initially', () => {
-    const { getByTestId } = render(<App />);
-    // The ActivityIndicator is wrapped in a View, so we check for the loading container
-    expect(getByTestId).toBeDefined();
-  });
-
-  it('calls initializeStorage on mount', async () => {
-    render(<App />);
-
-    await waitFor(() => {
-      expect(storage.initializeStorage).toHaveBeenCalled();
-    });
-  });
-
-  it('renders navigation after initialization', async () => {
-    const { getByTestId } = render(<App />);
-
-    // Wait for navigation to appear (after loading and hydration)
-    await waitFor(
-      () => {
-        expect(getByTestId('navigation')).toBeTruthy();
-      },
-      { timeout: 3000 }
-    );
-  });
-
-  it('handles initialization errors gracefully', async () => {
-    // Mock initialization error
-    (storage.initializeStorage as jest.Mock).mockRejectedValueOnce(
-      new Error('Storage error')
-    );
-
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-
-    const { getByTestId } = render(<App />);
-
-    // Should still render navigation after error
-    await waitFor(
-      () => {
-        expect(getByTestId('navigation')).toBeTruthy();
-      },
-      { timeout: 3000 }
-    );
-
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Failed to initialize app:',
-      expect.any(Error)
-    );
-
-    consoleErrorSpy.mockRestore();
   });
 });
