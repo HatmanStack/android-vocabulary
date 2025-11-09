@@ -20,7 +20,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': {
+          word1: {
             wordId: 'word1',
             state: 3,
             attempts: 3,
@@ -45,7 +45,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': {
+          word1: {
             wordId: 'word1',
             state: 2,
             attempts: 2,
@@ -68,21 +68,21 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': {
+          word1: {
             wordId: 'word1',
             state: 0,
             attempts: 0,
             correctAttempts: 0,
             lastReviewedAt: null,
           },
-          'word2': {
+          word2: {
             wordId: 'word2',
             state: 1,
             attempts: 1,
             correctAttempts: 1,
             lastReviewedAt: '2024-01-01',
           },
-          'word3': {
+          word3: {
             wordId: 'word3',
             state: 2,
             attempts: 2,
@@ -106,7 +106,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': {
+          word1: {
             wordId: 'word1',
             state: 3,
             attempts: 3,
@@ -119,7 +119,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'advanced',
         wordProgress: {
-          'word2': {
+          word2: {
             wordId: 'word2',
             state: 2,
             attempts: 2,
@@ -132,7 +132,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-b',
         levelId: 'expert',
         wordProgress: {
-          'word3': {
+          word3: {
             wordId: 'word3',
             state: 1,
             attempts: 1,
@@ -161,10 +161,34 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': { wordId: 'word1', state: 0, attempts: 0, correctAttempts: 0, lastReviewedAt: null },
-          'word2': { wordId: 'word2', state: 1, attempts: 1, correctAttempts: 1, lastReviewedAt: '2024-01-01' },
-          'word3': { wordId: 'word3', state: 2, attempts: 2, correctAttempts: 1, lastReviewedAt: '2024-01-01' },
-          'word4': { wordId: 'word4', state: 3, attempts: 3, correctAttempts: 3, lastReviewedAt: '2024-01-01' },
+          word1: {
+            wordId: 'word1',
+            state: 0,
+            attempts: 0,
+            correctAttempts: 0,
+            lastReviewedAt: null,
+          },
+          word2: {
+            wordId: 'word2',
+            state: 1,
+            attempts: 1,
+            correctAttempts: 1,
+            lastReviewedAt: '2024-01-01',
+          },
+          word3: {
+            wordId: 'word3',
+            state: 2,
+            attempts: 2,
+            correctAttempts: 1,
+            lastReviewedAt: '2024-01-01',
+          },
+          word4: {
+            wordId: 'word4',
+            state: 3,
+            attempts: 3,
+            correctAttempts: 3,
+            lastReviewedAt: '2024-01-01',
+          },
         },
       },
     };
@@ -184,7 +208,7 @@ describe('WordMasteryHeatmap', () => {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          'word1': {
+          word1: {
             wordId: 'word1',
             state: 3,
             attempts: 3,

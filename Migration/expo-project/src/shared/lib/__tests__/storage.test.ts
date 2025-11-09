@@ -185,9 +185,7 @@ describe('storage', () => {
     });
 
     it('handles parse errors gracefully', async () => {
-      const mockPairs: [string, string | null][] = [
-        ['key1', 'invalid json'],
-      ];
+      const mockPairs: [string, string | null][] = [['key1', 'invalid json']];
       (AsyncStorage.multiGet as jest.Mock).mockResolvedValue(mockPairs);
 
       const result = await multiGet(['key1']);

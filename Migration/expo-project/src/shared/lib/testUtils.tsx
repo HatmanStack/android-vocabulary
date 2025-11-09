@@ -8,6 +8,7 @@ import React from 'react';
 import { render, RenderOptions } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Mock navigation object
 export const mockNavigation = {
@@ -30,9 +31,11 @@ export const mockRoute = (params: any = {}) => ({
 // Custom render function with providers
 export function renderWithProviders(ui: React.ReactElement, options?: RenderOptions) {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <PaperProvider>
-      <NavigationContainer>{children}</NavigationContainer>
-    </PaperProvider>
+    <SafeAreaProvider>
+      <PaperProvider>
+        <NavigationContainer>{children}</NavigationContainer>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 
   return render(ui, { wrapper: Wrapper, ...options });

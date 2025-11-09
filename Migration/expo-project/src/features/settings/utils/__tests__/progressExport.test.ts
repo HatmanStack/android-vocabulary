@@ -121,7 +121,10 @@ describe('progressExport', () => {
       };
 
       (global as any).Blob = class Blob {
-        constructor(public content: any[], public options?: any) {}
+        constructor(
+          public content: any[],
+          public options?: any
+        ) {}
       };
 
       global.URL.createObjectURL = jest.fn(() => 'blob:mock-url');
@@ -254,9 +257,7 @@ describe('progressExport', () => {
       const result = await importProgress(JSON.stringify(oldVersionExport));
 
       expect(result.success).toBe(true);
-      expect(console.warn).toHaveBeenCalledWith(
-        expect.stringContaining('0.9.0')
-      );
+      expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('0.9.0'));
     });
 
     it('calculates preview stats correctly', async () => {

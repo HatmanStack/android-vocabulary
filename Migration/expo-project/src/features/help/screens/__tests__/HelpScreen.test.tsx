@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { renderWithProviders } from '@/shared/lib/testUtils';
 import HelpScreen from '../HelpScreen';
 
 const mockNavigation = {
@@ -24,21 +25,26 @@ describe('HelpScreen', () => {
     expect(typeof HelpScreen).toBe('function');
   });
 
-  it('returns a React element', () => {
-    const result = HelpScreen({ navigation: mockNavigation, route: mockRoute });
-    expect(result).toBeTruthy();
-    expect(result.type).toBeDefined();
+  it('renders successfully', () => {
+    const { toJSON } = renderWithProviders(
+      <HelpScreen navigation={mockNavigation} route={mockRoute} />,
+    );
+    expect(toJSON()).toBeTruthy();
   });
 
   it('accepts navigation prop with goBack method', () => {
-    const result = HelpScreen({ navigation: mockNavigation, route: mockRoute });
+    const { toJSON } = renderWithProviders(
+      <HelpScreen navigation={mockNavigation} route={mockRoute} />,
+    );
     expect(mockNavigation.goBack).toBeDefined();
-    expect(result).toBeTruthy();
+    expect(toJSON()).toBeTruthy();
   });
 
   it('accepts route prop', () => {
-    const result = HelpScreen({ navigation: mockNavigation, route: mockRoute });
+    const { toJSON } = renderWithProviders(
+      <HelpScreen navigation={mockNavigation} route={mockRoute} />,
+    );
     expect(mockRoute.name).toBe('Help');
-    expect(result).toBeTruthy();
+    expect(toJSON()).toBeTruthy();
   });
 });

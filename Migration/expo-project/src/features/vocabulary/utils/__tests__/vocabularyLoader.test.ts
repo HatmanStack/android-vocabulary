@@ -105,7 +105,16 @@ describe('vocabularyLoader', () => {
     });
 
     it('gets all 8 lists individually', () => {
-      const listIds = ['list-a', 'list-b', 'list-c', 'list-d', 'list-e', 'list-f', 'list-g', 'list-h'];
+      const listIds = [
+        'list-a',
+        'list-b',
+        'list-c',
+        'list-d',
+        'list-e',
+        'list-f',
+        'list-g',
+        'list-h',
+      ];
 
       listIds.forEach((id) => {
         const list = getListById(id);
