@@ -47,4 +47,5 @@ export interface UserProgress {
     listsCompleted: string[];
   };
   achievements?: Achievement[];
+  dailyProgress?: Record<string, number>; // date (YYYY-MM-DD) -> words learned that day
 }

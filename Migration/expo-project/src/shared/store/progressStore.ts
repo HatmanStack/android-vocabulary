@@ -122,6 +122,7 @@ const initialState: Omit<
     listsCompleted: [],
   },
   achievements: [],
+  dailyProgress: {},
   isLoading: false,
   lastSyncedAt: null,
 };
@@ -178,11 +179,20 @@ export const useProgressStore = create<ProgressState>()(
           },
         };
 
+        // Update daily progress if word was just mastered
+        const wasJustMastered = newState === 3 && wordProgress.state !== 3;
+        const updatedDailyProgress = { ...state.dailyProgress };
+        if (wasJustMastered) {
+          const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+          updatedDailyProgress[today] = (updatedDailyProgress[today] || 0) + 1;
+        }
+
         set({
           listLevelProgress: {
             ...state.listLevelProgress,
             [key]: updatedListLevel,
           },
+          dailyProgress: updatedDailyProgress,
           lastSyncedAt: now,
         });
       },
@@ -426,6 +436,7 @@ export const useProgressStore = create<ProgressState>()(
         listLevelProgress: state.listLevelProgress,
         globalStats: state.globalStats,
         achievements: state.achievements,
+        dailyProgress: state.dailyProgress,
         lastSyncedAt: state.lastSyncedAt,
       }),
     }

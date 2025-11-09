@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { Appbar, SegmentedButtons } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList, Achievement } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
@@ -9,6 +9,8 @@ import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { AchievementBadge } from '../components/AchievementBadge';
 import { getAchievementCompletionPercentage } from '../utils/achievements';
+import { ProgressChart } from '../components/ProgressChart';
+import { WordMasteryHeatmap } from '../components/WordMasteryHeatmap';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 
@@ -17,6 +19,7 @@ export default function StatsScreen({ navigation }: Props) {
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+  const [chartView, setChartView] = useState<'progress' | 'heatmap'>('progress');
 
   // Determine number of columns for stat cards
   // 2 columns on mobile, 3-4 on tablet/web
@@ -113,6 +116,36 @@ export default function StatsScreen({ navigation }: Props) {
               iconColor="#F44336"
             />
           </View>
+        </View>
+
+        <Spacer size="xl" />
+
+        {/* Learning Progress Chart Section */}
+        <View style={styles.section}>
+          <Typography variant="heading3">Learning Progress</Typography>
+          <Spacer size="sm" />
+
+          {/* View Toggle */}
+          <SegmentedButtons
+            value={chartView}
+            onValueChange={(value) => setChartView(value as 'progress' | 'heatmap')}
+            buttons={[
+              { value: 'progress', label: 'Progress Chart' },
+              { value: 'heatmap', label: 'Word Mastery' },
+            ]}
+            style={styles.segmentedButtons}
+          />
+
+          <Spacer size="md" />
+
+          {/* Chart Display */}
+          <Card elevation="low" style={styles.card}>
+            {chartView === 'progress' ? (
+              <ProgressChart dailyProgress={progressStore.dailyProgress || {}} />
+            ) : (
+              <WordMasteryHeatmap listLevelProgress={progressStore.listLevelProgress} />
+            )}
+          </Card>
         </View>
 
         <Spacer size="xl" />
@@ -231,6 +264,12 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '100%',
+  },
+  card: {
+    marginHorizontal: 0,
+  },
+  segmentedButtons: {
+    marginHorizontal: 0,
   },
   sectionHeader: {
     flexDirection: 'row',
