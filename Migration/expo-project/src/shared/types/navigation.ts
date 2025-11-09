@@ -1,6 +1,7 @@
 // Navigation Types
 
 export type RootStackParamList = {
+  Onboarding: undefined;
   Home: undefined;
   Difficulty: { listId: string };
   Quiz: { listId: string; levelId: string };

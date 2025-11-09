@@ -6,8 +6,10 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
+import { useSettingsStore } from '@/shared/store/settingsStore';
 
 // Import screens
+import OnboardingScreen from '@/features/onboarding/screens/OnboardingScreen';
 import HomeScreen from '@/features/vocabulary/screens/HomeScreen';
 import DifficultyScreen from '@/features/vocabulary/screens/DifficultyScreen';
 import QuizScreen from '@/features/quiz/screens/QuizScreen';
@@ -42,9 +44,19 @@ const fadeScreenOptions: StackNavigationOptions = {
 };
 
 export default function Navigation() {
+  const onboardingCompleted = useSettingsStore((state) => state.onboardingCompleted);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={defaultScreenOptions}>
+      <Stack.Navigator
+        initialRouteName={onboardingCompleted ? 'Home' : 'Onboarding'}
+        screenOptions={defaultScreenOptions}
+      >
+        <Stack.Screen
+          name="Onboarding"
+          component={OnboardingScreen}
+          options={{ title: 'Welcome' }}
+        />
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Vocabulary' }} />
         <Stack.Screen
           name="Difficulty"

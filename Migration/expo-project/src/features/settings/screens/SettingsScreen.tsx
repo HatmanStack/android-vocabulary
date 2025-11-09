@@ -248,6 +248,16 @@ export default function SettingsScreen({ navigation }: Props) {
               type="button"
               value=""
               onChange={() => console.log('Terms of service tapped')}
+              showDivider
+            />
+            <SettingItem
+              label="Reset Onboarding"
+              type="button"
+              value=""
+              onChange={() => {
+                settingsStore.setOnboardingCompleted(false);
+                Alert.alert('Success', 'Onboarding has been reset. Restart the app to see it again.');
+              }}
               showDivider={false}
             />
           </Card>
