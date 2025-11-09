@@ -133,16 +133,37 @@ export const useProgressStore = create<ProgressState>()(
             masteredDate: newState === 3 ? now : wordProgress.masteredDate,
           };
 
-          return {
-            listLevelProgress: {
-              ...state.listLevelProgress,
-              [key]: {
-                ...existing,
-                wordProgress: {
-                  ...existing.wordProgress,
-                  [wordId]: updated,
-                },
+          const newListLevelProgress = {
+            ...state.listLevelProgress,
+            [key]: {
+              ...existing,
+              wordProgress: {
+                ...existing.wordProgress,
+                [wordId]: updated,
               },
+            },
+          };
+
+          // Check if list was just completed
+          const listsCompleted = [...state.globalStats.listsCompleted];
+          if (!listsCompleted.includes(listId)) {
+            // Calculate if all levels in this list are now completed
+            const allLevelsCompleted = Object.values(newListLevelProgress).every((progress) => {
+              if (progress.listId !== listId) return true; // Ignore other lists
+              const words = Object.values(progress.wordProgress);
+              return words.length > 0 && words.every((w) => w.state === 3);
+            });
+
+            if (allLevelsCompleted) {
+              listsCompleted.push(listId);
+            }
+          }
+
+          return {
+            listLevelProgress: newListLevelProgress,
+            globalStats: {
+              ...state.globalStats,
+              listsCompleted,
             },
             lastSyncedAt: now,
           };
