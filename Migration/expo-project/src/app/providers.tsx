@@ -1,0 +1,4 @@
+// Global providers (Theme, etc.)
+// Will be implemented in Phase 2
+
+export {};
