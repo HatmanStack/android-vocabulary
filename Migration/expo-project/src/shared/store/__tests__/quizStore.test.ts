@@ -4,6 +4,7 @@
 
 import { useQuizStore } from '../quizStore';
 import { useVocabularyStore } from '../vocabularyStore';
+import { useProgressStore } from '../progressStore';
 
 describe('quizStore', () => {
   beforeAll(() => {
@@ -12,9 +13,20 @@ describe('quizStore', () => {
   });
 
   beforeEach(() => {
-    // Reset quiz store before each test
-    const store = useQuizStore.getState();
-    store.resetStats();
+    // Reset both quiz and progress stores before each test to ensure test isolation
+    useQuizStore.getState().resetStats();
+    // Reset the entire quiz state
+    useQuizStore.setState({
+      currentSession: null,
+      currentQuestion: null,
+      currentQuestionIndex: 0,
+      isQuizActive: false,
+      sessionStats: { hintsUsed: 0, wrongAnswers: 0, correctAnswers: 0 },
+      answered: [],
+      lastWordIndex: -1,
+    });
+    // Clear progress store to prevent state bleeding between tests
+    useProgressStore.getState().resetAllProgress();
   });
 
   describe('startQuiz', () => {
@@ -51,41 +63,41 @@ describe('quizStore', () => {
     });
 
     it('generates first question', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      expect(store.currentQuestion).not.toBeNull();
-      expect(store.currentQuestion?.word).toBeDefined();
-      expect(store.currentQuestion?.type).toMatch(/multiple|fillin/);
+      const state = useQuizStore.getState();
+      expect(state.currentQuestion).not.toBeNull();
+      expect(state.currentQuestion?.word).toBeDefined();
+      expect(state.currentQuestion?.type).toMatch(/multiple|fillin/);
     });
   });
 
   describe('getNextQuestion', () => {
     it('selects a word that is not mastered', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      const firstQuestion = store.currentQuestion;
+      const state = useQuizStore.getState();
+      const firstQuestion = state.currentQuestion;
       expect(firstQuestion).not.toBeNull();
 
       // The word's state should be less than 3
-      const wordIndex = store.lastWordIndex;
-      expect(store.answered[wordIndex]).toBeLessThan(3);
+      const wordIndex = state.lastWordIndex;
+      expect(state.answered[wordIndex]).toBeLessThan(3);
     });
 
     it('avoids repeating the same word consecutively', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      const firstWordIndex = store.lastWordIndex;
+      const firstWordIndex = useQuizStore.getState().lastWordIndex;
 
       // Get next question multiple times
       for (let i = 0; i < 5; i++) {
-        store.getNextQuestion();
-        const currentWordIndex = store.lastWordIndex;
+        useQuizStore.getState().getNextQuestion();
+        const state = useQuizStore.getState();
+        const currentWordIndex = state.lastWordIndex;
 
         // Should not be the same as previous (unless all other words are mastered)
-        if (store.answered.filter((s) => s < 3).length > 1) {
+        if (state.answered.filter((s) => s < 3).length > 1) {
           expect(currentWordIndex).not.toBe(firstWordIndex);
         }
       }
@@ -110,15 +122,15 @@ describe('quizStore', () => {
   describe('submitAnswer', () => {
     describe('correct answers', () => {
       it('increments correct answer count', () => {
-        const store = useQuizStore.getState();
-        store.startQuiz('list-a', 'basic');
+        useQuizStore.getState().startQuiz('list-a', 'basic');
 
-        const correctWord = store.currentQuestion!.word.word;
-        const initialCorrect = store.sessionStats.correctAnswers;
+        const correctWord = useQuizStore.getState().currentQuestion!.word.word;
+        const initialCorrect = useQuizStore.getState().sessionStats.correctAnswers;
 
-        store.submitAnswer(correctWord);
+        useQuizStore.getState().submitAnswer(correctWord);
 
-        expect(store.sessionStats.correctAnswers).toBe(initialCorrect + 1);
+        const state = useQuizStore.getState();
+        expect(state.sessionStats.correctAnswers).toBe(initialCorrect + 1);
       });
 
       it('progresses word state for multiple choice: 0→1', () => {
@@ -158,13 +170,13 @@ describe('quizStore', () => {
 
     describe('wrong answers', () => {
       it('increments wrong answer count', () => {
-        const store = useQuizStore.getState();
-        store.startQuiz('list-a', 'basic');
+        useQuizStore.getState().startQuiz('list-a', 'basic');
 
-        const initialWrong = store.sessionStats.wrongAnswers;
-        store.submitAnswer('wronganswer');
+        const initialWrong = useQuizStore.getState().sessionStats.wrongAnswers;
+        useQuizStore.getState().submitAnswer('wronganswer');
 
-        expect(store.sessionStats.wrongAnswers).toBe(initialWrong + 1);
+        const state = useQuizStore.getState();
+        expect(state.sessionStats.wrongAnswers).toBe(initialWrong + 1);
       });
 
       it('does not change word state', () => {
@@ -181,11 +193,10 @@ describe('quizStore', () => {
     });
 
     it('returns result with isCorrect and correctAnswer', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      const correctWord = store.currentQuestion!.word.word;
-      const result = store.submitAnswer(correctWord);
+      const correctWord = useQuizStore.getState().currentQuestion!.word.word;
+      const result = useQuizStore.getState().submitAnswer(correctWord);
 
       expect(result).toHaveProperty('isCorrect');
       expect(result).toHaveProperty('correctAnswer');
@@ -196,21 +207,20 @@ describe('quizStore', () => {
 
   describe('useHint', () => {
     it('increments hint count', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      const initialHints = store.sessionStats.hintsUsed;
-      store.useHint();
+      const initialHints = useQuizStore.getState().sessionStats.hintsUsed;
+      useQuizStore.getState().useHint();
 
-      expect(store.sessionStats.hintsUsed).toBe(initialHints + 1);
+      const state = useQuizStore.getState();
+      expect(state.sessionStats.hintsUsed).toBe(initialHints + 1);
     });
 
     it('returns word definition', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      const definition = store.useHint();
-      const expectedDefinition = store.currentQuestion!.word.definition;
+      const expectedDefinition = useQuizStore.getState().currentQuestion!.word.definition;
+      const definition = useQuizStore.getState().useHint();
 
       expect(definition).toBe(expectedDefinition);
     });
@@ -218,24 +228,23 @@ describe('quizStore', () => {
 
   describe('calculateProgress', () => {
     it('returns 0 for new quiz', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      expect(store.calculateProgress()).toBe(0);
+      expect(useQuizStore.getState().calculateProgress()).toBe(0);
     });
 
     it('calculates sum of word states', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      // Manually set some word states for testing
-      const newAnswered = [...store.answered];
+      // Manually set some word states for testing using the store's set method
+      const state = useQuizStore.getState();
+      const newAnswered = [...state.answered];
       newAnswered[0] = 1;
       newAnswered[1] = 2;
       newAnswered[2] = 3;
-      (store as any).answered = newAnswered;
+      useQuizStore.setState({ answered: newAnswered });
 
-      const progress = store.calculateProgress();
+      const progress = useQuizStore.getState().calculateProgress();
       expect(progress).toBe(6); // 1 + 2 + 3
     });
   });
@@ -249,14 +258,14 @@ describe('quizStore', () => {
     });
 
     it('returns true when all words at state 3', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      // Set all words to mastered
-      const newAnswered = store.answered.map(() => 3 as const);
-      (store as any).answered = newAnswered;
+      // Set all words to mastered using the store's set method
+      const state = useQuizStore.getState();
+      const newAnswered = state.answered.map(() => 3 as const);
+      useQuizStore.setState({ answered: newAnswered });
 
-      expect(store.isQuizComplete()).toBe(true);
+      expect(useQuizStore.getState().isQuizComplete()).toBe(true);
     });
   });
 
@@ -276,48 +285,44 @@ describe('quizStore', () => {
     });
 
     it('sets isQuizActive to false', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      expect(store.isQuizActive).toBe(true);
+      expect(useQuizStore.getState().isQuizActive).toBe(true);
 
-      store.endQuiz();
+      useQuizStore.getState().endQuiz();
 
-      expect(store.isQuizActive).toBe(false);
+      expect(useQuizStore.getState().isQuizActive).toBe(false);
     });
   });
 
   describe('stat tracking', () => {
     it('tracks multiple hints', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      store.incrementHints();
-      store.incrementHints();
-      store.incrementHints();
+      useQuizStore.getState().incrementHints();
+      useQuizStore.getState().incrementHints();
+      useQuizStore.getState().incrementHints();
 
-      expect(store.sessionStats.hintsUsed).toBe(3);
+      expect(useQuizStore.getState().sessionStats.hintsUsed).toBe(3);
     });
 
     it('tracks multiple wrong answers', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      store.incrementWrong();
-      store.incrementWrong();
+      useQuizStore.getState().incrementWrong();
+      useQuizStore.getState().incrementWrong();
 
-      expect(store.sessionStats.wrongAnswers).toBe(2);
+      expect(useQuizStore.getState().sessionStats.wrongAnswers).toBe(2);
     });
 
     it('tracks multiple correct answers', () => {
-      const store = useQuizStore.getState();
-      store.startQuiz('list-a', 'basic');
+      useQuizStore.getState().startQuiz('list-a', 'basic');
 
-      store.incrementCorrect();
-      store.incrementCorrect();
-      store.incrementCorrect();
+      useQuizStore.getState().incrementCorrect();
+      useQuizStore.getState().incrementCorrect();
+      useQuizStore.getState().incrementCorrect();
 
-      expect(store.sessionStats.correctAnswers).toBe(3);
+      expect(useQuizStore.getState().sessionStats.correctAnswers).toBe(3);
     });
   });
 });

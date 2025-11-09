@@ -12,41 +12,40 @@ describe('adaptiveDifficultyStore', () => {
 
   describe('updatePerformance', () => {
     it('tracks multiple choice performance correctly', () => {
-      const store = useAdaptiveDifficultyStore.getState();
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      let state = useAdaptiveDifficultyStore.getState();
+      expect(state.multipleChoiceAttempts).toBe(1);
+      expect(state.multipleChoiceCorrect).toBe(1);
+      expect(state.multipleChoiceAccuracy).toBe(1.0);
 
-      store.updatePerformance('multiple', true);
-      expect(store.multipleChoiceAttempts).toBe(1);
-      expect(store.multipleChoiceCorrect).toBe(1);
-      expect(store.multipleChoiceAccuracy).toBe(1.0);
-
-      store.updatePerformance('multiple', false);
-      expect(store.multipleChoiceAttempts).toBe(2);
-      expect(store.multipleChoiceCorrect).toBe(1);
-      expect(store.multipleChoiceAccuracy).toBe(0.5);
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', false);
+      state = useAdaptiveDifficultyStore.getState();
+      expect(state.multipleChoiceAttempts).toBe(2);
+      expect(state.multipleChoiceCorrect).toBe(1);
+      expect(state.multipleChoiceAccuracy).toBe(0.5);
     });
 
     it('tracks fill-in-blank performance correctly', () => {
-      const store = useAdaptiveDifficultyStore.getState();
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', true);
+      let state = useAdaptiveDifficultyStore.getState();
+      expect(state.fillInBlankAttempts).toBe(1);
+      expect(state.fillInBlankCorrect).toBe(1);
+      expect(state.fillInBlankAccuracy).toBe(1.0);
 
-      store.updatePerformance('fillin', true);
-      expect(store.fillInBlankAttempts).toBe(1);
-      expect(store.fillInBlankCorrect).toBe(1);
-      expect(store.fillInBlankAccuracy).toBe(1.0);
-
-      store.updatePerformance('fillin', false);
-      expect(store.fillInBlankAttempts).toBe(2);
-      expect(store.fillInBlankCorrect).toBe(1);
-      expect(store.fillInBlankAccuracy).toBe(0.5);
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', false);
+      state = useAdaptiveDifficultyStore.getState();
+      expect(state.fillInBlankAttempts).toBe(2);
+      expect(state.fillInBlankCorrect).toBe(1);
+      expect(state.fillInBlankAccuracy).toBe(0.5);
     });
 
     it('tracks both types independently', () => {
-      const store = useAdaptiveDifficultyStore.getState();
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', false);
 
-      store.updatePerformance('multiple', true);
-      store.updatePerformance('fillin', false);
-
-      expect(store.multipleChoiceAccuracy).toBe(1.0);
-      expect(store.fillInBlankAccuracy).toBe(0.0);
+      const state = useAdaptiveDifficultyStore.getState();
+      expect(state.multipleChoiceAccuracy).toBe(1.0);
+      expect(state.fillInBlankAccuracy).toBe(0.0);
     });
   });
 
@@ -62,16 +61,14 @@ describe('adaptiveDifficultyStore', () => {
     });
 
     it('returns random 50/50 before minimum attempts threshold', () => {
-      const store = useAdaptiveDifficultyStore.getState();
-
       // Add some attempts but below threshold (5)
-      store.updatePerformance('multiple', true);
-      store.updatePerformance('multiple', true);
-      store.updatePerformance('fillin', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', true);
 
       const results = new Set<string>();
       for (let i = 0; i < 20; i++) {
-        results.add(store.getOptimalQuestionType(0));
+        results.add(useAdaptiveDifficultyStore.getState().getOptimalQuestionType(0));
       }
 
       // Should see both types with limited data
@@ -80,22 +77,20 @@ describe('adaptiveDifficultyStore', () => {
     });
 
     it('biases toward fillin when user excels at multiple choice (>80%)', () => {
-      const store = useAdaptiveDifficultyStore.getState();
-
       // User excels at multiple choice (100% accuracy)
       for (let i = 0; i < 10; i++) {
-        store.updatePerformance('multiple', true);
+        useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
       }
 
       // Add minimum fillin attempts
       for (let i = 0; i < 5; i++) {
-        store.updatePerformance('fillin', true);
+        useAdaptiveDifficultyStore.getState().updatePerformance('fillin', true);
       }
 
       // Should bias toward fillin (70% chance)
       const results = { fillin: 0, multiple: 0 };
       for (let i = 0; i < 100; i++) {
-        const type = store.getOptimalQuestionType(0);
+        const type = useAdaptiveDifficultyStore.getState().getOptimalQuestionType(0);
         results[type]++;
       }
 
@@ -104,22 +99,21 @@ describe('adaptiveDifficultyStore', () => {
     });
 
     it('biases toward multiple when user struggles with fillin (<50%)', () => {
-      const store = useAdaptiveDifficultyStore.getState();
-
       // User struggles with fill-in-blank (40% accuracy)
       for (let i = 0; i < 10; i++) {
-        store.updatePerformance('fillin', i < 4); // 4 correct out of 10
+        useAdaptiveDifficultyStore.getState().updatePerformance('fillin', i < 4); // 4 correct out of 10
       }
 
-      // Add minimum multiple choice attempts
-      for (let i = 0; i < 5; i++) {
-        store.updatePerformance('multiple', true);
+      // Add minimum multiple choice attempts with moderate accuracy (60%)
+      // Important: keep multiple choice accuracy < 80% so it doesn't trigger the first bias condition
+      for (let i = 0; i < 10; i++) {
+        useAdaptiveDifficultyStore.getState().updatePerformance('multiple', i < 6); // 6 correct out of 10 = 60%
       }
 
       // Should bias toward multiple (70% chance)
       const results = { fillin: 0, multiple: 0 };
       for (let i = 0; i < 100; i++) {
-        const type = store.getOptimalQuestionType(0);
+        const type = useAdaptiveDifficultyStore.getState().getOptimalQuestionType(0);
         results[type]++;
       }
 
@@ -128,17 +122,15 @@ describe('adaptiveDifficultyStore', () => {
     });
 
     it('returns balanced 50/50 when performance is balanced', () => {
-      const store = useAdaptiveDifficultyStore.getState();
-
       // Balanced performance (60% for both)
       for (let i = 0; i < 10; i++) {
-        store.updatePerformance('multiple', i < 6);
-        store.updatePerformance('fillin', i < 6);
+        useAdaptiveDifficultyStore.getState().updatePerformance('multiple', i < 6);
+        useAdaptiveDifficultyStore.getState().updatePerformance('fillin', i < 6);
       }
 
       const results = { fillin: 0, multiple: 0 };
       for (let i = 0; i < 100; i++) {
-        const type = store.getOptimalQuestionType(0);
+        const type = useAdaptiveDifficultyStore.getState().getOptimalQuestionType(0);
         results[type]++;
       }
 
@@ -152,32 +144,29 @@ describe('adaptiveDifficultyStore', () => {
 
   describe('resetPerformance', () => {
     it('resets all stats to 0', () => {
-      const store = useAdaptiveDifficultyStore.getState();
-
       // Add some performance data
-      store.updatePerformance('multiple', true);
-      store.updatePerformance('fillin', false);
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', false);
 
       // Reset
-      store.resetPerformance();
+      useAdaptiveDifficultyStore.getState().resetPerformance();
 
-      expect(store.multipleChoiceAttempts).toBe(0);
-      expect(store.multipleChoiceCorrect).toBe(0);
-      expect(store.multipleChoiceAccuracy).toBe(0);
-      expect(store.fillInBlankAttempts).toBe(0);
-      expect(store.fillInBlankCorrect).toBe(0);
-      expect(store.fillInBlankAccuracy).toBe(0);
+      const state = useAdaptiveDifficultyStore.getState();
+      expect(state.multipleChoiceAttempts).toBe(0);
+      expect(state.multipleChoiceCorrect).toBe(0);
+      expect(state.multipleChoiceAccuracy).toBe(0);
+      expect(state.fillInBlankAttempts).toBe(0);
+      expect(state.fillInBlankCorrect).toBe(0);
+      expect(state.fillInBlankAccuracy).toBe(0);
     });
   });
 
   describe('getPerformanceMetrics', () => {
     it('returns current metrics', () => {
-      const store = useAdaptiveDifficultyStore.getState();
+      useAdaptiveDifficultyStore.getState().updatePerformance('multiple', true);
+      useAdaptiveDifficultyStore.getState().updatePerformance('fillin', true);
 
-      store.updatePerformance('multiple', true);
-      store.updatePerformance('fillin', true);
-
-      const metrics = store.getPerformanceMetrics();
+      const metrics = useAdaptiveDifficultyStore.getState().getPerformanceMetrics();
 
       expect(metrics).toEqual({
         multipleChoiceAccuracy: 1.0,
