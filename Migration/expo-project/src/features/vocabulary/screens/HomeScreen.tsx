@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions, Animated } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -21,25 +21,28 @@ export default function HomeScreen({ navigation }: Props) {
   // Breakpoint: 600px (common tablet breakpoint)
   const numColumns = width >= 600 ? 2 : 1;
 
-  // Calculate progress for each list
-  const getListProgress = (listId: string) => {
-    const listLevelProgress = Object.values(progressStore.listLevelProgress).filter(
-      (llp) => llp.listId === listId
-    );
+  // Calculate progress for each list (memoized to prevent unnecessary recalculations)
+  const getListProgress = useCallback(
+    (listId: string) => {
+      const listLevelProgress = Object.values(progressStore.listLevelProgress).filter(
+        (llp) => llp.listId === listId
+      );
 
-    if (listLevelProgress.length === 0) return 0;
+      if (listLevelProgress.length === 0) return 0;
 
-    let masteredWords = 0;
-    listLevelProgress.forEach((llp) => {
-      Object.values(llp.wordProgress).forEach((wp) => {
-        if (wp.state === 3) {
-          masteredWords++;
-        }
+      let masteredWords = 0;
+      listLevelProgress.forEach((llp) => {
+        Object.values(llp.wordProgress).forEach((wp) => {
+          if (wp.state === 3) {
+            masteredWords++;
+          }
+        });
       });
-    });
 
-    return masteredWords;
-  };
+      return masteredWords;
+    },
+    [progressStore.listLevelProgress]
+  );
 
   // Animation values for fade-in effect (start at 1 if reduced motion)
   const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(reducedMotion ? 1 : 0))).current;

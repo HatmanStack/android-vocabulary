@@ -37,7 +37,7 @@ interface ListCardProps {
   onPress: () => void;
 }
 
-export function ListCard({
+export const ListCard = React.memo(function ListCard({
   id: _id,
   name,
   description,
@@ -90,7 +90,7 @@ export function ListCard({
       </Card>
     </Pressable>
   );
-}
+});
 
 const styles = StyleSheet.create({
   pressable: {

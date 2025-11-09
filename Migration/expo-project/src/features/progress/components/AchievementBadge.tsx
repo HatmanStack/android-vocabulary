@@ -14,7 +14,10 @@ interface AchievementBadgeProps {
   onPress?: () => void;
 }
 
-export function AchievementBadge({ achievement, onPress }: AchievementBadgeProps) {
+export const AchievementBadge = React.memo(function AchievementBadge({
+  achievement,
+  onPress
+}: AchievementBadgeProps) {
   const isLocked = !achievement.isUnlocked;
 
   return (
@@ -53,7 +56,7 @@ export function AchievementBadge({ achievement, onPress }: AchievementBadgeProps
       {achievement.isUnlocked && <View style={styles.unlockedBadge} />}
     </TouchableOpacity>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {
