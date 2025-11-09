@@ -9,6 +9,7 @@ import { create } from 'zustand';
 import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/types';
 import { useVocabularyStore } from './vocabularyStore';
 import { useAdaptiveDifficultyStore } from './adaptiveDifficultyStore';
+import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
 
 interface SessionStats {
   hintsUsed: number;
@@ -30,6 +31,9 @@ interface QuizState {
   startQuiz: (listId: string, levelId: string) => void;
   getNextQuestion: () => void;
   determineQuestionType: (wordState: WordState) => QuestionType;
+  submitAnswer: (userAnswer: string) => { isCorrect: boolean; correctAnswer: string };
+  useHint: () => string;
+  calculateProgress: () => number;
   incrementHints: () => void;
   incrementWrong: () => void;
   incrementCorrect: () => void;
@@ -163,6 +167,84 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   determineQuestionType: (wordState: WordState): QuestionType => {
     const adaptiveStore = useAdaptiveDifficultyStore.getState();
     return adaptiveStore.getOptimalQuestionType(wordState);
+  },
+
+  // Submit answer and update word state
+  submitAnswer: (userAnswer: string) => {
+    const { currentQuestion, lastWordIndex, answered } = get();
+
+    if (!currentQuestion || lastWordIndex === -1) {
+      console.error('No active question');
+      return { isCorrect: false, correctAnswer: '' };
+    }
+
+    const { word, type } = currentQuestion;
+    const correctAnswer = word.word;
+
+    // Validate answer based on question type
+    const isCorrect =
+      type === 'multiple'
+        ? validateMultipleChoice(userAnswer, correctAnswer)
+        : validateFillInBlank(userAnswer, correctAnswer);
+
+    // Update stats
+    if (isCorrect) {
+      get().incrementCorrect();
+    } else {
+      get().incrementWrong();
+    }
+
+    // Update adaptive difficulty performance
+    const adaptiveStore = useAdaptiveDifficultyStore.getState();
+    adaptiveStore.updatePerformance(type, isCorrect);
+
+    // Update word state progression (only if correct)
+    if (isCorrect) {
+      const currentWordState = answered[lastWordIndex];
+      let newWordState: WordState = currentWordState;
+
+      // Word state progression logic (from Android app)
+      if (type === 'multiple') {
+        // Multiple choice correct: state 0→1, state 2→3
+        if (currentWordState === 0) {
+          newWordState = 1;
+        } else if (currentWordState === 2) {
+          newWordState = 3;
+        }
+      } else if (type === 'fillin') {
+        // Fill-in-blank correct: state 0→2, state 1→3
+        if (currentWordState === 0) {
+          newWordState = 2;
+        } else if (currentWordState === 1) {
+          newWordState = 3;
+        }
+      }
+
+      // Update answered array
+      const newAnswered = [...answered];
+      newAnswered[lastWordIndex] = newWordState;
+      set({ answered: newAnswered });
+    }
+
+    return { isCorrect, correctAnswer };
+  },
+
+  // Use hint for fill-in-blank question
+  useHint: () => {
+    const { currentQuestion } = get();
+
+    if (!currentQuestion) {
+      return '';
+    }
+
+    get().incrementHints();
+    return currentQuestion.word.definition;
+  },
+
+  // Calculate quiz progress (sum of all word states)
+  calculateProgress: () => {
+    const { answered } = get();
+    return answered.reduce((sum, state) => sum + state, 0 as number) as number;
   },
 
   // Increment hint count
