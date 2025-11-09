@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, ScrollView, Animated } from 'react-native';
-import { Icon } from 'react-native-paper';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, StyleSheet, ScrollView, Animated, Alert } from 'react-native';
+import { Icon, Dialog, Portal } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
@@ -11,6 +11,7 @@ type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
 export default function GraduationScreen({ navigation, route }: Props) {
   const { listId, levelId, stats } = route.params;
   const progressStore = useProgressStore();
+  const [resetDialogVisible, setResetDialogVisible] = useState(false);
 
   // Animation refs
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -50,6 +51,18 @@ export default function GraduationScreen({ navigation, route }: Props) {
   // Get global stats
   const globalStats = progressStore.getGlobalStats();
   const totalWordsLearned = progressStore.getTotalWordsLearned();
+
+  // Handle reset level
+  const handleResetLevel = () => {
+    setResetDialogVisible(true);
+  };
+
+  const confirmResetLevel = () => {
+    progressStore.resetListLevelProgress(listId, levelId);
+    setResetDialogVisible(false);
+    // Navigate to quiz screen with fresh start
+    navigation.navigate('Quiz', { listId, levelId });
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
@@ -181,12 +194,39 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
         <Spacer size="sm" />
 
+        <Button variant="text" onPress={handleResetLevel} fullWidth>
+          Reset This Level
+        </Button>
+
+        <Spacer size="xs" />
+
         <Button variant="text" onPress={() => navigation.navigate('Home')} fullWidth>
           Back to Home
         </Button>
       </View>
 
       <Spacer size="xl" />
+
+      {/* Reset Confirmation Dialog */}
+      <Portal>
+        <Dialog visible={resetDialogVisible} onDismiss={() => setResetDialogVisible(false)}>
+          <Dialog.Title>Reset Level Progress?</Dialog.Title>
+          <Dialog.Content>
+            <Typography variant="body">
+              This will reset all progress for this level. Your best score and word states will be
+              cleared. This action cannot be undone.
+            </Typography>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button variant="text" onPress={() => setResetDialogVisible(false)}>
+              Cancel
+            </Button>
+            <Button variant="text" onPress={confirmResetLevel}>
+              Reset
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </ScrollView>
   );
 }
