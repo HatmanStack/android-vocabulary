@@ -6,16 +6,38 @@ import { RootStackParamList } from '@/shared/types';
 import { loadVocabularyLists } from '../utils/vocabularyLoader';
 import { ListCard } from '../components/ListCard';
 import { Typography, Spacer } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
+  const progressStore = useProgressStore();
 
   // Determine number of columns based on screen width
   // Breakpoint: 600px (common tablet breakpoint)
   const numColumns = width >= 600 ? 2 : 1;
+
+  // Calculate progress for each list
+  const getListProgress = (listId: string) => {
+    const listLevelProgress = Object.values(progressStore.listLevelProgress).filter(
+      (llp) => llp.listId === listId
+    );
+
+    if (listLevelProgress.length === 0) return 0;
+
+    let masteredWords = 0;
+    listLevelProgress.forEach((llp) => {
+      Object.values(llp.wordProgress).forEach((wp) => {
+        if (wp.state === 3) {
+          masteredWords++;
+        }
+      });
+    });
+
+    return masteredWords;
+  };
 
   // Animation values for fade-in effect
   const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(0))).current;
@@ -75,7 +97,7 @@ export default function HomeScreen({ navigation }: Props) {
                   id={list.id}
                   name={list.name}
                   description={list.description}
-                  progress={0} // Real progress data will come from Phase 4
+                  progress={getListProgress(list.id)}
                   max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
                   onPress={() => navigation.navigate('Difficulty', { listId: list.id })}
                 />

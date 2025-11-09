@@ -6,23 +6,26 @@ import { RootStackParamList } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
 import { StatCard } from '../components/StatCard';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 
 export default function StatsScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
+  const progressStore = useProgressStore();
 
   // Determine number of columns for stat cards
   // 2 columns on mobile, 3-4 on tablet/web
   const numStatColumns = width >= 900 ? 4 : width >= 600 ? 3 : 2;
 
-  // Placeholder stats (Phase 4 will provide real data)
+  // Get real stats from progressStore
+  const globalStats = progressStore.getGlobalStats();
   const stats = {
-    wordsLearned: 0,
-    listsCompleted: 0,
-    allTimeHints: 0,
-    allTimeWrong: 0,
+    wordsLearned: progressStore.getTotalWordsLearned(),
+    listsCompleted: globalStats.listsCompleted.length,
+    allTimeHints: globalStats.allTimeHints,
+    allTimeWrong: globalStats.allTimeWrong,
   };
 
   // Empty state check
@@ -114,7 +117,20 @@ export default function StatsScreen({ navigation }: Props) {
 
           {vocabularyLists.map((list) => {
             const totalWords = list.levels.reduce((sum, level) => sum + level.words.length, 0);
-            const wordsCompleted = 0; // Phase 4 will provide real data
+
+            // Calculate words completed for this list
+            const listLevelProgress = Object.values(progressStore.listLevelProgress).filter(
+              (llp) => llp.listId === list.id
+            );
+
+            let wordsCompleted = 0;
+            listLevelProgress.forEach((llp) => {
+              Object.values(llp.wordProgress).forEach((wp) => {
+                if (wp.state === 3) {
+                  wordsCompleted++;
+                }
+              });
+            });
 
             return (
               <View key={list.id} style={styles.listItem}>

@@ -4,11 +4,13 @@ import { Icon } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
 
 export default function GraduationScreen({ navigation, route }: Props) {
   const { listId, levelId, stats } = route.params;
+  const progressStore = useProgressStore();
 
   // Animation refs
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -30,11 +32,24 @@ export default function GraduationScreen({ navigation, route }: Props) {
     ]).start();
   }, [fadeAnim, scaleAnim]);
 
-  // Get stats with defaults
+  // Get current session stats
   const hintsUsed = stats?.hints || 0;
   const wrongAnswers = stats?.wrong || 0;
-  const bestHints = stats?.bestHints || 0;
-  const bestWrong = stats?.bestWrong || 0;
+
+  // Get best scores from progressStore
+  const bestScore = progressStore.getBestScore(listId, levelId);
+  const bestHints = bestScore?.hints ?? 0;
+  const bestWrong = bestScore?.wrong ?? 0;
+
+  // Check if this is a new best score
+  const isNewBest =
+    !bestScore ||
+    hintsUsed < bestHints ||
+    (hintsUsed === bestHints && wrongAnswers < bestWrong);
+
+  // Get global stats
+  const globalStats = progressStore.getGlobalStats();
+  const totalWordsLearned = progressStore.getTotalWordsLearned();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
@@ -91,22 +106,27 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
       <Spacer size="md" />
 
-      {/* Best Scores (Placeholder for Phase 4) */}
+      {/* Best Scores */}
       <Card elevation="low" style={styles.card}>
         <Card.Content>
           <Typography variant="heading3" align="center">
             Best Score
           </Typography>
           <Spacer size="sm" />
-          <Typography variant="caption" color="secondary" align="center">
-            (Tracking begins in Phase 4)
-          </Typography>
+          {isNewBest && (
+            <>
+              <Typography variant="caption" style={styles.newBestText} align="center">
+                🎉 New Best Score! 🎉
+              </Typography>
+              <Spacer size="sm" />
+            </>
+          )}
           <Spacer size="md" />
 
           <View style={styles.statRow}>
-            <Icon source="star-outline" size={20} color="#4CAF50" />
+            <Icon source="star" size={20} color="#4CAF50" />
             <Spacer size="sm" direction="horizontal" />
-            <Typography variant="caption" color="secondary">
+            <Typography variant="body">
               Best: {bestHints} hints, {bestWrong} wrong
             </Typography>
           </View>
@@ -115,34 +135,24 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
       <Spacer size="md" />
 
-      {/* All-Time Stats (Placeholder for Phase 4) */}
+      {/* All-Time Stats */}
       <Card elevation="low" style={styles.card}>
         <Card.Content>
           <Typography variant="heading3" align="center">
             All-Time Statistics
           </Typography>
-          <Spacer size="sm" />
-          <Typography variant="caption" color="secondary" align="center">
-            (Coming in Phase 4)
-          </Typography>
           <Spacer size="md" />
 
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              Total words learned: 0
-            </Typography>
+            <Typography variant="body">Total words learned: {totalWordsLearned}</Typography>
           </View>
           <Spacer size="xs" />
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              All-time hints: 0
-            </Typography>
+            <Typography variant="body">All-time hints: {globalStats.allTimeHints}</Typography>
           </View>
           <Spacer size="xs" />
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              All-time wrong: 0
-            </Typography>
+            <Typography variant="body">All-time wrong: {globalStats.allTimeWrong}</Typography>
           </View>
         </Card.Content>
       </Card>
@@ -219,5 +229,9 @@ const styles = StyleSheet.create({
   actionsContainer: {
     width: '100%',
     paddingHorizontal: 16,
+  },
+  newBestText: {
+    color: '#4CAF50',
+    fontWeight: 'bold',
   },
 });

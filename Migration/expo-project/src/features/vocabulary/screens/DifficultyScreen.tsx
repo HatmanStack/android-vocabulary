@@ -6,6 +6,7 @@ import { RootStackParamList } from '@/shared/types';
 import { getListById } from '../utils/vocabularyLoader';
 import { LevelButton } from '../components/LevelButton';
 import { Typography, Spacer } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Difficulty'>;
 
@@ -21,6 +22,15 @@ const LEVEL_DIFFICULTY_MAP: Record<string, 1 | 2 | 3 | 4 | 5> = {
 export default function DifficultyScreen({ navigation, route }: Props) {
   const { listId } = route.params;
   const list = getListById(listId);
+  const progressStore = useProgressStore();
+
+  // Calculate mastered words for a level
+  const getMasteredCount = (levelId: string, totalWords: number) => {
+    const levelProgress = progressStore.getListLevelProgress(listId, levelId);
+    if (levelProgress.length === 0) return 0;
+
+    return levelProgress.filter((wp) => wp.state === 3).length;
+  };
 
   // Animation values for staggered slide-in
   const slideAnims = useRef(list?.levels.map(() => new Animated.Value(-100)) || []).current;
@@ -77,6 +87,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
           {list.levels.map((level, index) => {
             const difficulty = LEVEL_DIFFICULTY_MAP[level.id] || 1;
             const wordCount = level.words.length;
+            const masteredCount = getMasteredCount(level.id, wordCount);
 
             return (
               <Animated.View
@@ -93,7 +104,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
                   name={level.name}
                   wordCount={wordCount}
                   difficulty={difficulty}
-                  completionStatus={`0 / ${wordCount} mastered`}
+                  completionStatus={`${masteredCount} / ${wordCount} mastered`}
                   onPress={() => navigation.navigate('Quiz', { listId, levelId: level.id })}
                 />
               </Animated.View>
