@@ -50,11 +50,12 @@ export function levenshteinDistance(str1: string, str2: string): number {
         // 1. Substitution: dp[i-1][j-1] + 1
         // 2. Deletion: dp[i-1][j] + 1
         // 3. Insertion: dp[i][j-1] + 1
-        dp[i][j] = Math.min(
-          dp[i - 1][j - 1], // substitution
-          dp[i - 1][j], // deletion
-          dp[i][j - 1] // insertion
-        ) + 1;
+        dp[i][j] =
+          Math.min(
+            dp[i - 1][j - 1], // substitution
+            dp[i - 1][j], // deletion
+            dp[i][j - 1] // insertion
+          ) + 1;
       }
     }
   }

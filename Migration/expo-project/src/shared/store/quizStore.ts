@@ -160,7 +160,8 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     const questionType = get().determineQuestionType(wordState);
 
     // Generate options for multiple choice questions
-    const options = questionType === 'multiple' ? generateMultipleChoiceOptions(word, words) : undefined;
+    const options =
+      questionType === 'multiple' ? generateMultipleChoiceOptions(word, words) : undefined;
 
     const question: QuizQuestion = {
       word,

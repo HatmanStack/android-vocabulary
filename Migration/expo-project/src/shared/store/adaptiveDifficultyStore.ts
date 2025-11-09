@@ -88,7 +88,12 @@ export const useAdaptiveDifficultyStore = create<AdaptiveDifficultyState>((set, 
 
     // Word state 0 or 3: adaptive logic
     const state = get();
-    const { multipleChoiceAccuracy, fillInBlankAccuracy, multipleChoiceAttempts, fillInBlankAttempts } = state;
+    const {
+      multipleChoiceAccuracy,
+      fillInBlankAccuracy,
+      multipleChoiceAttempts,
+      fillInBlankAttempts,
+    } = state;
 
     // Don't apply adaptive logic until we have enough data
     if (
@@ -129,7 +134,12 @@ export const useAdaptiveDifficultyStore = create<AdaptiveDifficultyState>((set, 
 
   // Get performance metrics for stats display
   getPerformanceMetrics: () => {
-    const { multipleChoiceAccuracy, fillInBlankAccuracy, multipleChoiceAttempts, fillInBlankAttempts } = get();
+    const {
+      multipleChoiceAccuracy,
+      fillInBlankAccuracy,
+      multipleChoiceAttempts,
+      fillInBlankAttempts,
+    } = get();
 
     return {
       multipleChoiceAccuracy,

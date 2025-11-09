@@ -143,7 +143,8 @@ export const useProgressStore = create<ProgressState>()(
           wrongAttempts: wordProgress.wrongAttempts + (isCorrect ? 0 : 1),
           correctAttempts: wordProgress.correctAttempts + (isCorrect ? 1 : 0),
           lastAttemptDate: now,
-          masteredDate: newState === 3 && !wordProgress.masteredDate ? now : wordProgress.masteredDate,
+          masteredDate:
+            newState === 3 && !wordProgress.masteredDate ? now : wordProgress.masteredDate,
         };
 
         // Update list-level progress
@@ -203,8 +204,12 @@ export const useProgressStore = create<ProgressState>()(
         const key = `${listId}-${levelId}`;
         const now = new Date().toISOString();
 
-        const listLevel = state.listLevelProgress[key];
-        if (!listLevel) return;
+        // Get or create list-level progress
+        const listLevel = state.listLevelProgress[key] || {
+          listId,
+          levelId,
+          wordProgress: {},
+        };
 
         const currentBest = listLevel.bestScore;
 

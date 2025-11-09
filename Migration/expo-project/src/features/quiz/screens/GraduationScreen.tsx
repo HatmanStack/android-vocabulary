@@ -44,9 +44,7 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
   // Check if this is a new best score
   const isNewBest =
-    !bestScore ||
-    hintsUsed < bestHints ||
-    (hintsUsed === bestHints && wrongAnswers < bestWrong);
+    !bestScore || hintsUsed < bestHints || (hintsUsed === bestHints && wrongAnswers < bestWrong);
 
   // Get global stats
   const globalStats = progressStore.getGlobalStats();

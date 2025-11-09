@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform, Alert, TextInput } from 'react-native';
 import { Appbar, Dialog, Portal } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { SettingItem } from '../components/SettingItem';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { exportProgress, importProgress, applyImportedProgress } from '../utils/progressExport';
 
 type Props = StackScreenProps<RootStackParamList, 'Settings'>;
 
@@ -15,6 +16,9 @@ export default function SettingsScreen({ navigation }: Props) {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [hapticsEnabled, setHapticsEnabled] = useState(true);
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
+  const [importDialogVisible, setImportDialogVisible] = useState(false);
+  const [importData, setImportData] = useState('');
+  const [importPreview, setImportPreview] = useState<any>(null);
 
   const progressStore = useProgressStore();
 
@@ -41,6 +45,45 @@ export default function SettingsScreen({ navigation }: Props) {
     progressStore.resetAllProgress();
     setResetDialogVisible(false);
     navigation.navigate('Home');
+  };
+
+  const handleExportProgress = async () => {
+    const result = await exportProgress();
+    if (result.success) {
+      Alert.alert('Success', 'Progress exported successfully!');
+    } else {
+      Alert.alert('Error', result.error || 'Failed to export progress');
+    }
+  };
+
+  const handleImportProgress = () => {
+    setImportDialogVisible(true);
+    setImportData('');
+    setImportPreview(null);
+  };
+
+  const handleImportDataChange = async (text: string) => {
+    setImportData(text);
+    if (text.trim()) {
+      const result = await importProgress(text);
+      if (result.success && result.preview) {
+        setImportPreview(result.preview);
+      } else {
+        setImportPreview(null);
+      }
+    }
+  };
+
+  const confirmImportProgress = () => {
+    if (applyImportedProgress(importData)) {
+      setImportDialogVisible(false);
+      setImportData('');
+      setImportPreview(null);
+      Alert.alert('Success', 'Progress imported successfully!');
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('Error', 'Failed to import progress');
+    }
   };
 
   return (
@@ -115,6 +158,28 @@ export default function SettingsScreen({ navigation }: Props) {
           <Spacer size="sm" />
 
           <Card elevation="low" style={styles.card}>
+            <View style={styles.infoRow}>
+              <Typography variant="body">Export Progress</Typography>
+              <Button variant="text" onPress={handleExportProgress}>
+                Export
+              </Button>
+            </View>
+          </Card>
+
+          <Spacer size="sm" />
+
+          <Card elevation="low" style={styles.card}>
+            <View style={styles.infoRow}>
+              <Typography variant="body">Import Progress</Typography>
+              <Button variant="text" onPress={handleImportProgress}>
+                Import
+              </Button>
+            </View>
+          </Card>
+
+          <Spacer size="md" />
+
+          <Card elevation="low" style={styles.card}>
             <View style={styles.dangerZone}>
               <Typography variant="body" style={styles.dangerTitle}>
                 Danger Zone
@@ -125,7 +190,7 @@ export default function SettingsScreen({ navigation }: Props) {
                 scores, and statistics. This action cannot be undone.
               </Typography>
               <Spacer size="md" />
-              <Button variant="text" onPress={handleResetAllProgress} style={styles.dangerButton}>
+              <Button variant="text" onPress={handleResetAllProgress}>
                 Reset All Progress
               </Button>
             </View>
@@ -192,8 +257,47 @@ export default function SettingsScreen({ navigation }: Props) {
             <Button variant="text" onPress={() => setResetDialogVisible(false)}>
               Cancel
             </Button>
-            <Button variant="text" onPress={confirmResetAllProgress} style={styles.dangerButton}>
+            <Button variant="text" onPress={confirmResetAllProgress}>
               Yes, Reset Everything
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+
+        {/* Import Progress Dialog */}
+        <Dialog visible={importDialogVisible} onDismiss={() => setImportDialogVisible(false)}>
+          <Dialog.Title>Import Progress</Dialog.Title>
+          <Dialog.Content>
+            <Typography variant="body">Paste your exported progress data below:</Typography>
+            <Spacer size="md" />
+            <TextInput
+              style={styles.importInput}
+              multiline
+              numberOfLines={6}
+              placeholder='{"version": "1.0.0", ...}'
+              value={importData}
+              onChangeText={handleImportDataChange}
+            />
+            {importPreview && (
+              <>
+                <Spacer size="md" />
+                <Typography variant="heading3">Preview:</Typography>
+                <Spacer size="sm" />
+                <Typography variant="body">Words Learned: {importPreview.wordsLearned}</Typography>
+                <Typography variant="body">
+                  Lists Completed: {importPreview.listsCompleted}
+                </Typography>
+                <Typography variant="caption" color="secondary">
+                  Exported: {new Date(importPreview.exportDate).toLocaleDateString()}
+                </Typography>
+              </>
+            )}
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button variant="text" onPress={() => setImportDialogVisible(false)}>
+              Cancel
+            </Button>
+            <Button variant="text" onPress={confirmImportProgress} disabled={!importPreview}>
+              Import
             </Button>
           </Dialog.Actions>
         </Dialog>
@@ -239,13 +343,20 @@ const styles = StyleSheet.create({
   },
   dangerTitle: {
     color: '#F44336',
-    fontWeight: 'bold',
-  },
-  dangerButton: {
-    color: '#F44336',
+    fontWeight: 'bold' as const,
   },
   warningText: {
     color: '#F44336',
-    fontWeight: 'bold',
+    fontWeight: 'bold' as const,
+  },
+  importInput: {
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 8,
+    padding: 12,
+    fontFamily: 'monospace',
+    fontSize: 12,
+    minHeight: 150,
+    textAlignVertical: 'top',
   },
 });
