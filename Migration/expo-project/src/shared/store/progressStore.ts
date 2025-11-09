@@ -44,7 +44,10 @@ interface ProgressState extends UserProgress {
     levelId: string,
     stats: { hints: number; wrong: number }
   ) => boolean;
-  getBestScore: (listId: string, levelId: string) => { hints: number; wrong: number } | null;
+  getBestScore: (
+    listId: string,
+    levelId: string
+  ) => { hints: number; wrong: number; completedAt: string } | null;
 
   // Global stats tracking
   incrementGlobalStats: (hints: number, wrong: number, correct: number) => void;
