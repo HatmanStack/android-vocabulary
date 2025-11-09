@@ -1,88 +1,141 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button, Surface, Divider } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
-import {
-  getTotalWordCount,
-  loadVocabularyLists,
-} from '@/features/vocabulary/utils/vocabularyLoader';
+import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
+import { StatCard } from '../components/StatCard';
+import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 
 export default function StatsScreen({ navigation }: Props) {
-  const totalWords = getTotalWordCount();
-  const totalLists = loadVocabularyLists().length;
+  const vocabularyLists = loadVocabularyLists();
+  const { width } = useWindowDimensions();
+
+  // Determine number of columns for stat cards
+  // 2 columns on mobile, 3-4 on tablet/web
+  const numStatColumns = width >= 900 ? 4 : width >= 600 ? 3 : 2;
+
+  // Placeholder stats (Phase 4 will provide real data)
+  const stats = {
+    wordsLearned: 0,
+    listsCompleted: 0,
+    allTimeHints: 0,
+    allTimeWrong: 0,
+  };
+
+  // Empty state check
+  const hasProgress = stats.wordsLearned > 0;
 
   return (
     <View style={styles.container}>
-      <Surface style={styles.surface} elevation={2}>
-        <Text variant="headlineMedium" style={styles.title}>
-          Your Statistics
-        </Text>
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title="Your Progress" />
+      </Appbar.Header>
 
-        <View style={styles.section}>
-          <Text variant="titleMedium" style={styles.sectionTitle}>
-            Vocabulary Database
-          </Text>
-          <View style={styles.stats}>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">Total Vocabulary Lists:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                {totalLists}
-              </Text>
-            </View>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">Total Words Available:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                {totalWords}
-              </Text>
-            </View>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+        <View style={styles.header}>
+          <Typography variant="heading2">Overall Statistics</Typography>
+          <Spacer size="xs" />
+          <Typography variant="caption" color="secondary">
+            Track your learning journey
+          </Typography>
+        </View>
+
+        <Spacer size="lg" />
+
+        {/* Key Metrics Grid */}
+        <View
+          style={[
+            styles.statsGrid,
+            { gap: 12 },
+          ]}
+        >
+          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+            <StatCard
+              icon="book-outline"
+              label="Words Learned"
+              value={stats.wordsLearned}
+              iconColor="#4CAF50"
+            />
+          </View>
+
+          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+            <StatCard
+              icon="check-circle-outline"
+              label="Lists Completed"
+              value={`${stats.listsCompleted} / ${vocabularyLists.length}`}
+              iconColor="#2196F3"
+            />
+          </View>
+
+          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+            <StatCard
+              icon="lightbulb-outline"
+              label="Total Hints"
+              value={stats.allTimeHints}
+              iconColor="#FF9800"
+            />
+          </View>
+
+          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+            <StatCard
+              icon="close-circle-outline"
+              label="Wrong Answers"
+              value={stats.allTimeWrong}
+              iconColor="#F44336"
+            />
           </View>
         </View>
 
-        <Divider style={styles.divider} />
+        <Spacer size="xl" />
 
+        {/* Lists Overview Section */}
         <View style={styles.section}>
-          <Text variant="titleMedium" style={styles.sectionTitle}>
-            Your Progress
-          </Text>
-          <View style={styles.stats}>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">Words Learned:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                0
-              </Text>
-            </View>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">Lists Completed:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                0
-              </Text>
-            </View>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">All-Time Hints:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                0
-              </Text>
-            </View>
-            <View style={styles.statRow}>
-              <Text variant="bodyLarge">All-Time Wrong:</Text>
-              <Text variant="bodyLarge" style={styles.statValue}>
-                0
-              </Text>
-            </View>
-          </View>
+          <Typography variant="heading3">Lists Progress</Typography>
+          <Spacer size="md" />
+
+          {vocabularyLists.map((list) => {
+            const totalWords = list.levels.reduce((sum, level) => sum + level.words.length, 0);
+            const wordsCompleted = 0; // Phase 4 will provide real data
+
+            return (
+              <View key={list.id} style={styles.listItem}>
+                <View style={styles.listHeader}>
+                  <Typography variant="body">{list.name}</Typography>
+                  <Typography variant="caption" color="secondary">
+                    {wordsCompleted} / {totalWords} words
+                  </Typography>
+                </View>
+                <Spacer size="xs" />
+                <ProgressBar progress={wordsCompleted} max={totalWords} />
+                <Spacer size="md" />
+              </View>
+            );
+          })}
         </View>
 
-        <Text variant="bodySmall" style={styles.placeholder}>
-          Progress tracking will be implemented in Phase 4
-        </Text>
+        <Spacer size="lg" />
 
-        <Button mode="contained" onPress={() => navigation.navigate('Home')} style={styles.button}>
-          Back to Home
-        </Button>
-      </Surface>
+        {/* Empty State or Recent Activity */}
+        {!hasProgress && (
+          <Card elevation="low" style={styles.emptyStateCard}>
+            <Card.Content>
+              <Typography variant="body" align="center" color="secondary">
+                Start learning to see your progress here!
+              </Typography>
+              <Spacer size="sm" />
+              <Typography variant="caption" align="center" color="secondary">
+                Complete quizzes to track your vocabulary journey
+              </Typography>
+            </Card.Content>
+          </Card>
+        )}
+
+        <Spacer size="xl" />
+      </ScrollView>
     </View>
   );
 }
@@ -90,43 +143,39 @@ export default function StatsScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'center',
+    backgroundColor: '#F5F5F5',
   },
-  surface: {
-    padding: 24,
-    borderRadius: 8,
+  scrollView: {
+    flex: 1,
   },
-  title: {
-    marginBottom: 24,
-    textAlign: 'center',
+  scrollContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
   },
-  section: {
-    marginBottom: 16,
+  header: {
+    paddingVertical: 16,
+    alignItems: 'center',
   },
-  sectionTitle: {
+  statsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  statItem: {
     marginBottom: 12,
   },
-  stats: {
-    gap: 8,
+  section: {
+    width: '100%',
   },
-  statRow: {
+  listItem: {
+    marginBottom: 8,
+  },
+  listHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  statValue: {
-    fontWeight: 'bold',
-  },
-  divider: {
-    marginVertical: 16,
-  },
-  placeholder: {
-    marginTop: 16,
-    textAlign: 'center',
-    opacity: 0.6,
-  },
-  button: {
-    marginTop: 24,
+  emptyStateCard: {
+    marginHorizontal: 0,
   },
 });
