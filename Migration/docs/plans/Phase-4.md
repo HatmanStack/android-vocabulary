@@ -514,6 +514,73 @@ npm test
 npm test -- --coverage # >85% for progress logic
 ```
 
+**🔍 Code Review Questions:**
+
+> **Q1 - AsyncStorage Mock Missing:** Running `npm test` shows 9 test suites failing with the same error:
+> ```
+> [@RNC/AsyncStorage]: NativeModule: AsyncStorage is null.
+> If this happens while testing with Jest, check out how to integrate AsyncStorage here:
+> https://react-native-async-storage.github.io/async-storage/docs/advanced/jest
+> ```
+> **Consider:** The progressStore.ts imports AsyncStorage directly (line 10), causing all tests importing progressStore to fail. According to the AsyncStorage Jest documentation, AsyncStorage needs to be mocked in Jest setup. Should a `jest.setup.js` file be created with `jest.mock('@react-native-async-storage/async-storage')` to allow tests to run?
+>
+> **Affected test suites:** quizStore.test.ts, progressStore.test.ts, QuizScreen.test.tsx, GraduationScreen.test.tsx, HomeScreen.test.tsx, DifficultyScreen.test.tsx, SettingsScreen.test.tsx, StatsScreen.test.tsx (8 failed due to this issue)
+
+> **Q2 - Best Score Tracking Tests Failing:** In progressStore.test.ts, 4 tests related to best score tracking are failing:
+> - "sets initial best score on first completion" (line 108: `expect(bestScore).toBeDefined()` fails)
+> - "updates best score when new score is better"
+> - "updates best score when hints same but fewer wrong"
+> - "does not update best score when new score is worse"
+>
+> **Think about:** The test calls `endSession('list-a', 'basic', { hints: 2, wrong: 1, correct: 10 })` and expects `getBestScore('list-a', 'basic')` to return a defined value. Looking at the progressStore implementation, does `endSession` actually call `updateBestScore`? Or is there a missing connection between ending a session and tracking the best score?
+
+> **Q3 - TypeScript Compilation Errors:** Running `npm run type-check` shows 5 TypeScript errors:
+> - `storage.ts(84,5)`: Type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'
+>   - **Consider:** AsyncStorage.getAllKeys() returns `Promise<readonly string[]>` but the function signature promises `Promise<string[]>`. Should the return type be changed to `Promise<readonly string[]>`?
+> - `SettingsScreen.tsx(128,71)`: Type '{ color: string; }' is not assignable to type 'StyleProp<ViewStyle>'
+> - `SettingsScreen.tsx(195,70)`: Type '{ color: string; }' is not assignable to type 'StyleProp<ViewStyle>'
+>   - **Think about:** Are color props being passed to components expecting ViewStyle? Should these use TextStyle or be restructured?
+> - `parseXmlToJson.ts` errors (2): Phase 1 legacy issues still unresolved
+>
+> **Reflect:** The quality check at line 512 requires type-check to pass. Should these TypeScript errors be fixed before Phase 4 approval?
+
+> **Q4 - Missing Task 7: Progress Export/Import:** The plan specifies Task 7 (lines 317-353) requiring:
+> - File: `src/features/settings/utils/progressExport.ts`
+> - Functions: `exportProgress()`, `importProgress()`
+> - UI: Export/Import buttons in SettingsScreen
+>
+> **Verify:** Running `grep -r "exportProgress\|importProgress" src/` finds no matches. The task commit message should be `feat(settings): add progress export/import` but this commit doesn't exist. Was Task 7 implemented? If not, how can Phase 4 be complete without this backup functionality?
+
+> **Q5 - Missing Task 8: Loading States:** Task 8 (lines 356-390) requires:
+> - App.tsx: Wait for progress to load before rendering, show LoadingIndicator
+> - Screens: Show skeleton/loading states while loading progress
+>
+> **Consider:** Reading `src/app/App.tsx` shows it's unchanged - just renders `<Providers><Navigation /></Providers>` with no loading logic. Should `useProgressStore` be accessed in App.tsx to check `_hydrated` state before showing the main UI? How does the app handle the AsyncStorage load delay on startup?
+
+> **Q6 - Missing Task 10: Performance Optimization:** Task 10 (lines 437-474) requires:
+> - Implement selective persistence (Zustand partialize option)
+> - Debounce saves
+> - Add caching layer
+> - Implement batch updates
+>
+> **Reflect:** The commit history shows no `perf(progress): optimize progress data persistence` commit. Are there performance optimizations in progressStore.ts? Or was this task deferred? The specification lists this as Task 10 of 10, suggesting it's required for phase completion.
+
+> **Q7 - Code Formatting:** Running `npm run format:check` reports:
+> ```
+> [warn] src/features/quiz/screens/GraduationScreen.tsx
+> [warn] src/shared/lib/levenshtein.ts
+> [warn] src/shared/store/adaptiveDifficultyStore.ts
+> [warn] src/shared/store/progressStore.ts
+> [warn] src/shared/store/quizStore.ts
+> Code style issues found in 5 files.
+> ```
+> **Consider:** progressStore.ts is a Phase 4 file that should be properly formatted. Should `npm run format` be executed on Phase 4 files before committing?
+
+> **Q8 - Phase 3 Issues Unresolved:** The adaptiveDifficultyStore.test.ts failures from Phase 3 Review (Q1) still persist:
+> - 4 tests failing with the same pattern: after calling store mutations, tests read stale state
+>
+> **Think about:** Phase 4 builds on Phase 3's quiz logic. Should Phase 3 test failures be resolved before Phase 4 is approved? Or can these persist into later phases?
+
 ---
 
 ## Known Limitations & Technical Debt
