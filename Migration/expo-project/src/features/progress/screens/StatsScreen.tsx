@@ -3,7 +3,10 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Button, Surface, Divider } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
-import { getTotalWordCount, loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
+import {
+  getTotalWordCount,
+  loadVocabularyLists,
+} from '@/features/vocabulary/utils/vocabularyLoader';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 

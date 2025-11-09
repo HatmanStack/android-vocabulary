@@ -26,7 +26,11 @@ export default function GraduationScreen({ navigation, route }: Props) {
           </Text>
         </View>
         <View style={styles.buttons}>
-          <Button mode="contained" onPress={() => navigation.navigate('Home')} style={styles.button}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate('Home')}
+            style={styles.button}
+          >
             Back to Home
           </Button>
           <Button

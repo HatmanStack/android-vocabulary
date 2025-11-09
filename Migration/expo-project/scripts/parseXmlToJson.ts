@@ -156,7 +156,6 @@ async function migrateData() {
         } else {
           console.log(`  ⚠️  Skipping ${level} - no valid data`);
         }
-
       }
 
       // Build list object
@@ -172,7 +171,9 @@ async function migrateData() {
       console.log(`  📄 Generated ${outputPath}`);
     }
 
-    console.log(`\n✅ Migration complete! ${LISTS.length} files generated, ${totalWords} total words.`);
+    console.log(
+      `\n✅ Migration complete! ${LISTS.length} files generated, ${totalWords} total words.`
+    );
   } catch (error) {
     console.error('❌ Migration failed:', error);
     process.exit(1);

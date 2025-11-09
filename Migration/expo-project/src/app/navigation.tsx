@@ -28,21 +28,13 @@ export default function Navigation() {
           },
         }}
       >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Vocabulary' }}
-        />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Vocabulary' }} />
         <Stack.Screen
           name="Difficulty"
           component={DifficultyScreen}
           options={{ title: 'Select Level' }}
         />
-        <Stack.Screen
-          name="Quiz"
-          component={QuizScreen}
-          options={{ title: 'Quiz' }}
-        />
+        <Stack.Screen name="Quiz" component={QuizScreen} options={{ title: 'Quiz' }} />
         <Stack.Screen
           name="Graduation"
           component={GraduationScreen}
@@ -51,16 +43,8 @@ export default function Navigation() {
             headerLeft: () => null, // Prevent back navigation
           }}
         />
-        <Stack.Screen
-          name="Stats"
-          component={StatsScreen}
-          options={{ title: 'Statistics' }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{ title: 'Settings' }}
-        />
+        <Stack.Screen name="Stats" component={StatsScreen} options={{ title: 'Statistics' }} />
+        <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
