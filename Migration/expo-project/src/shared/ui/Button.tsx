@@ -46,6 +46,8 @@ interface ButtonProps {
   children: React.ReactNode;
   /** Custom styles */
   style?: StyleProp<ViewStyle>;
+  /** Accessibility label for screen readers */
+  accessibilityLabel?: string;
 }
 
 const SIZE_CONTENT_STYLE: Record<ButtonSize, ViewStyle> = {
@@ -64,6 +66,7 @@ export function Button({
   onPress,
   children,
   style,
+  accessibilityLabel,
 }: ButtonProps) {
   const handlePress = useCallback(() => {
     if (!loading && !disabled && onPress) {
@@ -98,6 +101,7 @@ export function Button({
       icon={icon}
       contentStyle={SIZE_CONTENT_STYLE[size]}
       style={buttonStyles}
+      accessibilityLabel={accessibilityLabel}
     >
       {children}
     </PaperButton>
