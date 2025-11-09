@@ -28,7 +28,7 @@ export function QuestionDisplay({ questionText, type }: QuestionDisplayProps) {
   const textAlign = type === 'multiple' ? 'center' : 'left';
 
   return (
-    <Card elevation="low" style={styles.card}>
+    <Card elevation="low" style={styles.card} testID="question-display">
       <Card.Content>
         <View style={styles.questionContainer}>
           <Typography variant="caption" color="secondary" align="center">
