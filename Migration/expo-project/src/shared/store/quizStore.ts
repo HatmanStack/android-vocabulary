@@ -8,6 +8,7 @@
 import { create } from 'zustand';
 import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/types';
 import { useVocabularyStore } from './vocabularyStore';
+import { useAdaptiveDifficultyStore } from './adaptiveDifficultyStore';
 
 interface SessionStats {
   hintsUsed: number;
@@ -155,19 +156,13 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     });
   },
 
-  // Determine question type based on word state
+  // Determine question type based on word state and adaptive difficulty
   // Word state 1: fill-in-blank only
   // Word state 2: multiple choice only
-  // Word state 0: random 50/50 (will be enhanced with adaptive difficulty in Task 4)
+  // Word state 0 or 3: use adaptive difficulty algorithm
   determineQuestionType: (wordState: WordState): QuestionType => {
-    if (wordState === 1) {
-      return 'fillin';
-    } else if (wordState === 2) {
-      return 'multiple';
-    } else {
-      // Word state 0: random selection (50/50)
-      return Math.random() < 0.5 ? 'multiple' : 'fillin';
-    }
+    const adaptiveStore = useAdaptiveDifficultyStore.getState();
+    return adaptiveStore.getOptimalQuestionType(wordState);
   },
 
   // Increment hint count
