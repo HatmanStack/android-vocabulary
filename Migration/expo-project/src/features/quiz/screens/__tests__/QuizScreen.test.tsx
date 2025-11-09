@@ -97,16 +97,21 @@ describe('QuizScreen', () => {
     expect(getByText(/Question 1/i)).toBeTruthy();
   });
 
-  it('displays question text', () => {
-    const { getByText } = renderWithProviders(
+  it('displays question text', async () => {
+    const { queryByText } = renderWithProviders(
       <QuizScreen navigation={mockNavigation as any} route={mockRoute as any} />
     );
 
-    // Should display either the definition or fill-in-blank sentence
-    const hasDefinition =
-      getByText(/Experienced or marked by humiliation/i) !== null ||
-      getByText(/Timmy was/i) !== null;
-    expect(hasDefinition).toBeTruthy();
+    // Wait for quiz to load and display question
+    await waitFor(() => {
+      // Should display either the definition or fill-in-blank sentence
+      const hasDefinition =
+        queryByText(/Experienced or marked by humiliation/i) !== null ||
+        queryByText(/Timmy was/i) !== null ||
+        queryByText(/A deviation from what is normal/i) !== null ||
+        queryByText(/The _____ in the data/i) !== null;
+      expect(hasDefinition).toBe(true);
+    });
   });
 
   it('renders answer component (MultipleChoice or FillInBlank)', () => {

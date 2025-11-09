@@ -88,7 +88,12 @@ export const useAdaptiveDifficultyStore = create<AdaptiveDifficultyState>((set, 
 
     // Word state 0 or 3: adaptive logic
     const state = get();
-    const { multipleChoiceAccuracy, fillInBlankAccuracy, multipleChoiceAttempts, fillInBlankAttempts } = state;
+    const {
+      multipleChoiceAccuracy,
+      fillInBlankAccuracy,
+      multipleChoiceAttempts,
+      fillInBlankAttempts,
+    } = state;
 
     // Don't apply adaptive logic until we have enough data
     if (
@@ -99,16 +104,17 @@ export const useAdaptiveDifficultyStore = create<AdaptiveDifficultyState>((set, 
       return Math.random() < 0.5 ? 'multiple' : 'fillin';
     }
 
+    // User is struggling with fill-in-blank (<50% accuracy)
+    // Bias toward easier multiple choice questions (70% multiple, 30% fillin)
+    // Priority: Help struggling users first
+    if (fillInBlankAccuracy < LOW_ACCURACY_THRESHOLD) {
+      return Math.random() < 0.7 ? 'multiple' : 'fillin';
+    }
+
     // User is excelling at multiple choice (>80% accuracy)
     // Bias toward harder fill-in-blank questions (70% fillin, 30% multiple)
     if (multipleChoiceAccuracy > HIGH_ACCURACY_THRESHOLD) {
       return Math.random() < 0.7 ? 'fillin' : 'multiple';
-    }
-
-    // User is struggling with fill-in-blank (<50% accuracy)
-    // Bias toward easier multiple choice questions (70% multiple, 30% fillin)
-    if (fillInBlankAccuracy < LOW_ACCURACY_THRESHOLD) {
-      return Math.random() < 0.7 ? 'multiple' : 'fillin';
     }
 
     // Balanced performance: 50/50 split
@@ -129,7 +135,12 @@ export const useAdaptiveDifficultyStore = create<AdaptiveDifficultyState>((set, 
 
   // Get performance metrics for stats display
   getPerformanceMetrics: () => {
-    const { multipleChoiceAccuracy, fillInBlankAccuracy, multipleChoiceAttempts, fillInBlankAttempts } = get();
+    const {
+      multipleChoiceAccuracy,
+      fillInBlankAccuracy,
+      multipleChoiceAttempts,
+      fillInBlankAttempts,
+    } = get();
 
     return {
       multipleChoiceAccuracy,

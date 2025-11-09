@@ -62,8 +62,9 @@ describe('quizStore', () => {
 
   describe('getNextQuestion', () => {
     it('selects a word that is not mastered', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       const firstQuestion = store.currentQuestion;
       expect(firstQuestion).not.toBeNull();
@@ -74,29 +75,34 @@ describe('quizStore', () => {
     });
 
     it('avoids repeating the same word consecutively', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
-      const firstWordIndex = store.lastWordIndex;
+      let previousWordIndex = store.lastWordIndex;
 
       // Get next question multiple times
       for (let i = 0; i < 5; i++) {
         store.getNextQuestion();
+        store = useQuizStore.getState(); // Get fresh state
         const currentWordIndex = store.lastWordIndex;
 
         // Should not be the same as previous (unless all other words are mastered)
         if (store.answered.filter((s) => s < 3).length > 1) {
-          expect(currentWordIndex).not.toBe(firstWordIndex);
+          expect(currentWordIndex).not.toBe(previousWordIndex);
         }
+
+        previousWordIndex = currentWordIndex;
       }
     });
 
     it('generates options for multiple choice questions', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
 
       // Try multiple questions to find a multiple choice one
       for (let i = 0; i < 10; i++) {
+        store = useQuizStore.getState(); // Get fresh state
         if (store.currentQuestion?.type === 'multiple') {
           expect(store.currentQuestion.options).toBeDefined();
           expect(store.currentQuestion.options).toHaveLength(4);
@@ -110,27 +116,31 @@ describe('quizStore', () => {
   describe('submitAnswer', () => {
     describe('correct answers', () => {
       it('increments correct answer count', () => {
-        const store = useQuizStore.getState();
+        let store = useQuizStore.getState();
         store.startQuiz('list-a', 'basic');
+        store = useQuizStore.getState(); // Get fresh state
 
         const correctWord = store.currentQuestion!.word.word;
         const initialCorrect = store.sessionStats.correctAnswers;
 
         store.submitAnswer(correctWord);
+        store = useQuizStore.getState(); // Get fresh state
 
         expect(store.sessionStats.correctAnswers).toBe(initialCorrect + 1);
       });
 
       it('progresses word state for multiple choice: 0→1', () => {
-        const store = useQuizStore.getState();
+        let store = useQuizStore.getState();
         store.startQuiz('list-a', 'basic');
 
         // Find a multiple choice question with word state 0
         for (let i = 0; i < 20; i++) {
+          store = useQuizStore.getState(); // Get fresh state
           const wordIndex = store.lastWordIndex;
           if (store.currentQuestion?.type === 'multiple' && store.answered[wordIndex] === 0) {
             const correctWord = store.currentQuestion.word.word;
             store.submitAnswer(correctWord);
+            store = useQuizStore.getState(); // Get fresh state
             expect(store.answered[wordIndex]).toBe(1);
             break;
           }
@@ -139,15 +149,17 @@ describe('quizStore', () => {
       });
 
       it('progresses word state for fill-in-blank: 0→2', () => {
-        const store = useQuizStore.getState();
+        let store = useQuizStore.getState();
         store.startQuiz('list-a', 'basic');
 
         // Find a fill-in-blank question with word state 0
         for (let i = 0; i < 20; i++) {
+          store = useQuizStore.getState(); // Get fresh state
           const wordIndex = store.lastWordIndex;
           if (store.currentQuestion?.type === 'fillin' && store.answered[wordIndex] === 0) {
             const correctWord = store.currentQuestion.word.word;
             store.submitAnswer(correctWord);
+            store = useQuizStore.getState(); // Get fresh state
             expect(store.answered[wordIndex]).toBe(2);
             break;
           }
@@ -158,31 +170,36 @@ describe('quizStore', () => {
 
     describe('wrong answers', () => {
       it('increments wrong answer count', () => {
-        const store = useQuizStore.getState();
+        let store = useQuizStore.getState();
         store.startQuiz('list-a', 'basic');
+        store = useQuizStore.getState(); // Get fresh state
 
         const initialWrong = store.sessionStats.wrongAnswers;
         store.submitAnswer('wronganswer');
+        store = useQuizStore.getState(); // Get fresh state
 
         expect(store.sessionStats.wrongAnswers).toBe(initialWrong + 1);
       });
 
       it('does not change word state', () => {
-        const store = useQuizStore.getState();
+        let store = useQuizStore.getState();
         store.startQuiz('list-a', 'basic');
+        store = useQuizStore.getState(); // Get fresh state
 
         const wordIndex = store.lastWordIndex;
         const initialState = store.answered[wordIndex];
 
         store.submitAnswer('wronganswer');
+        store = useQuizStore.getState(); // Get fresh state
 
         expect(store.answered[wordIndex]).toBe(initialState);
       });
     });
 
     it('returns result with isCorrect and correctAnswer', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       const correctWord = store.currentQuestion!.word.word;
       const result = store.submitAnswer(correctWord);
@@ -196,18 +213,21 @@ describe('quizStore', () => {
 
   describe('useHint', () => {
     it('increments hint count', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       const initialHints = store.sessionStats.hintsUsed;
       store.useHint();
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.sessionStats.hintsUsed).toBe(initialHints + 1);
     });
 
     it('returns word definition', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       const definition = store.useHint();
       const expectedDefinition = store.currentQuestion!.word.definition;
@@ -218,15 +238,17 @@ describe('quizStore', () => {
 
   describe('calculateProgress', () => {
     it('returns 0 for new quiz', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.calculateProgress()).toBe(0);
     });
 
     it('calculates sum of word states', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       // Manually set some word states for testing
       const newAnswered = [...store.answered];
@@ -242,15 +264,17 @@ describe('quizStore', () => {
 
   describe('isQuizComplete', () => {
     it('returns false for new quiz', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.isQuizComplete()).toBe(false);
     });
 
     it('returns true when all words at state 3', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       // Set all words to mastered
       const newAnswered = store.answered.map(() => 3 as const);
@@ -262,12 +286,14 @@ describe('quizStore', () => {
 
   describe('endQuiz', () => {
     it('returns final stats', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       // Add some stats
       store.useHint();
       store.submitAnswer('wrong');
+      store = useQuizStore.getState(); // Get fresh state
 
       const stats = store.endQuiz();
 
@@ -276,12 +302,14 @@ describe('quizStore', () => {
     });
 
     it('sets isQuizActive to false', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.isQuizActive).toBe(true);
 
       store.endQuiz();
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.isQuizActive).toBe(false);
     });
@@ -289,33 +317,39 @@ describe('quizStore', () => {
 
   describe('stat tracking', () => {
     it('tracks multiple hints', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       store.incrementHints();
       store.incrementHints();
       store.incrementHints();
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.sessionStats.hintsUsed).toBe(3);
     });
 
     it('tracks multiple wrong answers', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       store.incrementWrong();
       store.incrementWrong();
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.sessionStats.wrongAnswers).toBe(2);
     });
 
     it('tracks multiple correct answers', () => {
-      const store = useQuizStore.getState();
+      let store = useQuizStore.getState();
       store.startQuiz('list-a', 'basic');
+      store = useQuizStore.getState(); // Get fresh state
 
       store.incrementCorrect();
       store.incrementCorrect();
       store.incrementCorrect();
+      store = useQuizStore.getState(); // Get fresh state
 
       expect(store.sessionStats.correctAnswers).toBe(3);
     });
