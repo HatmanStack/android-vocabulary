@@ -9,6 +9,7 @@ import { create } from 'zustand';
 import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/types';
 import { useVocabularyStore } from './vocabularyStore';
 import { useAdaptiveDifficultyStore } from './adaptiveDifficultyStore';
+import { useProgressStore } from './progressStore';
 import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
 import { generateMultipleChoiceOptions } from '@/features/quiz/utils/questionGenerator';
 
@@ -60,6 +61,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   // Start a new quiz session
   startQuiz: (listId: string, levelId: string) => {
     const vocabularyStore = useVocabularyStore.getState();
+    const progressStore = useProgressStore.getState();
     const words = vocabularyStore.getWordsByListLevel(listId, levelId);
 
     if (words.length === 0) {
@@ -67,8 +69,14 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       return;
     }
 
-    // Initialize answered array with 0s (all words unanswered)
+    // Load existing progress from progressStore
     const answered = new Array(words.length).fill(0) as WordState[];
+    words.forEach((word, index) => {
+      const wordProgress = progressStore.getWordProgress(word.id);
+      if (wordProgress) {
+        answered[index] = wordProgress.state;
+      }
+    });
 
     const session: QuizSession = {
       listId,
@@ -82,6 +90,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       },
       startedAt: new Date().toISOString(),
     };
+
+    // Start session in progress store
+    progressStore.startSession(listId, levelId);
 
     set({
       currentSession: session,
@@ -175,9 +186,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // Submit answer and update word state
   submitAnswer: (userAnswer: string) => {
-    const { currentQuestion, lastWordIndex, answered } = get();
+    const { currentQuestion, currentSession, lastWordIndex, answered, sessionStats } = get();
 
-    if (!currentQuestion || lastWordIndex === -1) {
+    if (!currentQuestion || !currentSession || lastWordIndex === -1) {
       console.error('No active question');
       return { isCorrect: false, correctAnswer: '' };
     }
@@ -190,6 +201,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       type === 'multiple'
         ? validateMultipleChoice(userAnswer, correctAnswer)
         : validateFillInBlank(userAnswer, correctAnswer);
+
+    // Track if hint was used in this question (check if hints increased since last question)
+    const hintUsedInThisQuestion = false; // Hint tracking is separate via useHint()
 
     // Update stats
     if (isCorrect) {
@@ -228,6 +242,17 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       const newAnswered = [...answered];
       newAnswered[lastWordIndex] = newWordState;
       set({ answered: newAnswered });
+
+      // Save progress to progressStore
+      const progressStore = useProgressStore.getState();
+      progressStore.updateWordProgress(
+        word.id,
+        currentSession.listId,
+        currentSession.levelId,
+        newWordState,
+        isCorrect,
+        hintUsedInThisQuestion
+      );
     }
 
     return { isCorrect, correctAnswer };
@@ -294,7 +319,17 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // End quiz and return final stats
   endQuiz: () => {
-    const { sessionStats } = get();
+    const { sessionStats, currentSession } = get();
+
+    if (currentSession) {
+      // Save progress to progressStore
+      const progressStore = useProgressStore.getState();
+      progressStore.endSession(currentSession.listId, currentSession.levelId, {
+        hints: sessionStats.hintsUsed,
+        wrong: sessionStats.wrongAnswers,
+        correct: sessionStats.correctAnswers,
+      });
+    }
 
     set({
       isQuizActive: false,
