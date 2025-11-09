@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform, Alert } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { SettingItem } from '../components/SettingItem';
-import { Card, Typography, Spacer } from '@/shared/ui';
+import { Card, Typography, Spacer, Button } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Settings'>;
 
@@ -13,6 +14,7 @@ export default function SettingsScreen({ navigation }: Props) {
   const [theme] = useState('Light');
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [hapticsEnabled, setHapticsEnabled] = useState(true);
+  const progressStore = useProgressStore();
 
   const handleThemeChange = () => {
     // Phase 5 will implement theme switching
@@ -27,6 +29,32 @@ export default function SettingsScreen({ navigation }: Props) {
   const handleHapticsToggle = (value: boolean | string) => {
     setHapticsEnabled(value as boolean);
     // Phase 5 will implement haptic feedback
+  };
+
+  const handleResetAllProgress = () => {
+    Alert.alert(
+      'Reset All Progress',
+      'Are you sure you want to reset all progress? This cannot be undone. All your learned words, best scores, and statistics will be permanently deleted.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Reset All',
+          style: 'destructive',
+          onPress: () => {
+            progressStore.resetAllProgress();
+            Alert.alert('Success', 'All progress has been reset.', [
+              {
+                text: 'OK',
+                onPress: () => navigation.navigate('Home'),
+              },
+            ]);
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -129,6 +157,36 @@ export default function SettingsScreen({ navigation }: Props) {
           </Card>
         </View>
 
+        <Spacer size="lg" />
+
+        {/* Danger Zone Section */}
+        <View style={styles.section}>
+          <Typography variant="heading3" style={{ color: '#F44336' }}>
+            Danger Zone
+          </Typography>
+          <Spacer size="sm" />
+
+          <Card elevation="low" style={[styles.card, { borderColor: '#F44336', borderWidth: 1 }]}>
+            <View style={styles.dangerZoneContent}>
+              <Typography variant="body">Reset All Progress</Typography>
+              <Spacer size="xs" />
+              <Typography variant="caption" color="secondary">
+                Permanently delete all your learning progress, best scores, and statistics. This
+                action cannot be undone.
+              </Typography>
+              <Spacer size="md" />
+              <Button
+                variant="secondary"
+                onPress={handleResetAllProgress}
+                fullWidth
+                style={{ backgroundColor: '#FFEBEE' }}
+              >
+                Reset All Progress
+              </Button>
+            </View>
+          </Card>
+        </View>
+
         <Spacer size="xl" />
       </ScrollView>
     </View>
@@ -163,5 +221,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 16,
     paddingHorizontal: 16,
+  },
+  dangerZoneContent: {
+    padding: 16,
   },
 });

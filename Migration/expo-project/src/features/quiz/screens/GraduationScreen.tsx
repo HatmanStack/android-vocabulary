@@ -185,6 +185,26 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
         <Button
           variant="secondary"
+          onPress={() => {
+            // Reset this level and restart quiz
+            if (
+              confirm(
+                'Are you sure you want to reset this level? All progress for this level will be lost.'
+              )
+            ) {
+              progressStore.resetListLevelProgress(listId, levelId);
+              navigation.navigate('Quiz', { listId, levelId });
+            }
+          }}
+          fullWidth
+        >
+          Reset and Try Again
+        </Button>
+
+        <Spacer size="sm" />
+
+        <Button
+          variant="secondary"
           onPress={() => navigation.navigate('Difficulty', { listId })}
           fullWidth
         >
