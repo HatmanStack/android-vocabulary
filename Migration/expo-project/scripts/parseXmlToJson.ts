@@ -133,22 +133,30 @@ async function migrateData() {
           );
         }
 
-        // Combine into word objects
-        const vocabWords = words.map((word, index) => ({
-          id: generateWordId(list, level, index),
-          word,
-          definition: definitions[index] || '',
-          fillInBlank: fillInBlanks[index] || '',
-        }));
+        // Combine into word objects, filtering out empty entries
+        const vocabWords = words
+          .map((word, index) => ({
+            id: generateWordId(list, level, index),
+            word,
+            definition: definitions[index] || '',
+            fillInBlank: fillInBlanks[index] || '',
+          }))
+          .filter((w) => w.word.trim() !== '' && w.definition.trim() !== '');
 
-        levels.push({
-          id: level,
-          name: LEVEL_NAMES[level as keyof typeof LEVEL_NAMES],
-          words: vocabWords,
-        });
+        // Only add level if it has valid words
+        if (vocabWords.length > 0) {
+          levels.push({
+            id: level,
+            name: LEVEL_NAMES[level as keyof typeof LEVEL_NAMES],
+            words: vocabWords,
+          });
 
-        totalWords += vocabWords.length;
-        console.log(`  ✅ ${level}: ${vocabWords.length} words`);
+          totalWords += vocabWords.length;
+          console.log(`  ✅ ${level}: ${vocabWords.length} words`);
+        } else {
+          console.log(`  ⚠️  Skipping ${level} - no valid data`);
+        }
+
       }
 
       // Build list object
