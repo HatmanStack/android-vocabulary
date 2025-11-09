@@ -7,6 +7,7 @@ import { loadVocabularyLists } from '../utils/vocabularyLoader';
 import { ListCard } from '../components/ListCard';
 import { Typography, Spacer } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 
 type Props = StackScreenProps<RootStackParamList, 'Home'>;
 
@@ -14,6 +15,7 @@ export default function HomeScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
+  const reducedMotion = useReducedMotion();
 
   // Determine number of columns based on screen width
   // Breakpoint: 600px (common tablet breakpoint)
@@ -39,11 +41,16 @@ export default function HomeScreen({ navigation }: Props) {
     return masteredWords;
   };
 
-  // Animation values for fade-in effect
-  const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(0))).current;
+  // Animation values for fade-in effect (start at 1 if reduced motion)
+  const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(reducedMotion ? 1 : 0))).current;
 
   // Fade-in animation on mount
   useEffect(() => {
+    // Skip animations if reduced motion is enabled
+    if (reducedMotion) {
+      return;
+    }
+
     const animations = fadeAnims.map((anim, index) =>
       Animated.timing(anim, {
         toValue: 1,
@@ -54,7 +61,7 @@ export default function HomeScreen({ navigation }: Props) {
     );
     Animated.parallel(animations).start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <View style={styles.container}>

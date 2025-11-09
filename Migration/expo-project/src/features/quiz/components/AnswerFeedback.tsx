@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Animated } from 'react-native';
 import { Typography } from '@/shared/ui';
 import { Icon } from 'react-native-paper';
+import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 
 /**
  * AnswerFeedback Component
@@ -29,11 +30,25 @@ interface AnswerFeedbackProps {
 }
 
 export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerFeedbackProps) {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const reducedMotion = useReducedMotion();
+  const fadeAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
+  const scaleAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0.8)).current;
 
   useEffect(() => {
     if (isVisible) {
+      // Skip animations if reduced motion is enabled
+      if (reducedMotion) {
+        fadeAnim.setValue(1);
+        scaleAnim.setValue(1);
+
+        // Still auto-hide after delay, but no animation
+        const timer = setTimeout(() => {
+          onAnimationEnd();
+        }, 1500);
+
+        return () => clearTimeout(timer);
+      }
+
       // Fade in and scale up
       Animated.parallel([
         Animated.timing(fadeAnim, {
@@ -69,11 +84,11 @@ export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerF
       return () => clearTimeout(timer);
     } else {
       // Reset animations when not visible
-      fadeAnim.setValue(0);
-      scaleAnim.setValue(0.8);
+      fadeAnim.setValue(reducedMotion ? 1 : 0);
+      scaleAnim.setValue(reducedMotion ? 1 : 0.8);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisible]);
+  }, [isVisible, reducedMotion]);
 
   if (!isVisible) {
     return null;
