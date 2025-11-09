@@ -4,11 +4,13 @@ import { Icon } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
 
 export default function GraduationScreen({ navigation, route }: Props) {
   const { listId, levelId, stats } = route.params;
+  const progressStore = useProgressStore();
 
   // Animation refs
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -30,11 +32,20 @@ export default function GraduationScreen({ navigation, route }: Props) {
     ]).start();
   }, [fadeAnim, scaleAnim]);
 
-  // Get stats with defaults
+  // Get current session stats
   const hintsUsed = stats?.hints || 0;
   const wrongAnswers = stats?.wrong || 0;
-  const bestHints = stats?.bestHints || 0;
-  const bestWrong = stats?.bestWrong || 0;
+
+  // Get best score from progressStore
+  const bestScore = progressStore.getBestScore(listId, levelId);
+  const isNewBest =
+    bestScore &&
+    (hintsUsed < bestScore.hints ||
+      (hintsUsed === bestScore.hints && wrongAnswers <= bestScore.wrong));
+
+  // Get global stats
+  const globalStats = progressStore.getGlobalStats();
+  const totalWordsLearned = progressStore.getTotalWordsLearned();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
@@ -91,58 +102,69 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
       <Spacer size="md" />
 
-      {/* Best Scores (Placeholder for Phase 4) */}
+      {/* Best Score */}
       <Card elevation="low" style={styles.card}>
         <Card.Content>
           <Typography variant="heading3" align="center">
             Best Score
           </Typography>
           <Spacer size="sm" />
-          <Typography variant="caption" color="secondary" align="center">
-            (Tracking begins in Phase 4)
-          </Typography>
+          {isNewBest && (
+            <>
+              <Typography variant="caption" align="center" style={{ color: '#4CAF50' }}>
+                🎉 New best score!
+              </Typography>
+              <Spacer size="sm" />
+            </>
+          )}
           <Spacer size="md" />
 
           <View style={styles.statRow}>
-            <Icon source="star-outline" size={20} color="#4CAF50" />
+            <Icon source="star" size={20} color="#4CAF50" />
             <Spacer size="sm" direction="horizontal" />
-            <Typography variant="caption" color="secondary">
-              Best: {bestHints} hints, {bestWrong} wrong
-            </Typography>
+            {bestScore ? (
+              <Typography variant="body">
+                Best: {bestScore.hints} hints, {bestScore.wrong} wrong
+              </Typography>
+            ) : (
+              <Typography variant="body">First completion!</Typography>
+            )}
           </View>
         </Card.Content>
       </Card>
 
       <Spacer size="md" />
 
-      {/* All-Time Stats (Placeholder for Phase 4) */}
+      {/* All-Time Stats */}
       <Card elevation="low" style={styles.card}>
         <Card.Content>
           <Typography variant="heading3" align="center">
             All-Time Statistics
           </Typography>
-          <Spacer size="sm" />
-          <Typography variant="caption" color="secondary" align="center">
-            (Coming in Phase 4)
-          </Typography>
           <Spacer size="md" />
 
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              Total words learned: 0
-            </Typography>
+            <Icon source="school-outline" size={20} color="#2196F3" />
+            <Spacer size="sm" direction="horizontal" />
+            <Typography variant="body">Total words learned: {totalWordsLearned}</Typography>
           </View>
           <Spacer size="xs" />
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              All-time hints: 0
-            </Typography>
+            <Icon source="lightbulb-outline" size={20} color="#FF9800" />
+            <Spacer size="sm" direction="horizontal" />
+            <Typography variant="body">All-time hints: {globalStats.allTimeHints}</Typography>
           </View>
           <Spacer size="xs" />
           <View style={styles.statRow}>
-            <Typography variant="caption" color="secondary">
-              All-time wrong: 0
-            </Typography>
+            <Icon source="close-circle-outline" size={20} color="#F44336" />
+            <Spacer size="sm" direction="horizontal" />
+            <Typography variant="body">All-time wrong: {globalStats.allTimeWrong}</Typography>
+          </View>
+          <Spacer size="xs" />
+          <View style={styles.statRow}>
+            <Icon source="check-circle-outline" size={20} color="#4CAF50" />
+            <Spacer size="sm" direction="horizontal" />
+            <Typography variant="body">All-time correct: {globalStats.allTimeCorrect}</Typography>
           </View>
         </Card.Content>
       </Card>

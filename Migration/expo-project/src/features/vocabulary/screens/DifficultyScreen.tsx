@@ -6,6 +6,7 @@ import { RootStackParamList } from '@/shared/types';
 import { getListById } from '../utils/vocabularyLoader';
 import { LevelButton } from '../components/LevelButton';
 import { Typography, Spacer } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Difficulty'>;
 
@@ -21,9 +22,19 @@ const LEVEL_DIFFICULTY_MAP: Record<string, 1 | 2 | 3 | 4 | 5> = {
 export default function DifficultyScreen({ navigation, route }: Props) {
   const { listId } = route.params;
   const list = getListById(listId);
+  const progressStore = useProgressStore();
 
   // Animation values for staggered slide-in
   const slideAnims = useRef(list?.levels.map(() => new Animated.Value(-100)) || []).current;
+
+  // Get mastered words count for a level
+  const getMasteredCount = (levelId: string) => {
+    const levelProgress = progressStore.getListLevelProgress(listId, levelId);
+    if (!levelProgress) return 0;
+
+    const words = Object.values(levelProgress.wordProgress);
+    return words.filter((w) => w.state === 3).length;
+  };
 
   // Staggered slide-in animation on mount
   useEffect(() => {
@@ -77,6 +88,8 @@ export default function DifficultyScreen({ navigation, route }: Props) {
           {list.levels.map((level, index) => {
             const difficulty = LEVEL_DIFFICULTY_MAP[level.id] || 1;
             const wordCount = level.words.length;
+            const masteredCount = getMasteredCount(level.id);
+            const isCompleted = masteredCount === wordCount;
 
             return (
               <Animated.View
@@ -93,7 +106,9 @@ export default function DifficultyScreen({ navigation, route }: Props) {
                   name={level.name}
                   wordCount={wordCount}
                   difficulty={difficulty}
-                  completionStatus={`0 / ${wordCount} mastered`}
+                  completionStatus={
+                    isCompleted ? '✓ Completed' : `${masteredCount} / ${wordCount} mastered`
+                  }
                   onPress={() => navigation.navigate('Quiz', { listId, levelId: level.id })}
                 />
               </Animated.View>

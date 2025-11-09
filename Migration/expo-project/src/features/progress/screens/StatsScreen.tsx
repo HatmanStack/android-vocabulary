@@ -6,23 +6,30 @@ import { RootStackParamList } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
 import { StatCard } from '../components/StatCard';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 
 export default function StatsScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
+  const progressStore = useProgressStore();
   const { width } = useWindowDimensions();
 
   // Determine number of columns for stat cards
   // 2 columns on mobile, 3-4 on tablet/web
   const numStatColumns = width >= 900 ? 4 : width >= 600 ? 3 : 2;
 
-  // Placeholder stats (Phase 4 will provide real data)
+  // Get real stats from progressStore
+  const globalStats = progressStore.getGlobalStats();
+  const wordsLearned = progressStore.getTotalWordsLearned();
+  const listsCompleted = globalStats.listsCompleted.length;
+
   const stats = {
-    wordsLearned: 0,
-    listsCompleted: 0,
-    allTimeHints: 0,
-    allTimeWrong: 0,
+    wordsLearned,
+    listsCompleted,
+    allTimeHints: globalStats.allTimeHints,
+    allTimeWrong: globalStats.allTimeWrong,
+    allTimeCorrect: globalStats.allTimeCorrect,
   };
 
   // Empty state check
