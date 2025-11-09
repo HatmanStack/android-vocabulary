@@ -12,6 +12,12 @@ const renderWithProvider = (component: React.ReactElement) => {
 };
 
 describe('QuizHeader', () => {
+  const mockOnExit = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('displays list and level names', () => {
     const { getByText } = renderWithProvider(
       <QuizHeader
@@ -21,6 +27,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
@@ -37,6 +44,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
@@ -53,6 +61,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={3}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
@@ -68,6 +77,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={5}
+        onExit={mockOnExit}
       />
     );
 
@@ -83,6 +93,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
@@ -99,6 +110,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
@@ -114,6 +126,7 @@ describe('QuizHeader', () => {
         totalWords={8}
         hintsUsed={0}
         wrongAnswers={0}
+        onExit={mockOnExit}
       />
     );
 
