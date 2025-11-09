@@ -199,36 +199,78 @@ describe('Achievement System', () => {
               listId: 'list-a',
               levelId: 'level1',
               wordProgress: {
-                'word-1': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
-                'word-2': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-1': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
+                'word-2': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
             'list-a-level2': {
               listId: 'list-a',
               levelId: 'level2',
               wordProgress: {
-                'word-3': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-3': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
             'list-a-level3': {
               listId: 'list-a',
               levelId: 'level3',
               wordProgress: {
-                'word-4': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-4': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
             'list-a-level4': {
               listId: 'list-a',
               levelId: 'level4',
               wordProgress: {
-                'word-5': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-5': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
             'list-a-level5': {
               listId: 'list-a',
               levelId: 'level5',
               wordProgress: {
-                'word-6': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-6': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
           },
@@ -246,8 +288,22 @@ describe('Achievement System', () => {
               listId: 'list-a',
               levelId: 'level1',
               wordProgress: {
-                'word-1': { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
-                'word-2': { state: 2, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' },
+                'word-1': {
+                  state: 3,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
+                'word-2': {
+                  state: 2,
+                  hintsUsed: 0,
+                  wrongAttempts: 0,
+                  correctAttempts: 1,
+                  lastAttemptDate: '',
+                  firstAttemptDate: '',
+                },
               },
             },
           },
@@ -401,7 +457,9 @@ describe('Achievement System', () => {
     });
 
     it('should unlock achievement-hunter when all others are unlocked', () => {
-      const allIds = Object.keys(ACHIEVEMENT_DEFINITIONS).filter((id) => id !== 'achievement-hunter');
+      const allIds = Object.keys(ACHIEVEMENT_DEFINITIONS).filter(
+        (id) => id !== 'achievement-hunter'
+      );
       const currentAchievements: Achievement[] = allIds.map((id) => ({
         ...ACHIEVEMENT_DEFINITIONS[id as keyof typeof ACHIEVEMENT_DEFINITIONS],
         isUnlocked: true,

@@ -31,10 +31,7 @@ export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProp
   };
 
   // Organize words by list and level
-  const organizedData: Record<
-    string,
-    Record<string, { wordId: string; state: number }[]>
-  > = {};
+  const organizedData: Record<string, Record<string, { wordId: string; state: number }[]>> = {};
 
   Object.values(listLevelProgress).forEach((llp) => {
     if (!organizedData[llp.listId]) {
@@ -107,10 +104,7 @@ export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProp
                   {words.map((word, index) => (
                     <View
                       key={`${word.wordId}-${index}`}
-                      style={[
-                        styles.wordDot,
-                        { backgroundColor: getStateColor(word.state) },
-                      ]}
+                      style={[styles.wordDot, { backgroundColor: getStateColor(word.state) }]}
                       accessibilityLabel={`Word ${index + 1}, state ${word.state}`}
                     />
                   ))}

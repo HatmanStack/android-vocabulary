@@ -125,10 +125,7 @@ export default function OnboardingScreen({ navigation }: Props) {
         {/* Progress Dots */}
         <View style={styles.dotsContainer}>
           {SLIDES.map((_, index) => (
-            <View
-              key={index}
-              style={[styles.dot, index === currentIndex && styles.activeDot]}
-            />
+            <View key={index} style={[styles.dot, index === currentIndex && styles.activeDot]} />
           ))}
         </View>
 

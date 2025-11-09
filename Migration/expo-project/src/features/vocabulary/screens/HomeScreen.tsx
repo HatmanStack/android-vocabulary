@@ -45,7 +45,9 @@ export default function HomeScreen({ navigation }: Props) {
   );
 
   // Animation values for fade-in effect (start at 1 if reduced motion)
-  const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(reducedMotion ? 1 : 0))).current;
+  const fadeAnims = useRef(
+    vocabularyLists.map(() => new Animated.Value(reducedMotion ? 1 : 0))
+  ).current;
 
   // Fade-in animation on mount
   useEffect(() => {

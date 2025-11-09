@@ -16,7 +16,7 @@ interface AchievementBadgeProps {
 
 export const AchievementBadge = React.memo(function AchievementBadge({
   achievement,
-  onPress
+  onPress,
 }: AchievementBadgeProps) {
   const isLocked = !achievement.isUnlocked;
 

@@ -267,7 +267,10 @@ export default function SettingsScreen({ navigation }: Props) {
               value=""
               onChange={() => {
                 settingsStore.setOnboardingCompleted(false);
-                Alert.alert('Success', 'Onboarding has been reset. Restart the app to see it again.');
+                Alert.alert(
+                  'Success',
+                  'Onboarding has been reset. Restart the app to see it again.'
+                );
               }}
               showDivider={false}
             />

@@ -192,9 +192,7 @@ export function checkAchievement(
       Object.values(progress.listLevelProgress).forEach((llp) => {
         // Check if level is 100% complete (all words mastered)
         const totalWords = Object.keys(llp.wordProgress).length;
-        const masteredWords = Object.values(llp.wordProgress).filter(
-          (wp) => wp.state === 3
-        ).length;
+        const masteredWords = Object.values(llp.wordProgress).filter((wp) => wp.state === 3).length;
 
         if (totalWords > 0 && masteredWords === totalWords) {
           listCompletionMap[llp.listId] = (listCompletionMap[llp.listId] || 0) + 1;

@@ -93,8 +93,7 @@ export function Button({
   const buttonStyles = [fullWidth && styles.fullWidth, style];
 
   // Use children as accessibilityLabel if not provided
-  const a11yLabel =
-    accessibilityLabel || (typeof children === 'string' ? children : undefined);
+  const a11yLabel = accessibilityLabel || (typeof children === 'string' ? children : undefined);
 
   return (
     <PaperButton
