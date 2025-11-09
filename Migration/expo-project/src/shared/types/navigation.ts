@@ -12,6 +12,7 @@ export type RootStackParamList = {
       wrong: number;
       bestHints: number;
       bestWrong: number;
+      durationMinutes?: number;
     };
   };
   Stats: undefined;

@@ -8,8 +8,15 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { WordProgress, ListLevelProgress, UserProgress, WordState } from '@/shared/types';
+import {
+  WordProgress,
+  ListLevelProgress,
+  UserProgress,
+  WordState,
+  Achievement,
+} from '@/shared/types';
 import { STORAGE_KEYS } from '@/shared/lib/storage';
+import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
 
 interface ProgressState extends UserProgress {
   // Loading state
@@ -64,6 +71,17 @@ interface ProgressState extends UserProgress {
   resetListLevelProgress: (listId: string, levelId: string) => void;
   resetAllProgress: () => void;
 
+  // Achievement tracking
+  checkAndUnlockAchievements: (sessionData?: {
+    listId: string;
+    levelId: string;
+    hints: number;
+    wrong: number;
+    durationMinutes: number;
+  }) => Achievement[];
+  getAchievements: () => Achievement[];
+  getUnlockedAchievements: () => Achievement[];
+
   // Utility
   _hydrated: boolean;
   setHydrated: () => void;
@@ -87,6 +105,9 @@ const initialState: Omit<
   | 'isLevelCompleted'
   | 'resetListLevelProgress'
   | 'resetAllProgress'
+  | 'checkAndUnlockAchievements'
+  | 'getAchievements'
+  | 'getUnlockedAchievements'
   | '_hydrated'
   | 'setHydrated'
 > = {
@@ -100,6 +121,7 @@ const initialState: Omit<
     totalWordsLearned: 0,
     listsCompleted: [],
   },
+  achievements: [],
   isLoading: false,
   lastSyncedAt: null,
 };
@@ -344,6 +366,53 @@ export const useProgressStore = create<ProgressState>()(
           _hydrated: true,
         });
       },
+
+      // Check and unlock achievements
+      checkAndUnlockAchievements: (sessionData) => {
+        const state = get();
+        const currentAchievements = state.achievements || [];
+
+        // Get current progress as UserProgress (without methods)
+        const progress: UserProgress = {
+          currentListId: state.currentListId,
+          currentLevelId: state.currentLevelId,
+          listLevelProgress: state.listLevelProgress,
+          globalStats: state.globalStats,
+          achievements: currentAchievements,
+        };
+
+        // Check for newly unlocked achievements
+        const newlyUnlocked = checkAllAchievements(progress, currentAchievements, sessionData);
+
+        // Update state with newly unlocked achievements
+        if (newlyUnlocked.length > 0) {
+          set({
+            achievements: [...currentAchievements, ...newlyUnlocked],
+          });
+        }
+
+        return newlyUnlocked;
+      },
+
+      // Get all achievements with their current state
+      getAchievements: () => {
+        const state = get();
+        const progress: UserProgress = {
+          currentListId: state.currentListId,
+          currentLevelId: state.currentLevelId,
+          listLevelProgress: state.listLevelProgress,
+          globalStats: state.globalStats,
+          achievements: state.achievements,
+        };
+
+        return getAllAchievements(progress, state.achievements || []);
+      },
+
+      // Get only unlocked achievements
+      getUnlockedAchievements: () => {
+        const state = get();
+        return (state.achievements || []).filter((a) => a.isUnlocked);
+      },
     }),
     {
       name: STORAGE_KEYS.USER_PROGRESS,
@@ -356,6 +425,7 @@ export const useProgressStore = create<ProgressState>()(
         currentLevelId: state.currentLevelId,
         listLevelProgress: state.listLevelProgress,
         globalStats: state.globalStats,
+        achievements: state.achievements,
         lastSyncedAt: state.lastSyncedAt,
       }),
     }

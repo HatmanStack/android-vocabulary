@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, ScrollView, Animated, Alert } from 'react-native';
 import { Icon, Dialog, Portal } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { RootStackParamList, Achievement } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { AchievementUnlockModal } from '@/features/progress/components/AchievementUnlockModal';
 
 type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
 
@@ -12,6 +13,8 @@ export default function GraduationScreen({ navigation, route }: Props) {
   const { listId, levelId, stats } = route.params;
   const progressStore = useProgressStore();
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
+  const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([]);
+  const [currentAchievementIndex, setCurrentAchievementIndex] = useState(0);
 
   // Animation refs
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -32,6 +35,24 @@ export default function GraduationScreen({ navigation, route }: Props) {
       }),
     ]).start();
   }, [fadeAnim, scaleAnim]);
+
+  // Check for achievements on mount
+  useEffect(() => {
+    const sessionData = stats?.durationMinutes
+      ? {
+          listId,
+          levelId,
+          hints: stats.hints,
+          wrong: stats.wrong,
+          durationMinutes: stats.durationMinutes,
+        }
+      : undefined;
+
+    const newAchievements = progressStore.checkAndUnlockAchievements(sessionData);
+    if (newAchievements.length > 0) {
+      setUnlockedAchievements(newAchievements);
+    }
+  }, []);
 
   // Get current session stats
   const hintsUsed = stats?.hints || 0;
@@ -60,6 +81,18 @@ export default function GraduationScreen({ navigation, route }: Props) {
     setResetDialogVisible(false);
     // Navigate to quiz screen with fresh start
     navigation.navigate('Quiz', { listId, levelId });
+  };
+
+  // Handle achievement modal dismissal
+  const handleDismissAchievement = () => {
+    if (currentAchievementIndex < unlockedAchievements.length - 1) {
+      // Show next achievement
+      setCurrentAchievementIndex(currentAchievementIndex + 1);
+    } else {
+      // Reset to hide modal
+      setCurrentAchievementIndex(0);
+      setUnlockedAchievements([]);
+    }
   };
 
   return (
@@ -225,6 +258,13 @@ export default function GraduationScreen({ navigation, route }: Props) {
           </Dialog.Actions>
         </Dialog>
       </Portal>
+
+      {/* Achievement Unlock Modal */}
+      <AchievementUnlockModal
+        achievement={unlockedAchievements[currentAchievementIndex] || null}
+        visible={unlockedAchievements.length > 0}
+        onDismiss={handleDismissAchievement}
+      />
     </ScrollView>
   );
 }

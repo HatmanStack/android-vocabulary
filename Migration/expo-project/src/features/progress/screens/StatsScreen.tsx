@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { RootStackParamList, Achievement } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
 import { StatCard } from '../components/StatCard';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { AchievementBadge } from '../components/AchievementBadge';
+import { getAchievementCompletionPercentage } from '../utils/achievements';
 
 type Props = StackScreenProps<RootStackParamList, 'Stats'>;
 
@@ -14,6 +16,7 @@ export default function StatsScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
 
   // Determine number of columns for stat cards
   // 2 columns on mobile, 3-4 on tablet/web
@@ -27,6 +30,10 @@ export default function StatsScreen({ navigation }: Props) {
     allTimeHints: globalStats.allTimeHints,
     allTimeWrong: globalStats.allTimeWrong,
   };
+
+  // Get achievements
+  const achievements = progressStore.getAchievements();
+  const achievementPercentage = getAchievementCompletionPercentage(achievements);
 
   // Empty state check
   const hasProgress = stats.wordsLearned > 0;
@@ -105,6 +112,33 @@ export default function StatsScreen({ navigation }: Props) {
               value={stats.allTimeWrong}
               iconColor="#F44336"
             />
+          </View>
+        </View>
+
+        <Spacer size="xl" />
+
+        {/* Achievements Section */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Typography variant="heading3">Achievements</Typography>
+            <Typography variant="caption" color="secondary">
+              {Math.round(achievementPercentage)}% Complete
+            </Typography>
+          </View>
+          <Spacer size="sm" />
+          <ProgressBar progress={achievementPercentage} max={100} />
+          <Spacer size="md" />
+
+          {/* Achievement Grid */}
+          <View style={styles.achievementGrid}>
+            {achievements.map((achievement) => (
+              <View key={achievement.id} style={styles.achievementItem}>
+                <AchievementBadge
+                  achievement={achievement}
+                  onPress={() => setSelectedAchievement(achievement)}
+                />
+              </View>
+            ))}
           </View>
         </View>
 
@@ -197,6 +231,22 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '100%',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  achievementGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    justifyContent: 'flex-start',
+  },
+  achievementItem: {
+    width: '30%',
+    minWidth: 100,
+    maxWidth: 140,
   },
   listItem: {
     marginBottom: 8,

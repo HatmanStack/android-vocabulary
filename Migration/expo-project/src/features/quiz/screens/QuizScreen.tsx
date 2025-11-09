@@ -38,15 +38,22 @@ export default function QuizScreen({ navigation, route }: Props) {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState('');
+  const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
 
   // Start quiz on mount
   useEffect(() => {
     startQuiz(listId, levelId);
+    setQuizStartTime(Date.now());
   }, [listId, levelId]);
 
   // Check for quiz completion
   useEffect(() => {
     if (isQuizActive && isQuizComplete()) {
+      // Calculate quiz duration
+      const durationMinutes = quizStartTime
+        ? (Date.now() - quizStartTime) / (1000 * 60)
+        : undefined;
+
       // Navigate to graduation screen with stats
       const finalStats = endQuiz();
       navigation.replace('Graduation', {
@@ -57,10 +64,11 @@ export default function QuizScreen({ navigation, route }: Props) {
           wrong: finalStats.wrong,
           bestHints: 0, // Placeholder for Phase 4
           bestWrong: 0, // Placeholder for Phase 4
+          durationMinutes,
         },
       });
     }
-  }, [currentQuestionIndex]);
+  }, [currentQuestionIndex, quizStartTime]);
 
   if (!list || !currentQuestion) {
     return (

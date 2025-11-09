@@ -23,6 +23,18 @@ export interface ListLevelProgress {
   };
 }
 
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: 'milestone' | 'performance' | 'consistency' | 'completion';
+  isUnlocked: boolean;
+  unlockedAt?: string;
+  progress?: number;
+  target?: number;
+}
+
 export interface UserProgress {
   currentListId?: string;
   currentLevelId?: string;
@@ -34,4 +46,5 @@ export interface UserProgress {
     totalWordsLearned: number;
     listsCompleted: string[];
   };
+  achievements?: Achievement[];
 }
