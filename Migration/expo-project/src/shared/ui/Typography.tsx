@@ -16,13 +16,7 @@ import { StyleProp, TextStyle } from 'react-native';
  * ```
  */
 
-type TypographyVariant =
-  | 'heading1'
-  | 'heading2'
-  | 'heading3'
-  | 'body'
-  | 'caption'
-  | 'label';
+type TypographyVariant = 'heading1' | 'heading2' | 'heading3' | 'body' | 'caption' | 'label';
 
 type TypographyColor = 'primary' | 'secondary' | 'error' | 'disabled';
 

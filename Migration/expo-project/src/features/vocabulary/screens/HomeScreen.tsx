@@ -1,11 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  useWindowDimensions,
-  Animated,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, useWindowDimensions, Animated } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
@@ -24,9 +18,7 @@ export default function HomeScreen({ navigation }: Props) {
   const numColumns = width >= 600 ? 2 : 1;
 
   // Animation values for fade-in effect
-  const fadeAnims = useRef(
-    vocabularyLists.map(() => new Animated.Value(0))
-  ).current;
+  const fadeAnims = useRef(vocabularyLists.map(() => new Animated.Value(0))).current;
 
   // Fade-in animation on mount
   useEffect(() => {
@@ -85,9 +77,7 @@ export default function HomeScreen({ navigation }: Props) {
                   description={list.description}
                   progress={0} // Real progress data will come from Phase 4
                   max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
-                  onPress={() =>
-                    navigation.navigate('Difficulty', { listId: list.id })
-                  }
+                  onPress={() => navigation.navigate('Difficulty', { listId: list.id })}
                 />
               </Animated.View>
             ))}

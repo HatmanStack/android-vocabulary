@@ -23,9 +23,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
   const list = getListById(listId);
 
   // Animation values for staggered slide-in
-  const slideAnims = useRef(
-    list?.levels.map(() => new Animated.Value(-100)) || []
-  ).current;
+  const slideAnims = useRef(list?.levels.map(() => new Animated.Value(-100)) || []).current;
 
   // Staggered slide-in animation on mount
   useEffect(() => {
@@ -51,9 +49,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
           <Appbar.Content title="List Not Found" />
         </Appbar.Header>
         <View style={styles.errorContainer}>
-          <Typography variant="body">
-            The selected vocabulary list could not be found.
-          </Typography>
+          <Typography variant="body">The selected vocabulary list could not be found.</Typography>
         </View>
       </View>
     );
@@ -98,9 +94,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
                   wordCount={wordCount}
                   difficulty={difficulty}
                   completionStatus={`0 / ${wordCount} mastered`}
-                  onPress={() =>
-                    navigation.navigate('Quiz', { listId, levelId: level.id })
-                  }
+                  onPress={() => navigation.navigate('Quiz', { listId, levelId: level.id })}
                 />
               </Animated.View>
             );

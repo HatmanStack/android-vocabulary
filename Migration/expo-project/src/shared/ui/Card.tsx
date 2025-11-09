@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Card as PaperCard,
-  CardProps as PaperCardProps,
-} from 'react-native-paper';
+import { Card as PaperCard, CardProps as PaperCardProps } from 'react-native-paper';
 import { StyleProp, ViewStyle } from 'react-native';
 
 /**
@@ -46,12 +43,7 @@ const ELEVATION_MAP: Record<CardElevation, number> = {
 /**
  * Main Card component
  */
-export function Card({
-  elevation = 'medium',
-  style,
-  children,
-  ...rest
-}: CardComponentProps) {
+export function Card({ elevation = 'medium', style, children, ...rest }: CardComponentProps) {
   const elevationValue = ELEVATION_MAP[elevation] as 0 | 1 | 2 | 3 | 4 | 5;
 
   return (

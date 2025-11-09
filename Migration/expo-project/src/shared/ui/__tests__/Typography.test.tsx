@@ -14,16 +14,12 @@ describe('Typography', () => {
   });
 
   it('renders with heading1 variant', () => {
-    const { getByText } = renderWithProvider(
-      <Typography variant="heading1">Heading 1</Typography>
-    );
+    const { getByText } = renderWithProvider(<Typography variant="heading1">Heading 1</Typography>);
     expect(getByText('Heading 1')).toBeTruthy();
   });
 
   it('renders with body variant', () => {
-    const { getByText } = renderWithProvider(
-      <Typography variant="body">Body text</Typography>
-    );
+    const { getByText } = renderWithProvider(<Typography variant="body">Body text</Typography>);
     expect(getByText('Body text')).toBeTruthy();
   });
 

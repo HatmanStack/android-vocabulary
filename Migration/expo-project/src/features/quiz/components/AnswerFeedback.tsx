@@ -28,11 +28,7 @@ interface AnswerFeedbackProps {
   onAnimationEnd: () => void;
 }
 
-export function AnswerFeedback({
-  isCorrect,
-  isVisible,
-  onAnimationEnd,
-}: AnswerFeedbackProps) {
+export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerFeedbackProps) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.8)).current;
 

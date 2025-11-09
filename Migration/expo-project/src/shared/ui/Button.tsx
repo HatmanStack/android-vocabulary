@@ -87,10 +87,7 @@ export function Button({
     }
   };
 
-  const buttonStyles = [
-    fullWidth && styles.fullWidth,
-    style,
-  ];
+  const buttonStyles = [fullWidth && styles.fullWidth, style];
 
   return (
     <PaperButton

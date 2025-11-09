@@ -48,9 +48,7 @@ export default function QuizScreen({ navigation, route }: Props) {
   if (!list || !currentWord) {
     return (
       <View style={styles.container}>
-        <Typography variant="body">
-          Quiz data not found. Please return to home.
-        </Typography>
+        <Typography variant="body">Quiz data not found. Please return to home.</Typography>
       </View>
     );
   }
@@ -123,10 +121,7 @@ export default function QuizScreen({ navigation, route }: Props) {
 
         {/* Render appropriate question type */}
         {questionType === 'multiple' ? (
-          <MultipleChoiceQuestion
-            options={dummyOptions}
-            onSelectAnswer={handleSelectAnswer}
-          />
+          <MultipleChoiceQuestion options={dummyOptions} onSelectAnswer={handleSelectAnswer} />
         ) : (
           <FillInBlankQuestion
             sentence={dummySentence}

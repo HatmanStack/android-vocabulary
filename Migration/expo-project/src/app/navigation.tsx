@@ -44,25 +44,14 @@ const fadeScreenOptions: StackNavigationOptions = {
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={defaultScreenOptions}
-      >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Vocabulary' }}
-        />
+      <Stack.Navigator initialRouteName="Home" screenOptions={defaultScreenOptions}>
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Vocabulary' }} />
         <Stack.Screen
           name="Difficulty"
           component={DifficultyScreen}
           options={{ title: 'Select Level' }}
         />
-        <Stack.Screen
-          name="Quiz"
-          component={QuizScreen}
-          options={{ title: 'Quiz' }}
-        />
+        <Stack.Screen name="Quiz" component={QuizScreen} options={{ title: 'Quiz' }} />
         <Stack.Screen
           name="Graduation"
           component={GraduationScreen}

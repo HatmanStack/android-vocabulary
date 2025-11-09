@@ -17,10 +17,7 @@ describe('MultipleChoiceQuestion', () => {
 
   it('renders all 4 options', () => {
     const { getByText } = renderWithProvider(
-      <MultipleChoiceQuestion
-        options={mockOptions}
-        onSelectAnswer={mockOnSelect}
-      />
+      <MultipleChoiceQuestion options={mockOptions} onSelectAnswer={mockOnSelect} />
     );
 
     expect(getByText('option1')).toBeTruthy();
@@ -31,10 +28,7 @@ describe('MultipleChoiceQuestion', () => {
 
   it('calls onSelectAnswer when option is pressed', async () => {
     const { getByText } = renderWithProvider(
-      <MultipleChoiceQuestion
-        options={mockOptions}
-        onSelectAnswer={mockOnSelect}
-      />
+      <MultipleChoiceQuestion options={mockOptions} onSelectAnswer={mockOnSelect} />
     );
 
     fireEvent.press(getByText('option1'));
@@ -46,10 +40,7 @@ describe('MultipleChoiceQuestion', () => {
 
   it('disables buttons after selection', async () => {
     const { getByText } = renderWithProvider(
-      <MultipleChoiceQuestion
-        options={mockOptions}
-        onSelectAnswer={mockOnSelect}
-      />
+      <MultipleChoiceQuestion options={mockOptions} onSelectAnswer={mockOnSelect} />
     );
 
     fireEvent.press(getByText('option1'));

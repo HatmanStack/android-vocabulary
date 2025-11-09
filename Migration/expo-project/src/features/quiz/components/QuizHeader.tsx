@@ -60,12 +60,7 @@ export function QuizHeader({
             {listName} - {levelName}
           </Typography>
         </View>
-        <IconButton
-          icon="close"
-          size={24}
-          onPress={onExit}
-          accessibilityLabel="Exit quiz"
-        />
+        <IconButton icon="close" size={24} onPress={onExit} accessibilityLabel="Exit quiz" />
       </View>
 
       <Spacer size="sm" />

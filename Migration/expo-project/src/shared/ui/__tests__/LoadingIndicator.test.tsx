@@ -14,23 +14,17 @@ describe('LoadingIndicator', () => {
   });
 
   it('displays text when provided', () => {
-    const { getByText } = renderWithProvider(
-      <LoadingIndicator text="Loading..." />
-    );
+    const { getByText } = renderWithProvider(<LoadingIndicator text="Loading..." />);
     expect(getByText('Loading...')).toBeTruthy();
   });
 
   it('renders with overlay', () => {
-    const { root } = renderWithProvider(
-      <LoadingIndicator overlay />
-    );
+    const { root } = renderWithProvider(<LoadingIndicator overlay />);
     expect(root).toBeTruthy();
   });
 
   it('renders with custom size', () => {
-    const { root } = renderWithProvider(
-      <LoadingIndicator size="small" />
-    );
+    const { root } = renderWithProvider(<LoadingIndicator size="small" />);
     expect(root).toBeTruthy();
   });
 });

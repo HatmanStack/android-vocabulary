@@ -44,9 +44,7 @@ export function Spacer({ size = 'md', direction = 'vertical' }: SpacerProps) {
   const spacing = typeof size === 'number' ? size : SPACING_PRESETS[size];
 
   const style =
-    direction === 'horizontal'
-      ? { width: spacing, height: 1 }
-      : { height: spacing, width: 1 };
+    direction === 'horizontal' ? { width: spacing, height: 1 } : { height: spacing, width: 1 };
 
   return <View style={style} />;
 }

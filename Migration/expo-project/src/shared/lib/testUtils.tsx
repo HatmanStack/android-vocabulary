@@ -28,10 +28,7 @@ export const mockRoute = (params: any = {}) => ({
 });
 
 // Custom render function with providers
-export function renderWithProviders(
-  ui: React.ReactElement,
-  options?: RenderOptions
-) {
+export function renderWithProviders(ui: React.ReactElement, options?: RenderOptions) {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <PaperProvider>
       <NavigationContainer>{children}</NavigationContainer>

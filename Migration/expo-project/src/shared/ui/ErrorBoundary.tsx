@@ -96,11 +96,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 </Text>
               </View>
             )}
-            <PaperButton
-              mode="contained"
-              onPress={this.handleReset}
-              style={styles.button}
-            >
+            <PaperButton mode="contained" onPress={this.handleReset} style={styles.button}>
               Try Again
             </PaperButton>
           </Surface>

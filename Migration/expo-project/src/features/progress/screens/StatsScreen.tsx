@@ -47,13 +47,13 @@ export default function StatsScreen({ navigation }: Props) {
         <Spacer size="lg" />
 
         {/* Key Metrics Grid */}
-        <View
-          style={[
-            styles.statsGrid,
-            { gap: 12 },
-          ]}
-        >
-          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+        <View style={[styles.statsGrid, { gap: 12 }]}>
+          <View
+            style={[
+              styles.statItem,
+              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
+            ]}
+          >
             <StatCard
               icon="book-outline"
               label="Words Learned"
@@ -62,7 +62,12 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+          <View
+            style={[
+              styles.statItem,
+              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
+            ]}
+          >
             <StatCard
               icon="check-circle-outline"
               label="Lists Completed"
@@ -71,7 +76,12 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+          <View
+            style={[
+              styles.statItem,
+              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
+            ]}
+          >
             <StatCard
               icon="lightbulb-outline"
               label="Total Hints"
@@ -80,7 +90,12 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View style={[styles.statItem, { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` }]}>
+          <View
+            style={[
+              styles.statItem,
+              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
+            ]}
+          >
             <StatCard
               icon="close-circle-outline"
               label="Wrong Answers"

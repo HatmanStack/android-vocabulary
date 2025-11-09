@@ -53,26 +53,15 @@ export function ListCard({
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.pressable,
-        { opacity: pressed ? 0.7 : 1 },
-      ]}
+      style={({ pressed }) => [styles.pressable, { opacity: pressed ? 0.7 : 1 }]}
       accessibilityLabel={`${name}, ${progress} of ${max} words mastered`}
       accessibilityRole="button"
     >
       <Card elevation="medium" style={styles.card}>
         <Card.Content>
           <View style={styles.cardHeader}>
-            <View
-              style={[
-                styles.letterBadge,
-                { backgroundColor: theme.colors.primaryContainer },
-              ]}
-            >
-              <Typography
-                variant="heading2"
-                style={{ color: theme.colors.onPrimaryContainer }}
-              >
+            <View style={[styles.letterBadge, { backgroundColor: theme.colors.primaryContainer }]}>
+              <Typography variant="heading2" style={{ color: theme.colors.onPrimaryContainer }}>
                 {letter}
               </Typography>
             </View>

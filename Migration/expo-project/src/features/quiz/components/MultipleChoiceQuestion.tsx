@@ -61,10 +61,7 @@ export function MultipleChoiceQuestion({
               variant="secondary"
               onPress={() => handleSelect(option)}
               disabled={isDisabled || !option}
-              style={[
-                styles.optionButton,
-                selectedAnswer === option && styles.selectedButton,
-              ]}
+              style={[styles.optionButton, selectedAnswer === option && styles.selectedButton]}
               accessibilityLabel={`Option ${index + 1}: ${option}`}
             >
               {option}

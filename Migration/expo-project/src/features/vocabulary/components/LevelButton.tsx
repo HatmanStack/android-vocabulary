@@ -73,10 +73,7 @@ export function LevelButton({
       onPress={onPress}
       disabled={disabled}
       fullWidth
-      style={[
-        styles.button,
-        { borderLeftWidth: 4, borderLeftColor: difficultyColor },
-      ]}
+      style={[styles.button, { borderLeftWidth: 4, borderLeftColor: difficultyColor }]}
       accessibilityLabel={`${name} level, ${wordCount} words, ${completionStatus}`}
     >
       <View style={styles.buttonContent}>

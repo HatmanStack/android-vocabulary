@@ -24,7 +24,9 @@ describe('Button', () => {
   it('does not call onPress when disabled', () => {
     const onPressMock = jest.fn();
     const { getByText } = renderWithProvider(
-      <Button onPress={onPressMock} disabled>Disabled</Button>
+      <Button onPress={onPressMock} disabled>
+        Disabled
+      </Button>
     );
 
     fireEvent.press(getByText('Disabled'));
@@ -34,7 +36,9 @@ describe('Button', () => {
   it('does not call onPress when loading', () => {
     const onPressMock = jest.fn();
     const { getByText } = renderWithProvider(
-      <Button onPress={onPressMock} loading>Loading</Button>
+      <Button onPress={onPressMock} loading>
+        Loading
+      </Button>
     );
 
     fireEvent.press(getByText('Loading'));
@@ -43,21 +47,27 @@ describe('Button', () => {
 
   it('renders with primary variant', () => {
     const { getByText } = renderWithProvider(
-      <Button variant="primary" onPress={jest.fn()}>Primary</Button>
+      <Button variant="primary" onPress={jest.fn()}>
+        Primary
+      </Button>
     );
     expect(getByText('Primary')).toBeTruthy();
   });
 
   it('renders with secondary variant', () => {
     const { getByText } = renderWithProvider(
-      <Button variant="secondary" onPress={jest.fn()}>Secondary</Button>
+      <Button variant="secondary" onPress={jest.fn()}>
+        Secondary
+      </Button>
     );
     expect(getByText('Secondary')).toBeTruthy();
   });
 
   it('renders with text variant', () => {
     const { getByText } = renderWithProvider(
-      <Button variant="text" onPress={jest.fn()}>Text</Button>
+      <Button variant="text" onPress={jest.fn()}>
+        Text
+      </Button>
     );
     expect(getByText('Text')).toBeTruthy();
   });
