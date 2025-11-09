@@ -595,6 +595,70 @@ npm test
 npm test -- --coverage # >80% overall
 ```
 
+**🔍 Code Review Questions:**
+
+> **Q1 - Missing Dependencies:** Running `npm run type-check` shows TypeScript errors for missing modules:
+> ```
+> error TS2307: Cannot find module 'expo-av' or its corresponding type declarations.
+> error TS2307: Cannot find module 'expo-haptics' or its corresponding type declarations.
+> ```
+> **Consider:** The code in `src/shared/hooks/useSound.ts:9` and `src/shared/hooks/useHaptics.ts:10` imports these packages, but they're not listed in package.json dependencies. Should `expo-av` and `expo-haptics` be added to the dependencies array? Currently only `react-native-chart-kit` was added but these expo packages are missing.
+
+> **Q2 - Tests Failing Due to Missing Dependencies:** Running `npm test` shows 5 test suites failing:
+> - QuizScreen.test.tsx: "Cannot find module 'expo-av'"
+> - GraduationScreen.test.tsx: "Cannot find module 'expo-av'"
+> - StatsScreen.test.tsx: "Cannot find module 'react-native-chart-kit'"
+>
+> **Think about:** Even though jest.setup.js mocks AsyncStorage, it doesn't mock expo-av or react-native-chart-kit. Since react-native-chart-kit IS in package.json but tests fail, does this mean `npm install` wasn't run after adding it? Should we mock these modules in jest.setup.js as well, or ensure dependencies are installed?
+
+> **Q3 - Phase 3 Issues Still Unresolved:** The adaptiveDifficultyStore tests show 4 failures identical to Phase 3 Review Q1:
+> ```
+> ✕ tracks multiple choice performance correctly
+> ✕ tracks fill-in-blank performance correctly
+> ✕ tracks both types independently
+> ✕ biases toward multiple when user struggles with fillin (<50%)
+> ```
+> **Reflect:** This is the same Zustand state snapshot issue from Phase 3. Tests call `store.updatePerformance()` then check `store.multipleChoiceAttempts` which reads stale state. At what phase should this be fixed? Should Phase 5 be approved with Phase 3 test failures still present?
+
+> **Q4 - Code Formatting:** Running `npm run format:check` reports:
+> ```
+> [warn] Code style issues found in 9 files.
+> OnboardingScreen.tsx, AchievementBadge.tsx, WordMasteryHeatmap.tsx,
+> achievements.test.ts, achievements.ts, SettingsScreen.tsx,
+> HomeScreen.tsx, useReducedMotion.ts, Button.tsx
+> ```
+> **Consider:** These are all Phase 5 files. Should `npm run format` be executed before final approval?
+
+> **Q5 - TypeScript Legacy Errors:** The same 2 parseXmlToJson.ts errors from Phases 1-4 still exist:
+> ```
+> scripts/parseXmlToJson.ts(13,29): Missing declaration for 'xml2js'
+> scripts/parseXmlToJson.ts(66,30): Parameter 'err' implicitly has 'any' type
+> ```
+> **Think about:** This has been flagged in every phase review (Phase 2 Q2, Phase 3 Q4, Phase 4 Q3). Should this be resolved now, or is it acceptable to ship with these migration script errors?
+
+> **Q6 - Sound Files Missing:** Reading `src/assets/sounds/README.md` shows placeholder instructions but no actual sound files. The useSound hook at lines 13-18 sets all SOUND_FILES to `null` with comments:
+> ```typescript
+> const SOUND_FILES = {
+>   correct: null, // Will be: require('@/assets/sounds/correct.mp3')
+>   wrong: null,   // Will be: require('@/assets/sounds/wrong.mp3')
+>   complete: null // Will be: require('@/assets/sounds/complete.mp3')
+> }
+> ```
+> **Consider:** Task 4 (lines 204-254) requires "Add sound files to src/assets/sounds/" and functionality should work. Are sounds functional with null files, or is this incomplete implementation? Should actual .mp3 files be added?
+
+> **Q7 - Quiz Store Test Failures:** Running tests shows quizStore.test.ts has 12 failures:
+> ```
+> ✕ increments hint count
+> ✕ returns word definition
+> ✕ calculates sum of word states
+> ✕ returns true when all words at state 3
+> ✕ sets isQuizActive to false
+> ✕ tracks multiple hints
+> ✕ tracks multiple wrong answers
+> ✕ tracks multiple correct answers
+> ```
+> **Reflect:** These appear to be the same Zustand state snapshot pattern from Phase 3. Tests call `store.incrementHints()` then check `store.sessionStats.hintsUsed` but get stale values. Should these be fixed before Phase 5 approval?
+
 ---
 
 ## Known Limitations & Technical Debt
