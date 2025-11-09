@@ -6,6 +6,7 @@ import { RootStackParamList } from '@/shared/types';
 import { getListById } from '@/features/vocabulary/utils/vocabularyLoader';
 import { useQuizStore } from '@/shared/store/quizStore';
 import { useSound } from '@/shared/hooks/useSound';
+import { useHaptics } from '@/shared/hooks/useHaptics';
 import { QuizHeader } from '../components/QuizHeader';
 import { QuestionDisplay } from '../components/QuestionDisplay';
 import { AnswerFeedback } from '../components/AnswerFeedback';
@@ -36,6 +37,9 @@ export default function QuizScreen({ navigation, route }: Props) {
 
   // Sound effects
   const { playCorrect, playWrong } = useSound();
+
+  // Haptic feedback
+  const { triggerLight, triggerMedium, triggerHeavy } = useHaptics();
 
   // Local state
   const [showExitDialog, setShowExitDialog] = useState(false);
@@ -102,11 +106,13 @@ export default function QuizScreen({ navigation, route }: Props) {
     setCorrectAnswer(result.correctAnswer);
     setShowFeedback(true);
 
-    // Play sound based on answer correctness
+    // Play sound and haptic feedback based on answer correctness
     if (result.isCorrect) {
       playCorrect();
+      triggerMedium();
     } else {
       playWrong();
+      triggerHeavy();
     }
   };
 
@@ -116,11 +122,13 @@ export default function QuizScreen({ navigation, route }: Props) {
     setCorrectAnswer(result.correctAnswer);
     setShowFeedback(true);
 
-    // Play sound based on answer correctness
+    // Play sound and haptic feedback based on answer correctness
     if (result.isCorrect) {
       playCorrect();
+      triggerMedium();
     } else {
       playWrong();
+      triggerHeavy();
     }
   };
 

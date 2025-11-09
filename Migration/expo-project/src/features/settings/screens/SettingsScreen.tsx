@@ -168,11 +168,6 @@ export default function SettingsScreen({ navigation }: Props) {
               />
             )}
           </Card>
-
-          <Spacer size="xs" />
-          <Typography variant="caption" color="secondary" style={styles.hint}>
-            Audio and haptics functionality coming in Phase 5
-          </Typography>
         </View>
 
         <Spacer size="lg" />
