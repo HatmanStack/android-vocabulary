@@ -100,6 +100,9 @@ All dependencies will be installed during this phase via npm/yarn. No pre-instal
 - [ ] App opens in web browser showing default Expo screen
 - [ ] TypeScript compilation works (no TS errors in App.tsx)
 
+**🔍 Code Review Questions:**
+> **Q1:** The verification checklist specifies "expo SDK 51+ and react-native 0.74+", but the implemented `package.json` shows expo ~54.0.23 and react-native 0.81.5. Which version numbering scheme is correct? Are these versions actually equivalent to what was specified, or is there a version mismatch that could affect compatibility with the documented requirements?
+
 **Testing Instructions:**
 
 Run these commands to verify setup:
@@ -284,6 +287,11 @@ chore(deps): install core dependencies
 - [ ] `npm run format` successfully formats files
 - [ ] `npm run type-check` runs TypeScript compiler in check mode
 - [ ] All scripts in package.json execute successfully
+
+**🔍 Code Review Questions:**
+> **Q2:** When running `npm run lint`, the tool fails with an error stating "ESLint couldn't find an eslint.config.(js|mjs|cjs) file" and warns that .eslintrc.js is no longer supported in ESLint v9. The package.json shows eslint ^8.57.1, but the actual installed version appears to be 9.39.1. How can the implementation use .eslintrc.js format when ESLint v9 requires the new flat config format (eslint.config.js)? Is there a version mismatch between what was specified and what was actually installed?
+>
+> **Q3:** When running `npm run type-check`, the compiler fails with numerous errors including "Cannot find global value 'Promise'", "Cannot use JSX unless the '--jsx' flag is provided", missing module declarations for core packages like 'react' and 'expo', and library target issues ("Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later"). The tsconfig.json extends "expo/tsconfig.base", which cannot be found because dependencies aren't installed. Why does TypeScript compilation fail so comprehensively if the verification checklist requires it to "show no TypeScript errors"? What configuration is missing from tsconfig.json to make it work standalone?
 
 **Testing Instructions:**
 
@@ -1223,6 +1231,14 @@ npm run android  # Should open Android emulator
 ```
 
 All commands should complete without errors.
+
+**🔍 Code Review Questions:**
+> **Q4:** The Integration Testing section states "All commands should complete without errors." However, when executing these commands:
+> - `npm run lint` fails with "ESLint couldn't find an eslint.config.(js|mjs|cjs) file" due to ESLint v9 incompatibility with .eslintrc.js
+> - `npm run type-check` fails with 150+ TypeScript errors including missing global types (Promise, Map, Set), JSX flag not set, missing module declarations for react/expo/react-native, and ES2015 library features unavailable
+> - `node_modules/` directory doesn't exist, suggesting dependencies were never installed (or need to be installed before testing)
+>
+> Given these widespread failures across core tooling, how can Phase 1 be considered complete? What fundamental configuration or installation steps were missed that would cause every quality check to fail?
 
 ### Manual Testing Checklist
 
