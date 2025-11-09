@@ -10,6 +10,7 @@ import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/typ
 import { useVocabularyStore } from './vocabularyStore';
 import { useAdaptiveDifficultyStore } from './adaptiveDifficultyStore';
 import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
+import { generateMultipleChoiceOptions } from '@/features/quiz/utils/questionGenerator';
 
 interface SessionStats {
   hintsUsed: number;
@@ -147,10 +148,13 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     // Determine question type based on word state
     const questionType = get().determineQuestionType(wordState);
 
+    // Generate options for multiple choice questions
+    const options = questionType === 'multiple' ? generateMultipleChoiceOptions(word, words) : undefined;
+
     const question: QuizQuestion = {
       word,
       type: questionType,
-      options: undefined, // Will be set in Task 6 for multiple choice
+      options,
     };
 
     set({
