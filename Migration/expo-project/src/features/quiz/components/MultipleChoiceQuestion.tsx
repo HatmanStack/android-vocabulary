@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from '@/shared/ui';
 
@@ -32,6 +32,16 @@ export function MultipleChoiceQuestion({
   selectedAnswer = null,
 }: MultipleChoiceQuestionProps) {
   const [isDisabled, setIsDisabled] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup timeout on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSelect = (answer: string) => {
     if (isDisabled) return;
@@ -40,8 +50,13 @@ export function MultipleChoiceQuestion({
     setIsDisabled(true);
     onSelectAnswer(answer);
 
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     // Re-enable after feedback animation (1.5s)
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setIsDisabled(false);
     }, 1800);
   };

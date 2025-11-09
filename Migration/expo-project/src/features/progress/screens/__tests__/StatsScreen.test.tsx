@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 import StatsScreen from '../StatsScreen';
@@ -47,24 +47,22 @@ describe('StatsScreen', () => {
   });
 
   it('displays stat cards with placeholder values', () => {
-    const { getByText } = renderWithProviders(
+    const { queryByText } = renderWithProviders(
       <StatsScreen navigation={mockNavigation as any} route={mockRoute as any} />
     );
 
     // Should show some stat labels
-    expect(getByText(/Words Learned/i) || getByText(/Lists Completed/i)).toBeTruthy();
+    expect(queryByText(/Words Learned/i) || queryByText(/Lists Completed/i)).toBeTruthy();
   });
 
   it('shows list progress section', () => {
-    const { getByText } = renderWithProviders(
+    const { queryByText } = renderWithProviders(
       <StatsScreen navigation={mockNavigation as any} route={mockRoute as any} />
     );
 
     // Should show at least one list name (A-H)
     const hasListName =
-      getByText(/List A/i) !== null ||
-      getByText(/List B/i) !== null ||
-      getByText(/Lists/i) !== null;
+      queryByText(/List A/i) || queryByText(/List B/i) || queryByText(/Lists/i);
     expect(hasListName).toBeTruthy();
   });
 

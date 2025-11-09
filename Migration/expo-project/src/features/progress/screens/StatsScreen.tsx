@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
 import { Appbar, SegmentedButtons } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList, Achievement } from '@/shared/types';
+import { RootStackParamList } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
 import { StatCard } from '../components/StatCard';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
@@ -18,7 +18,6 @@ export default function StatsScreen({ navigation }: Props) {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
-  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [chartView, setChartView] = useState<'progress' | 'heatmap'>('progress');
 
   // Determine number of columns for stat cards
@@ -166,10 +165,7 @@ export default function StatsScreen({ navigation }: Props) {
           <View style={styles.achievementGrid}>
             {achievements.map((achievement) => (
               <View key={achievement.id} style={styles.achievementItem}>
-                <AchievementBadge
-                  achievement={achievement}
-                  onPress={() => setSelectedAchievement(achievement)}
-                />
+                <AchievementBadge achievement={achievement} />
               </View>
             ))}
           </View>

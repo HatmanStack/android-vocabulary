@@ -65,7 +65,8 @@ describe('AnswerFeedback', () => {
   });
 
   it('calls onAnimationEnd when component becomes visible', () => {
-    // This test verifies the callback prop exists
+    jest.useFakeTimers();
+
     const { rerender } = renderWithProvider(
       <AnswerFeedback isCorrect={true} isVisible={false} onAnimationEnd={mockOnAnimationEnd} />
     );
@@ -77,8 +78,12 @@ describe('AnswerFeedback', () => {
       </PaperProvider>
     );
 
-    // The animation end callback should be called after animation completes
-    // In a real scenario, this would be tested with timers or animation mocking
-    expect(mockOnAnimationEnd).toBeDefined();
+    // Fast-forward time to trigger the animation end callback (1500ms + animation duration)
+    jest.advanceTimersByTime(2000);
+
+    // The animation end callback should have been called
+    expect(mockOnAnimationEnd).toHaveBeenCalled();
+
+    jest.useRealTimers();
   });
 });

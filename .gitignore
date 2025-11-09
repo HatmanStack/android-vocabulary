@@ -7,6 +7,5 @@ app/src/main/res/values/secrets.xml
 local.properties
 node_modules/
 package-lock.json
-package.json
 
 

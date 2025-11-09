@@ -14,6 +14,9 @@ interface WordMasteryHeatmapProps {
 }
 
 export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProps) {
+  // Human-friendly labels for word states
+  const stateLabels = ['Not Started', 'Seen', 'Learning', 'Mastered'];
+
   // Get color for word state
   const getStateColor = (state: number): string => {
     switch (state) {
@@ -28,6 +31,11 @@ export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProp
       default:
         return '#E0E0E0';
     }
+  };
+
+  // Get human-friendly label for word state
+  const getStateLabel = (state: number): string => {
+    return stateLabels[state] || 'Unknown';
   };
 
   // Organize words by list and level
@@ -105,7 +113,7 @@ export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProp
                     <View
                       key={`${word.wordId}-${index}`}
                       style={[styles.wordDot, { backgroundColor: getStateColor(word.state) }]}
-                      accessibilityLabel={`Word ${index + 1}, state ${word.state}`}
+                      accessibilityLabel={`Word ${index + 1}, ${getStateLabel(word.state)}`}
                     />
                   ))}
                 </View>

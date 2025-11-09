@@ -95,9 +95,9 @@ describe('WordMasteryHeatmap', () => {
 
     const { getByLabelText } = render(<WordMasteryHeatmap listLevelProgress={mockProgress} />);
 
-    expect(getByLabelText('Word 1, state 0')).toBeTruthy();
-    expect(getByLabelText('Word 2, state 1')).toBeTruthy();
-    expect(getByLabelText('Word 3, state 2')).toBeTruthy();
+    expect(getByLabelText('Word 1, Not Started')).toBeTruthy();
+    expect(getByLabelText('Word 2, Seen')).toBeTruthy();
+    expect(getByLabelText('Word 3, Learning')).toBeTruthy();
   });
 
   it('handles multiple lists and levels', () => {
@@ -195,11 +195,11 @@ describe('WordMasteryHeatmap', () => {
 
     const { getByLabelText } = render(<WordMasteryHeatmap listLevelProgress={mockProgress} />);
 
-    // All 4 words should be rendered
-    expect(getByLabelText('Word 1, state 0')).toBeTruthy();
-    expect(getByLabelText('Word 2, state 1')).toBeTruthy();
-    expect(getByLabelText('Word 3, state 2')).toBeTruthy();
-    expect(getByLabelText('Word 4, state 3')).toBeTruthy();
+    // All 4 words should be rendered with human-friendly accessibility labels
+    expect(getByLabelText('Word 1, Not Started')).toBeTruthy();
+    expect(getByLabelText('Word 2, Seen')).toBeTruthy();
+    expect(getByLabelText('Word 3, Learning')).toBeTruthy();
+    expect(getByLabelText('Word 4, Mastered')).toBeTruthy();
   });
 
   it('renders with ScrollView for horizontal scrolling', () => {
