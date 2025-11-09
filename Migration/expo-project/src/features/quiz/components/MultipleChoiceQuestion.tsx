@@ -43,6 +43,17 @@ export function MultipleChoiceQuestion({
     };
   }, []);
 
+  // Reset state when options change (new question)
+  useEffect(() => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    // Re-enable buttons for new question
+    setIsDisabled(false);
+  }, [options]);
+
   const handleSelect = (answer: string) => {
     if (isDisabled) return;
 

@@ -20,19 +20,8 @@ export const AchievementBadge = React.memo(function AchievementBadge({
 }: AchievementBadgeProps) {
   const isLocked = !achievement.isUnlocked;
 
-  return (
-    <TouchableOpacity
-      style={[styles.container, isLocked && styles.locked]}
-      onPress={onPress}
-      activeOpacity={0.7}
-      accessibilityRole="button"
-      accessibilityLabel={
-        isLocked
-          ? `${achievement.name} - Locked - ${achievement.description}`
-          : `${achievement.name} - Unlocked - ${achievement.description}`
-      }
-      accessibilityHint={isLocked ? 'Tap to view unlock requirements' : 'Tap to view details'}
-    >
+  const content = (
+    <>
       {/* Icon */}
       <View style={[styles.iconContainer, isLocked && styles.iconLocked]}>
         <Typography variant="heading1" style={styles.icon}>
@@ -54,7 +43,39 @@ export const AchievementBadge = React.memo(function AchievementBadge({
 
       {/* Unlocked indicator */}
       {achievement.isUnlocked && <View style={styles.unlockedBadge} />}
-    </TouchableOpacity>
+    </>
+  );
+
+  if (onPress) {
+    return (
+      <TouchableOpacity
+        style={[styles.container, isLocked && styles.locked]}
+        onPress={onPress}
+        activeOpacity={0.7}
+        accessibilityRole="button"
+        accessibilityLabel={
+          isLocked
+            ? `${achievement.name} - Locked - ${achievement.description}`
+            : `${achievement.name} - Unlocked - ${achievement.description}`
+        }
+        accessibilityHint={isLocked ? 'Tap to view unlock requirements' : 'Tap to view details'}
+      >
+        {content}
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <View
+      style={[styles.container, isLocked && styles.locked]}
+      accessibilityLabel={
+        isLocked
+          ? `${achievement.name} - Locked - ${achievement.description}`
+          : `${achievement.name} - Unlocked - ${achievement.description}`
+      }
+    >
+      {content}
+    </View>
   );
 });
 

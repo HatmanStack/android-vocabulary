@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, act } from '@testing-library/react-native';
 import { PaperProvider } from 'react-native-paper';
 import { AnswerFeedback } from '../AnswerFeedback';
 
@@ -79,7 +79,9 @@ describe('AnswerFeedback', () => {
     );
 
     // Fast-forward time to trigger the animation end callback (1500ms + animation duration)
-    jest.advanceTimersByTime(2000);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
 
     // The animation end callback should have been called
     expect(mockOnAnimationEnd).toHaveBeenCalled();

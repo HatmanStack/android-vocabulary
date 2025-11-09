@@ -24,6 +24,19 @@ export default function StatsScreen({ navigation }: Props) {
   // 2 columns on mobile, 3-4 on tablet/web
   const numStatColumns = width >= 900 ? 4 : width >= 600 ? 3 : 2;
 
+  // Calculate proper flexBasis for stat cards accounting for gaps
+  const getStatCardFlex = () => {
+    switch (numStatColumns) {
+      case 4:
+        return '23%'; // 4 cards with 3 gaps
+      case 3:
+        return '31%'; // 3 cards with 2 gaps
+      case 2:
+      default:
+        return '48%'; // 2 cards with 1 gap
+    }
+  };
+
   // Get real stats from progressStore
   const globalStats = progressStore.getGlobalStats();
   const stats = {
@@ -59,13 +72,8 @@ export default function StatsScreen({ navigation }: Props) {
         <Spacer size="lg" />
 
         {/* Key Metrics Grid */}
-        <View style={[styles.statsGrid, { gap: 12 }]}>
-          <View
-            style={[
-              styles.statItem,
-              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
-            ]}
-          >
+        <View style={styles.statsGrid}>
+          <View style={[styles.statItem, { flexBasis: getStatCardFlex() }]}>
             <StatCard
               icon="book-outline"
               label="Words Learned"
@@ -74,12 +82,7 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View
-            style={[
-              styles.statItem,
-              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
-            ]}
-          >
+          <View style={[styles.statItem, { flexBasis: getStatCardFlex() }]}>
             <StatCard
               icon="check-circle-outline"
               label="Lists Completed"
@@ -88,12 +91,7 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View
-            style={[
-              styles.statItem,
-              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
-            ]}
-          >
+          <View style={[styles.statItem, { flexBasis: getStatCardFlex() }]}>
             <StatCard
               icon="lightbulb-outline"
               label="Total Hints"
@@ -102,12 +100,7 @@ export default function StatsScreen({ navigation }: Props) {
             />
           </View>
 
-          <View
-            style={[
-              styles.statItem,
-              { width: numStatColumns === 2 ? '48%' : `${100 / numStatColumns - 2}%` },
-            ]}
-          >
+          <View style={[styles.statItem, { flexBasis: getStatCardFlex() }]}>
             <StatCard
               icon="close-circle-outline"
               label="Wrong Answers"
@@ -253,10 +246,11 @@ const styles = StyleSheet.create({
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    gap: 12,
   },
   statItem: {
-    marginBottom: 12,
+    flexGrow: 1,
   },
   section: {
     width: '100%',
