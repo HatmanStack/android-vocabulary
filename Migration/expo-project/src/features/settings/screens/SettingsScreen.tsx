@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Platform, Alert, TextInput } from 'react-native';
-import { Appbar, Dialog, Portal } from 'react-native-paper';
+import { Appbar, Dialog, Portal, Menu } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { SettingItem } from '../components/SettingItem';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { useSettingsStore } from '@/shared/store/settingsStore';
 import { exportProgress, importProgress, applyImportedProgress } from '../utils/progressExport';
 
 type Props = StackScreenProps<RootStackParamList, 'Settings'>;
 
 export default function SettingsScreen({ navigation }: Props) {
-  // Setting states (non-functional in Phase 2, functionality in Phase 5)
-  const [theme] = useState('Light');
-  const [soundEnabled, setSoundEnabled] = useState(true);
-  const [hapticsEnabled, setHapticsEnabled] = useState(true);
+  const progressStore = useProgressStore();
+  const settingsStore = useSettingsStore();
+
+  // Local state for dialogs
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
   const [importDialogVisible, setImportDialogVisible] = useState(false);
   const [importData, setImportData] = useState('');
   const [importPreview, setImportPreview] = useState<any>(null);
+  const [themeMenuVisible, setThemeMenuVisible] = useState(false);
 
-  const progressStore = useProgressStore();
+  // Get settings from store
+  const theme = settingsStore.theme;
+  const soundEnabled = settingsStore.soundEnabled;
+  const hapticsEnabled = settingsStore.hapticsEnabled;
 
   const handleThemeChange = () => {
-    // Phase 5 will implement theme switching
-    console.log('Theme setting tapped');
+    setThemeMenuVisible(true);
   };
 
   const handleSoundToggle = (value: boolean | string) => {
-    setSoundEnabled(value as boolean);
-    // Phase 5 will implement sound effects
+    settingsStore.setSoundEnabled(value as boolean);
   };
 
   const handleHapticsToggle = (value: boolean | string) => {
-    setHapticsEnabled(value as boolean);
-    // Phase 5 will implement haptic feedback
+    settingsStore.setHapticsEnabled(value as boolean);
   };
 
   const handleResetAllProgress = () => {
@@ -102,19 +104,42 @@ export default function SettingsScreen({ navigation }: Props) {
           <Spacer size="sm" />
 
           <Card elevation="low" style={styles.card}>
-            <SettingItem
-              label="Theme"
-              type="select"
-              value={theme}
-              onChange={handleThemeChange}
-              showDivider={false}
-            />
+            <Menu
+              visible={themeMenuVisible}
+              onDismiss={() => setThemeMenuVisible(false)}
+              anchor={
+                <SettingItem
+                  label="Theme"
+                  type="select"
+                  value={theme.charAt(0).toUpperCase() + theme.slice(1)}
+                  onChange={handleThemeChange}
+                  showDivider={false}
+                />
+              }
+            >
+              <Menu.Item
+                onPress={() => {
+                  settingsStore.setTheme('light');
+                  setThemeMenuVisible(false);
+                }}
+                title="Light"
+              />
+              <Menu.Item
+                onPress={() => {
+                  settingsStore.setTheme('dark');
+                  setThemeMenuVisible(false);
+                }}
+                title="Dark"
+              />
+              <Menu.Item
+                onPress={() => {
+                  settingsStore.setTheme('auto');
+                  setThemeMenuVisible(false);
+                }}
+                title="Auto (System)"
+              />
+            </Menu>
           </Card>
-
-          <Spacer size="xs" />
-          <Typography variant="caption" color="secondary" style={styles.hint}>
-            Theme switching coming in Phase 5
-          </Typography>
         </View>
 
         <Spacer size="lg" />
