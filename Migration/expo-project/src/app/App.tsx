@@ -1,6 +1,11 @@
 import React from 'react';
+import Providers from './providers';
 import Navigation from './navigation';
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <Providers>
+      <Navigation />
+    </Providers>
+  );
 }
