@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Button, Surface, Chip } from 'react-native-paper';
+import { Portal, Dialog, Button as PaperButton } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { getLevelWords, getListById } from '@/features/vocabulary/utils/vocabularyLoader';
+import { QuizHeader } from '../components/QuizHeader';
+import { QuestionDisplay } from '../components/QuestionDisplay';
+import { AnswerFeedback } from '../components/AnswerFeedback';
+import { Typography, Spacer } from '@/shared/ui';
 
 type Props = StackScreenProps<RootStackParamList, 'Quiz'>;
 
@@ -12,55 +16,118 @@ export default function QuizScreen({ navigation, route }: Props) {
   const list = getListById(listId);
   const words = getLevelWords(listId, levelId);
 
-  const handleCompleteQuiz = () => {
-    navigation.navigate('Graduation', {
-      listId,
-      levelId,
-      stats: {
-        hints: 2,
-        wrong: 1,
-        bestHints: 1,
-        bestWrong: 0,
-      },
-    });
+  // Quiz state (placeholder for Phase 3)
+  const [currentIndex] = useState(0);
+  const [hintsUsed] = useState(0);
+  const [wrongAnswers] = useState(0);
+  const [showExitDialog, setShowExitDialog] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(true);
+
+  // Get first word for placeholder display
+  const currentWord = words[currentIndex];
+
+  if (!list || !currentWord) {
+    return (
+      <View style={styles.container}>
+        <Typography variant="body">
+          Quiz data not found. Please return to home.
+        </Typography>
+      </View>
+    );
+  }
+
+  const handleExit = () => {
+    setShowExitDialog(true);
+  };
+
+  const handleConfirmExit = () => {
+    setShowExitDialog(false);
+    navigation.goBack();
+  };
+
+  const handleCancelExit = () => {
+    setShowExitDialog(false);
+  };
+
+  // Test function for feedback animation (remove in Phase 3)
+  const handleTestFeedback = (correct: boolean) => {
+    setIsCorrect(correct);
+    setShowFeedback(true);
   };
 
   return (
     <View style={styles.container}>
-      <Surface style={styles.surface} elevation={2}>
-        <Text variant="headlineMedium" style={styles.title}>
-          Quiz Mode
-        </Text>
-        <View style={styles.info}>
-          <Chip icon="book" style={styles.chip}>
-            {list?.name}
-          </Chip>
-          <Chip icon="trophy" style={styles.chip}>
-            {levelId.charAt(0).toUpperCase() + levelId.slice(1)}
-          </Chip>
+      <QuizHeader
+        listName={list.name}
+        levelName={levelId.charAt(0).toUpperCase() + levelId.slice(1)}
+        currentIndex={currentIndex}
+        totalWords={words.length}
+        hintsUsed={hintsUsed}
+        wrongAnswers={wrongAnswers}
+        onExit={handleExit}
+      />
+
+      <View style={styles.content}>
+        <Spacer size="lg" />
+
+        <QuestionDisplay
+          questionText={currentWord.definition}
+          type="multiple"
+        />
+
+        <Spacer size="lg" />
+
+        <View style={styles.placeholderSection}>
+          <Typography variant="body" color="secondary" align="center">
+            Answer options will appear here
+          </Typography>
+          <Spacer size="md" />
+          <Typography variant="caption" color="secondary" align="center">
+            (MultipleChoice and FillInBlank components in Task 5)
+          </Typography>
+          <Spacer size="lg" />
+
+          {/* Temporary test buttons for feedback animation */}
+          <View style={styles.testButtons}>
+            <PaperButton
+              mode="outlined"
+              onPress={() => handleTestFeedback(true)}
+            >
+              Test Correct
+            </PaperButton>
+            <Spacer size="sm" />
+            <PaperButton
+              mode="outlined"
+              onPress={() => handleTestFeedback(false)}
+            >
+              Test Wrong
+            </PaperButton>
+          </View>
         </View>
-        <Text variant="bodyLarge" style={styles.wordCount}>
-          {words.length} words to master
-        </Text>
-        <Text variant="bodyMedium" style={styles.placeholder}>
-          Quiz functionality will be implemented in Phase 3
-        </Text>
-        <Text variant="bodySmall" style={styles.note}>
-          This screen will feature:
-        </Text>
-        <Text variant="bodySmall" style={styles.note}>
-          • Multiple choice questions
-        </Text>
-        <Text variant="bodySmall" style={styles.note}>
-          • Fill-in-the-blank exercises
-        </Text>
-        <Text variant="bodySmall" style={styles.note}>
-          • Adaptive difficulty
-        </Text>
-        <Button mode="contained" onPress={handleCompleteQuiz} style={styles.button}>
-          Skip to Results (Placeholder)
-        </Button>
-      </Surface>
+
+        <AnswerFeedback
+          isCorrect={isCorrect}
+          isVisible={showFeedback}
+          onAnimationEnd={() => setShowFeedback(false)}
+        />
+      </View>
+
+      {/* Exit confirmation dialog */}
+      <Portal>
+        <Dialog visible={showExitDialog} onDismiss={handleCancelExit}>
+          <Dialog.Title>Exit Quiz?</Dialog.Title>
+          <Dialog.Content>
+            <Typography variant="body">
+              Your progress will be lost if you exit now. Are you sure?
+            </Typography>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <PaperButton onPress={handleCancelExit}>Cancel</PaperButton>
+            <PaperButton onPress={handleConfirmExit}>Exit</PaperButton>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </View>
   );
 }
@@ -68,40 +135,17 @@ export default function QuizScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'center',
+    backgroundColor: '#F5F5F5',
   },
-  surface: {
-    padding: 24,
-    borderRadius: 8,
+  content: {
+    flex: 1,
   },
-  title: {
-    marginBottom: 16,
-    textAlign: 'center',
+  placeholderSection: {
+    paddingHorizontal: 24,
+    alignItems: 'center',
   },
-  info: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginBottom: 16,
-  },
-  chip: {
-    marginHorizontal: 4,
-  },
-  wordCount: {
-    textAlign: 'center',
-    marginBottom: 16,
-  },
-  placeholder: {
-    marginVertical: 16,
-    textAlign: 'center',
-    opacity: 0.7,
-  },
-  note: {
-    marginVertical: 4,
-    opacity: 0.6,
-  },
-  button: {
-    marginTop: 24,
+  testButtons: {
+    width: '100%',
+    maxWidth: 300,
   },
 });
