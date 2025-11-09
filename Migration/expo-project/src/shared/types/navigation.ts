@@ -18,4 +18,5 @@ export type RootStackParamList = {
   };
   Stats: undefined;
   Settings: undefined;
+  Help: undefined;
 };

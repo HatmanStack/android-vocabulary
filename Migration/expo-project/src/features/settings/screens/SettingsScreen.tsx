@@ -226,6 +226,17 @@ export default function SettingsScreen({ navigation }: Props) {
 
           <Card elevation="low" style={styles.card}>
             <View style={styles.infoRow}>
+              <Typography variant="body">Help & FAQ</Typography>
+              <Button variant="text" onPress={() => navigation.navigate('Help')}>
+                View
+              </Button>
+            </View>
+          </Card>
+
+          <Spacer size="sm" />
+
+          <Card elevation="low" style={styles.card}>
+            <View style={styles.infoRow}>
               <Typography variant="body">App Version</Typography>
               <Typography variant="body" color="secondary">
                 2.0.0

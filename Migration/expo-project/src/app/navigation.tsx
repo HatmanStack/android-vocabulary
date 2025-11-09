@@ -16,6 +16,7 @@ import QuizScreen from '@/features/quiz/screens/QuizScreen';
 import GraduationScreen from '@/features/quiz/screens/GraduationScreen';
 import StatsScreen from '@/features/progress/screens/StatsScreen';
 import SettingsScreen from '@/features/settings/screens/SettingsScreen';
+import HelpScreen from '@/features/help/screens/HelpScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -86,6 +87,14 @@ export default function Navigation() {
           options={{
             ...modalScreenOptions,
             title: 'Settings',
+          }}
+        />
+        <Stack.Screen
+          name="Help"
+          component={HelpScreen}
+          options={{
+            ...modalScreenOptions,
+            title: 'Help',
           }}
         />
       </Stack.Navigator>
