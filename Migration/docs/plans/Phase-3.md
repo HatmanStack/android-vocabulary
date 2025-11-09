@@ -1249,6 +1249,49 @@ npm test               # All tests pass (unit + integration)
 npm test -- --coverage # >85% coverage for quiz logic
 ```
 
+**🔍 Code Review Questions:**
+
+> **Q1 - Test Failures:** Running `npm test` shows 17 failed tests out of 155 total:
+> - adaptiveDifficultyStore tests: 4 failures (lines 18-26 in test file)
+> - quizStore tests: 12 failures (incrementCorrect, incrementWrong, incrementHints, etc.)
+> - QuizScreen tests: 1 failure
+>
+> **Consider:** In the failing tests like `adaptiveDifficultyStore.test.ts:18`, the pattern is:
+> ```typescript
+> const store = useAdaptiveDifficultyStore.getState();
+> store.updatePerformance('multiple', true);
+> expect(store.multipleChoiceAttempts).toBe(1); // ❌ Receives 0, expects 1
+> ```
+> After calling `updatePerformance()`, the `store` variable still holds the old snapshot. How can you access the updated state after mutations in Zustand? Should you call `getState()` again to get fresh state?
+>
+> **Think about:** Lines 1052-1061 specify all tests should pass. Are these test implementation issues or logic bugs in the stores themselves?
+
+> **Q2 - Test Coverage Below Target:** Running `npm run test:coverage` shows quiz logic coverage:
+> - features/quiz/utils: 100% ✓ (excellent)
+> - adaptiveDifficultyStore.ts: 96.87% ✓ (great)
+> - quizStore.ts: 68.47% ✗ (target: >85%)
+> - vocabularyStore.ts: 23.07% ✗ (target: >85%)
+>
+> **Reflect:** The specification at line 1058 requires ">85% coverage for quiz logic". The quiz store and vocabulary store are core quiz logic components. Should additional tests be written for:
+> - quizStore: Line coverage gaps at 66-67, 104-105, 110-111, 136, 141-142, 181-182, 196, 207-230, 241
+> - vocabularyStore: Most functions untested (lines 62-110, 120)
+
+> **Q3 - Formatting Issues:** Running `npm run format:check` reports:
+> ```
+> [warn] src/shared/lib/levenshtein.ts
+> [warn] src/shared/store/adaptiveDifficultyStore.ts
+> [warn] src/shared/store/quizStore.ts
+> Code style issues found in 3 files.
+> ```
+> **Consider:** The quality check at line 1246 expects formatting to pass. Should `npm run format` be executed on these Phase 3 files before committing?
+
+> **Q4 - TypeScript Errors Persist:** Running `npm run type-check` still shows 2 errors from Phase 1:
+> ```
+> scripts/parseXmlToJson.ts(13,29): Missing declaration for 'xml2js'
+> scripts/parseXmlToJson.ts(66,30): Parameter 'err' implicitly has 'any' type
+> ```
+> **Think about:** While these errors are in migration scripts (not Phase 3 code), line 1247 requires type-check to pass. This was flagged in Phase 2 review (Q2). Should this be resolved before Phase 3 approval, or is it acceptable to have these legacy errors?
+
 ### Functional Verification
 
 - [ ] Quiz starts with first question
