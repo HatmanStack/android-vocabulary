@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Portal, Dialog, Button as PaperButton } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
@@ -7,7 +7,9 @@ import { getLevelWords, getListById } from '@/features/vocabulary/utils/vocabula
 import { QuizHeader } from '../components/QuizHeader';
 import { QuestionDisplay } from '../components/QuestionDisplay';
 import { AnswerFeedback } from '../components/AnswerFeedback';
-import { Typography, Spacer } from '@/shared/ui';
+import { MultipleChoiceQuestion } from '../components/MultipleChoiceQuestion';
+import { FillInBlankQuestion } from '../components/FillInBlankQuestion';
+import { Typography, Spacer, Button } from '@/shared/ui';
 
 type Props = StackScreenProps<RootStackParamList, 'Quiz'>;
 
@@ -24,8 +26,24 @@ export default function QuizScreen({ navigation, route }: Props) {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(true);
 
-  // Get first word for placeholder display
+  // Demo: Toggle between question types
+  const [questionType, setQuestionType] = useState<'multiple' | 'fillin'>('multiple');
+
+  // Get first word and create dummy data
   const currentWord = words[currentIndex];
+
+  // Create dummy multiple choice options (current word + 3 others)
+  const dummyOptions = currentWord
+    ? [
+        currentWord.word,
+        words[1]?.word || 'option2',
+        words[2]?.word || 'option3',
+        words[3]?.word || 'option4',
+      ].sort(() => Math.random() - 0.5) // Shuffle
+    : [];
+
+  // Create dummy fill-in-blank sentence
+  const dummySentence = currentWord?.fillInBlank || `The word is _____.`;
 
   if (!list || !currentWord) {
     return (
@@ -50,14 +68,35 @@ export default function QuizScreen({ navigation, route }: Props) {
     setShowExitDialog(false);
   };
 
-  // Test function for feedback animation (remove in Phase 3)
-  const handleTestFeedback = (correct: boolean) => {
-    setIsCorrect(correct);
+  const handleSelectAnswer = (answer: string) => {
+    console.log('Selected answer:', answer);
+    // Placeholder: Show feedback (Phase 3 will validate)
+    setIsCorrect(answer === currentWord.word);
     setShowFeedback(true);
   };
 
+  const handleSubmitAnswer = (answer: string) => {
+    console.log('Submitted answer:', answer);
+    // Placeholder: Show feedback (Phase 3 will validate)
+    setIsCorrect(answer.toLowerCase() === currentWord.word.toLowerCase());
+    setShowFeedback(true);
+  };
+
+  const handleUseHint = () => {
+    console.log('Hint used');
+    // Phase 3 will implement hint logic
+  };
+
+  const toggleQuestionType = () => {
+    setQuestionType((prev) => (prev === 'multiple' ? 'fillin' : 'multiple'));
+  };
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={0}
+    >
       <QuizHeader
         listName={list.name}
         levelName={levelId.charAt(0).toUpperCase() + levelId.slice(1)}
@@ -68,50 +107,55 @@ export default function QuizScreen({ navigation, route }: Props) {
         onExit={handleExit}
       />
 
-      <View style={styles.content}>
-        <Spacer size="lg" />
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+        <Spacer size="md" />
 
         <QuestionDisplay
-          questionText={currentWord.definition}
-          type="multiple"
+          questionText={
+            questionType === 'multiple'
+              ? currentWord.definition
+              : `Fill in the blank: ${dummySentence}`
+          }
+          type={questionType}
         />
 
         <Spacer size="lg" />
 
-        <View style={styles.placeholderSection}>
-          <Typography variant="body" color="secondary" align="center">
-            Answer options will appear here
-          </Typography>
-          <Spacer size="md" />
-          <Typography variant="caption" color="secondary" align="center">
-            (MultipleChoice and FillInBlank components in Task 5)
-          </Typography>
-          <Spacer size="lg" />
+        {/* Render appropriate question type */}
+        {questionType === 'multiple' ? (
+          <MultipleChoiceQuestion
+            options={dummyOptions}
+            onSelectAnswer={handleSelectAnswer}
+          />
+        ) : (
+          <FillInBlankQuestion
+            sentence={dummySentence}
+            onSubmitAnswer={handleSubmitAnswer}
+            onUseHint={handleUseHint}
+          />
+        )}
 
-          {/* Temporary test buttons for feedback animation */}
-          <View style={styles.testButtons}>
-            <PaperButton
-              mode="outlined"
-              onPress={() => handleTestFeedback(true)}
-            >
-              Test Correct
-            </PaperButton>
-            <Spacer size="sm" />
-            <PaperButton
-              mode="outlined"
-              onPress={() => handleTestFeedback(false)}
-            >
-              Test Wrong
-            </PaperButton>
-          </View>
+        <Spacer size="lg" />
+
+        {/* Demo toggle button */}
+        <View style={styles.toggleSection}>
+          <Typography variant="caption" color="secondary" align="center">
+            Demo: Toggle question type
+          </Typography>
+          <Spacer size="sm" />
+          <Button variant="text" onPress={toggleQuestionType}>
+            Switch to {questionType === 'multiple' ? 'Fill-in-Blank' : 'Multiple Choice'}
+          </Button>
         </View>
 
-        <AnswerFeedback
-          isCorrect={isCorrect}
-          isVisible={showFeedback}
-          onAnimationEnd={() => setShowFeedback(false)}
-        />
-      </View>
+        <Spacer size="xl" />
+      </ScrollView>
+
+      <AnswerFeedback
+        isCorrect={isCorrect}
+        isVisible={showFeedback}
+        onAnimationEnd={() => setShowFeedback(false)}
+      />
 
       {/* Exit confirmation dialog */}
       <Portal>
@@ -128,7 +172,7 @@ export default function QuizScreen({ navigation, route }: Props) {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -137,15 +181,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  content: {
+  scrollView: {
     flex: 1,
   },
-  placeholderSection: {
+  scrollContent: {
+    paddingBottom: 24,
+  },
+  toggleSection: {
     paddingHorizontal: 24,
     alignItems: 'center',
-  },
-  testButtons: {
-    width: '100%',
-    maxWidth: 300,
   },
 });
