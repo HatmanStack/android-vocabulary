@@ -33,6 +33,8 @@ interface TypographyProps {
   children: React.ReactNode;
   /** Custom styles */
   style?: StyleProp<TextStyle>;
+  /** Enable font scaling for accessibility (default: true) */
+  allowFontScaling?: boolean;
 }
 
 const VARIANT_MAP: Record<TypographyVariant, string> = {
@@ -50,6 +52,7 @@ export function Typography({
   align = 'left',
   children,
   style,
+  allowFontScaling = true,
 }: TypographyProps) {
   const theme = useTheme();
 
@@ -68,11 +71,18 @@ export function Typography({
     }
   };
 
+  // Set accessibility role for headings
+  const getAccessibilityRole = (): 'header' | 'text' => {
+    return variant.startsWith('heading') ? 'header' : 'text';
+  };
+
   return (
     <PaperText
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       variant={VARIANT_MAP[variant] as any}
       style={[{ color: getColor(), textAlign: align }, style]}
+      allowFontScaling={allowFontScaling}
+      accessibilityRole={getAccessibilityRole()}
     >
       {children}
     </PaperText>

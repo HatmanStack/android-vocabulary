@@ -48,6 +48,8 @@ interface ButtonProps {
   style?: StyleProp<ViewStyle>;
   /** Accessibility label for screen readers */
   accessibilityLabel?: string;
+  /** Accessibility hint describing what happens when the button is pressed */
+  accessibilityHint?: string;
 }
 
 const SIZE_CONTENT_STYLE: Record<ButtonSize, ViewStyle> = {
@@ -67,6 +69,7 @@ export function Button({
   children,
   style,
   accessibilityLabel,
+  accessibilityHint,
 }: ButtonProps) {
   const handlePress = useCallback(() => {
     if (!loading && !disabled && onPress) {
@@ -89,6 +92,10 @@ export function Button({
 
   const buttonStyles = [fullWidth && styles.fullWidth, style];
 
+  // Use children as accessibilityLabel if not provided
+  const a11yLabel =
+    accessibilityLabel || (typeof children === 'string' ? children : undefined);
+
   return (
     <PaperButton
       mode={getMode()}
@@ -98,7 +105,9 @@ export function Button({
       icon={icon}
       contentStyle={SIZE_CONTENT_STYLE[size]}
       style={buttonStyles}
-      accessibilityLabel={accessibilityLabel}
+      accessibilityLabel={a11yLabel}
+      accessibilityHint={accessibilityHint}
+      accessibilityRole="button"
     >
       {children}
     </PaperButton>

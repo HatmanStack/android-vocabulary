@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated, Modal, TouchableWithoutFeedback } from 'react-native';
 import { Achievement } from '@/shared/types';
 import { Typography, Button, Spacer } from '@/shared/ui';
+import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 
 interface AchievementUnlockModalProps {
   achievement: Achievement | null;
@@ -20,11 +21,19 @@ export function AchievementUnlockModal({
   visible,
   onDismiss,
 }: AchievementUnlockModalProps) {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.5)).current;
+  const reducedMotion = useReducedMotion();
+  const fadeAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
+  const scaleAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0.5)).current;
 
   useEffect(() => {
     if (visible && achievement) {
+      // Skip animations if reduced motion is enabled
+      if (reducedMotion) {
+        fadeAnim.setValue(1);
+        scaleAnim.setValue(1);
+        return;
+      }
+
       // Animate in
       Animated.parallel([
         Animated.timing(fadeAnim, {
@@ -41,10 +50,10 @@ export function AchievementUnlockModal({
       ]).start();
     } else {
       // Reset animations
-      fadeAnim.setValue(0);
-      scaleAnim.setValue(0.5);
+      fadeAnim.setValue(reducedMotion ? 1 : 0);
+      scaleAnim.setValue(reducedMotion ? 1 : 0.5);
     }
-  }, [visible, achievement]);
+  }, [visible, achievement, reducedMotion]);
 
   if (!achievement) return null;
 

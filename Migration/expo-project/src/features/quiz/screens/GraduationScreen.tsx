@@ -7,6 +7,7 @@ import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useSound } from '@/shared/hooks/useSound';
 import { useHaptics } from '@/shared/hooks/useHaptics';
+import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 import { AchievementUnlockModal } from '@/features/progress/components/AchievementUnlockModal';
 
 type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
@@ -16,19 +17,25 @@ export default function GraduationScreen({ navigation, route }: Props) {
   const progressStore = useProgressStore();
   const { playComplete } = useSound();
   const { triggerSuccess } = useHaptics();
+  const reducedMotion = useReducedMotion();
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
   const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([]);
   const [currentAchievementIndex, setCurrentAchievementIndex] = useState(0);
 
-  // Animation refs
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  // Animation refs (start at final values if reduced motion)
+  const fadeAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
+  const scaleAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0.8)).current;
 
   // Celebration animation on mount
   useEffect(() => {
     // Play completion sound and haptic feedback
     playComplete();
     triggerSuccess();
+
+    // Skip animations if reduced motion is enabled
+    if (reducedMotion) {
+      return;
+    }
 
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -42,7 +49,7 @@ export default function GraduationScreen({ navigation, route }: Props) {
         useNativeDriver: true,
       }),
     ]).start();
-  }, [fadeAnim, scaleAnim]);
+  }, [fadeAnim, scaleAnim, reducedMotion]);
 
   // Check for achievements on mount
   useEffect(() => {
