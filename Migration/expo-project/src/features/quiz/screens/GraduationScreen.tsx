@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList, Achievement } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { useSound } from '@/shared/hooks/useSound';
 import { AchievementUnlockModal } from '@/features/progress/components/AchievementUnlockModal';
 
 type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
@@ -12,6 +13,7 @@ type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
 export default function GraduationScreen({ navigation, route }: Props) {
   const { listId, levelId, stats } = route.params;
   const progressStore = useProgressStore();
+  const { playComplete } = useSound();
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
   const [unlockedAchievements, setUnlockedAchievements] = useState<Achievement[]>([]);
   const [currentAchievementIndex, setCurrentAchievementIndex] = useState(0);
@@ -22,6 +24,9 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
   // Celebration animation on mount
   useEffect(() => {
+    // Play completion sound
+    playComplete();
+
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,

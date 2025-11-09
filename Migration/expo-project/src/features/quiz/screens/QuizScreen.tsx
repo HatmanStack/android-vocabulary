@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
 import { getListById } from '@/features/vocabulary/utils/vocabularyLoader';
 import { useQuizStore } from '@/shared/store/quizStore';
+import { useSound } from '@/shared/hooks/useSound';
 import { QuizHeader } from '../components/QuizHeader';
 import { QuestionDisplay } from '../components/QuestionDisplay';
 import { AnswerFeedback } from '../components/AnswerFeedback';
@@ -32,6 +33,9 @@ export default function QuizScreen({ navigation, route }: Props) {
     isQuizComplete,
     endQuiz,
   } = useQuizStore();
+
+  // Sound effects
+  const { playCorrect, playWrong } = useSound();
 
   // Local state
   const [showExitDialog, setShowExitDialog] = useState(false);
@@ -97,6 +101,13 @@ export default function QuizScreen({ navigation, route }: Props) {
     setIsCorrect(result.isCorrect);
     setCorrectAnswer(result.correctAnswer);
     setShowFeedback(true);
+
+    // Play sound based on answer correctness
+    if (result.isCorrect) {
+      playCorrect();
+    } else {
+      playWrong();
+    }
   };
 
   const handleSubmitAnswer = (answer: string) => {
@@ -104,6 +115,13 @@ export default function QuizScreen({ navigation, route }: Props) {
     setIsCorrect(result.isCorrect);
     setCorrectAnswer(result.correctAnswer);
     setShowFeedback(true);
+
+    // Play sound based on answer correctness
+    if (result.isCorrect) {
+      playCorrect();
+    } else {
+      playWrong();
+    }
   };
 
   const handleUseHint = () => {
