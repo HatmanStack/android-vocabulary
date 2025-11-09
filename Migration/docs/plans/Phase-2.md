@@ -1268,6 +1268,35 @@ feat(animations): add screen transitions and UI animations
 - [ ] No warnings in test output
 - [ ] Tests run fast (<30 seconds total)
 
+**🔍 Code Review Questions:**
+
+> **Q3 - Test Coverage:** The verification checklist requires "All screens have tests (6 screens)" but running `find src/features -name "*.test.tsx"` only shows tests for 2 screens:
+> - HomeScreen.test.tsx ✓
+> - SettingsScreen.test.tsx ✓
+> - DifficultyScreen.test.tsx ✗ (missing)
+> - QuizScreen.test.tsx ✗ (missing)
+> - GraduationScreen.test.tsx ✗ (missing)
+> - StatsScreen.test.tsx ✗ (missing)
+>
+> Steps 4, 5, 7, and 8 (lines 1221-1248) specify tests for these screens. Were these tests intentionally deferred, or should they be implemented for Phase 2 completion?
+>
+> **Q4 - Component Tests:** The checklist requires "Quiz components have tests (4 components)" but only MultipleChoiceQuestion.test.tsx exists. Step 6 (lines 1233-1237) specifies tests for:
+> - MultipleChoiceQuestion.test.tsx ✓
+> - FillInBlankQuestion.test.tsx ✗ (missing)
+> - QuizHeader.test.tsx ✗ (missing)
+> - AnswerFeedback.test.tsx ✗ (missing)
+>
+> Are these tests planned for Phase 3, or should they be part of Phase 2's comprehensive test suite?
+>
+> **Q5 - Coverage Metrics:** Running `npm test -- --coverage` shows overall coverage around 40-70% for different modules, below the specified ">80% coverage" threshold. For example:
+> - shared/ui: 69.62% (good, but below target)
+> - features/quiz/screens: 0%
+> - features/quiz/components: varying (0-80%)
+>
+> The target at line 1267 is "Test coverage >80%". Should we add more tests to reach this threshold, or is the current coverage acceptable given that critical shared components have good coverage?
+>
+> **Q6 - Test Warnings:** The test output shows multiple "ReferenceError: You are trying to access a property or method of the Jest environment after it has been torn down" warnings from ProgressBar.test.tsx and HomeScreen.test.tsx. Line 1268 specifies "No warnings in test output". Are these timing-related warnings acceptable, or do they indicate a test cleanup issue that needs to be fixed?
+
 **Testing Instructions:**
 
 Run tests:
@@ -1359,6 +1388,16 @@ npm test               # All tests pass
 npm test -- --coverage # >80% coverage
 npm run format:check   # Should pass
 ```
+
+**🔍 Code Review Questions:**
+
+> **Q1 - Formatting:** Running `npm run format:check` reports "Code style issues found in 22 files. Run Prettier with --write to fix." The quality check expects formatting to pass. Have all files been formatted with Prettier? Should we run `npm run format` before committing?
+>
+> **Q2 - Type Safety:** Running `npm run type-check` shows 2 TypeScript errors in `scripts/parseXmlToJson.ts`:
+> - Line 13: "Could not find a declaration file for module 'xml2js'"
+> - Line 66: "Parameter 'err' implicitly has an 'any' type"
+>
+> While these are in a migration script (not app code), the quality check at line 1357 expects type-check to pass. Should we install `@types/xml2js` and add explicit error typing to make the project fully type-safe?
 
 ### Visual Quality Checklist
 
