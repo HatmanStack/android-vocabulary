@@ -3,13 +3,21 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Button, Surface } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
+import { getListById } from '../utils/vocabularyLoader';
 
 type Props = StackScreenProps<RootStackParamList, 'Difficulty'>;
 
 export default function DifficultyScreen({ navigation, route }: Props) {
   const { listId } = route.params;
+  const list = getListById(listId);
 
-  const levels = ['basic', 'intermediate', 'advanced', 'expert', 'professional'];
+  if (!list) {
+    return (
+      <View style={styles.container}>
+        <Text>List not found</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -18,17 +26,17 @@ export default function DifficultyScreen({ navigation, route }: Props) {
           Select Difficulty Level
         </Text>
         <Text variant="bodyMedium" style={styles.subtitle}>
-          List: {listId.toUpperCase()}
+          {list.name}
         </Text>
         <View style={styles.buttons}>
-          {levels.map((level) => (
+          {list.levels.map((level) => (
             <Button
-              key={level}
+              key={level.id}
               mode="contained"
-              onPress={() => navigation.navigate('Quiz', { listId, levelId: level })}
+              onPress={() => navigation.navigate('Quiz', { listId, levelId: level.id })}
               style={styles.button}
             >
-              {level.charAt(0).toUpperCase() + level.slice(1)}
+              {level.name}
             </Button>
           ))}
         </View>

@@ -1,68 +1,100 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button, Surface } from 'react-native-paper';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Text, Button, Surface, Divider } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '@/shared/types';
+import { loadVocabularyLists } from '../utils/vocabularyLoader';
 
 type Props = StackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
+  const vocabularyLists = loadVocabularyLists();
+
   return (
-    <View style={styles.container}>
-      <Surface style={styles.surface} elevation={2}>
-        <Text variant="headlineMedium" style={styles.title}>
-          Home Screen
+    <ScrollView style={styles.container}>
+      <Surface style={styles.header} elevation={0}>
+        <Text variant="headlineLarge" style={styles.title}>
+          Vocabulary App
         </Text>
         <Text variant="bodyMedium" style={styles.subtitle}>
           Select a vocabulary list to begin
         </Text>
-        <View style={styles.buttons}>
+      </Surface>
+
+      <View style={styles.content}>
+        <Text variant="titleMedium" style={styles.sectionTitle}>
+          Vocabulary Lists ({vocabularyLists.length})
+        </Text>
+
+        {vocabularyLists.map((list) => (
           <Button
+            key={list.id}
             mode="contained"
-            onPress={() => navigation.navigate('Difficulty', { listId: 'list-a' })}
-            style={styles.button}
+            onPress={() => navigation.navigate('Difficulty', { listId: list.id })}
+            style={styles.listButton}
+            contentStyle={styles.listButtonContent}
           >
-            Go to List A
+            {list.name}
           </Button>
+        ))}
+
+        <Divider style={styles.divider} />
+
+        <View style={styles.bottomButtons}>
           <Button
             mode="outlined"
             onPress={() => navigation.navigate('Stats')}
             style={styles.button}
+            icon="chart-bar"
           >
-            View Stats
+            View Statistics
           </Button>
           <Button
             mode="outlined"
             onPress={() => navigation.navigate('Settings')}
             style={styles.button}
+            icon="cog"
           >
             Settings
           </Button>
         </View>
-      </Surface>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'center',
   },
-  surface: {
+  header: {
     padding: 24,
-    borderRadius: 8,
+    alignItems: 'center',
   },
   title: {
     marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
-    marginBottom: 24,
     textAlign: 'center',
+    opacity: 0.7,
   },
-  buttons: {
+  content: {
+    padding: 16,
+  },
+  sectionTitle: {
+    marginBottom: 16,
+  },
+  listButton: {
+    marginBottom: 12,
+  },
+  listButtonContent: {
+    paddingVertical: 8,
+  },
+  divider: {
+    marginVertical: 24,
+  },
+  bottomButtons: {
     gap: 12,
   },
   button: {
